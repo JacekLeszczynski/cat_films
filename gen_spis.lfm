@@ -1,0 +1,400 @@
+object FGenSpis: TFGenSpis
+  Left = 450
+  Height = 669
+  Top = 161
+  Width = 807
+  Caption = 'Generowanie spisu filmów wg. żądanego wzorca'
+  ClientHeight = 669
+  ClientWidth = 807
+  DesignTimePPI = 88
+  OnClose = FormClose
+  Position = poOwnerFormCenter
+  LCLVersion = '1.9.0.0'
+  object RadioGroup1: TRadioGroup
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 72
+    Top = 4
+    Width = 799
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    BorderSpacing.Around = 4
+    Caption = 'Źródło:'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 52
+    ClientWidth = 795
+    Items.Strings = (
+      'Wszystkie filmy z bazy danych'
+      'Tylko należące do nowego zestawu filmów'
+    )
+    TabOrder = 0
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = RadioGroup1
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 80
+    Width = 54
+    Caption = 'Legenda:'
+    ParentColor = False
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = RadioGroup1
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 102
+    Top = 98
+    Width = 799
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Bottom = 4
+    Color = clSilver
+    Lines.Strings = (
+      '  %c - numerowanie spisu'
+      '  %t - tytuł filmu'
+      '  %o - tytuł oryginalny filmu'
+      '  %g - gatunek'
+      '  %p - produkcja'
+    )
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Memo1
+    AnchorSideTop.Control = Memo1
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 204
+    Width = 51
+    Caption = 'Wzorzec:'
+    ParentColor = False
+  end
+  object wzor: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Memo1
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 222
+    Width = 799
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Bottom = 4
+    TabOrder = 2
+    Text = '%c. %t (%g) %p'
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = wzor
+    AnchorSideTop.Control = wzor
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 254
+    Width = 38
+    Caption = 'Wynik:'
+    ParentColor = False
+  end
+  object Memo2: TMemo
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = wzor
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = BitBtn1
+    Left = 4
+    Height = 369
+    Top = 272
+    Width = 799
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideRight.Control = Memo2
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 726
+    Height = 28
+    Top = 641
+    Width = 77
+    Anchors = [akRight, akBottom]
+    Caption = 'Wyjście'
+    Font.Height = -13
+    Font.Name = 'Sans'
+    OnClick = BitBtn1Click
+    ParentFont = False
+    TabOrder = 4
+  end
+  object BitBtn2: TBitBtn
+    AnchorSideLeft.Control = Memo2
+    AnchorSideTop.Control = BitBtn1
+    AnchorSideBottom.Control = BitBtn1
+    AnchorSideBottom.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 641
+    Width = 125
+    Anchors = [akTop, akLeft, akBottom]
+    Caption = 'Wygeneruj spis'
+    Font.Height = -13
+    Font.Name = 'Sans'
+    OnClick = BitBtn2Click
+    ParentFont = False
+    TabOrder = 5
+  end
+  object BitBtn3: TBitBtn
+    AnchorSideLeft.Control = BitBtn2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Memo2
+    AnchorSideTop.Side = asrBottom
+    Left = 129
+    Height = 28
+    Top = 641
+    Width = 117
+    BorderSpacing.Right = 4
+    Caption = 'Zapisz do pliku'
+    OnClick = BitBtn3Click
+    TabOrder = 6
+  end
+  object gen: TZQuery
+    Connection = dm.db
+    SortedFields = 'tytul'
+    BeforeOpen = genBeforeOpen
+    AfterOpen = _OPEN_CLOSE
+    AfterClose = _OPEN_CLOSE
+    SQL.Strings = (
+      'select * from multimedia'
+      'order by tytul'
+    )
+    Params = <>
+    IndexFieldNames = 'tytul Asc'
+    left = 56
+    top = 320
+    object genid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object gentytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object genrok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object gentytul_oryg: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object gendlugosc: TLargeintField
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object genzdjecie: TBlobField
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object genopis: TMemoField
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object genlink: TStringField
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object genrezyseria: TStringField
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object genscenariusz: TStringField
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object genprodukcja: TStringField
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object genpremiera: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object genpremiera_pl: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object genboxoffice: TFloatField
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object genplik: TStringField
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object gensubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object gennowy_zestaw: TLargeintField
+      FieldKind = fkData
+      FieldName = 'nowy_zestaw'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object ds_gen: TDataSource
+    DataSet = gen
+    left = 112
+    top = 320
+  end
+  object gatunek: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select'
+      '  nazwa'
+      'from kategorie where id in (select id_kategorii from gatunek where id_filmu=:id)'
+      'order by nazwa'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_gen
+    left = 56
+    top = 378
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object gatuneknazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.txt'
+    Filter = 'Pliki tekstowe|*.txt'
+    left = 232
+    top = 320
+  end
+end

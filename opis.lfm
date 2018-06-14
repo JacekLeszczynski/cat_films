@@ -1,0 +1,721 @@
+object FOpis: TFOpis
+  Left = 590
+  Height = 668
+  Top = 179
+  Width = 891
+  BorderStyle = bsNone
+  Caption = 'Opis filmu'
+  ClientHeight = 668
+  ClientWidth = 891
+  DesignTimePPI = 88
+  KeyPreview = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '1.9.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 668
+    Top = 0
+    Width = 891
+    Align = alClient
+    ClientHeight = 668
+    ClientWidth = 891
+    Color = clWhite
+    Font.CharSet = EASTEUROPE_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+    object uETileImage1: TuETileImage
+      Left = 1
+      Height = 666
+      Top = 1
+      Width = 889
+      Debug = False
+      Align = alClient
+      ParentColor = False
+    end
+    object DBImage2: TDBImage
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 19
+      Height = 300
+      Top = 19
+      Width = 210
+      BorderSpacing.Left = 18
+      BorderSpacing.Top = 18
+      DataField = 'zdjecie'
+      DataSource = ds_film
+      Stretch = True
+    end
+    object DBText2: TDBText
+      AnchorSideLeft.Control = DBImage2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = DBImage2
+      Left = 249
+      Height = 27
+      Top = 19
+      Width = 102
+      BorderSpacing.Left = 20
+      Constraints.MaxWidth = 637
+      DataField = 'tytul'
+      DataSource = ds_film
+      Font.Height = -22
+      Font.Name = 'Sans'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object DBText1: TDBText
+      AnchorSideLeft.Control = DBText2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = DBText2
+      AnchorSideBottom.Side = asrBottom
+      Left = 360
+      Height = 15
+      Top = 19
+      Width = 49
+      BorderSpacing.Left = 9
+      DataField = 'rok_str'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Sans'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object BitBtn1: TBitBtn
+      Left = 792
+      Height = 36
+      Top = 624
+      Width = 93
+      Caption = 'Wyjście'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Sans'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnClick = BitBtn1Click
+      ParentFont = False
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      Left = 8
+      Height = 36
+      Top = 624
+      Width = 130
+      Caption = 'Odtwórz teraz'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Sans'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnClick = BitBtn2Click
+      ParentFont = False
+      TabOrder = 1
+    end
+    object DBText3: TDBText
+      AnchorSideLeft.Control = DBText2
+      AnchorSideTop.Control = DBText2
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 24
+      Top = 46
+      Width = 83
+      Constraints.MaxWidth = 691
+      DataField = 'tytul_oryg'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = 20
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object DBText4: TDBText
+      AnchorSideLeft.Control = DBText3
+      AnchorSideTop.Control = DBText3
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 85
+      Width = 49
+      BorderSpacing.Top = 15
+      DataField = 'czas'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = DBImage2
+      AnchorSideTop.Control = DBImage2
+      AnchorSideTop.Side = asrBottom
+      Left = 19
+      Height = 18
+      Top = 337
+      Width = 50
+      BorderSpacing.Top = 18
+      Caption = 'Label1'
+      Constraints.MaxWidth = 850
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = DBText4
+      AnchorSideTop.Control = DBText4
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 115
+      Width = 59
+      BorderSpacing.Top = 15
+      Caption = 'Reżyseria:'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object DBText5: TDBText
+      AnchorSideLeft.Control = Label2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label2
+      Left = 334
+      Height = 15
+      Top = 115
+      Width = 49
+      BorderSpacing.Left = 26
+      Constraints.MaxWidth = 609
+      DataField = 'rezyseria'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clTeal
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = Label2
+      AnchorSideTop.Control = Label2
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 130
+      Width = 69
+      Caption = 'Scenariusz:'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object DBText6: TDBText
+      AnchorSideLeft.Control = DBText5
+      AnchorSideTop.Control = Label3
+      Left = 334
+      Height = 15
+      Top = 130
+      Width = 49
+      Constraints.MaxWidth = 609
+      DataField = 'scenariusz'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clTeal
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 145
+      Width = 55
+      Caption = 'Gatunek:'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label5: TLabel
+      AnchorSideLeft.Control = Label4
+      AnchorSideTop.Control = Label4
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 160
+      Width = 63
+      Caption = 'Produkcja:'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object DBText8: TDBText
+      AnchorSideLeft.Control = DBText5
+      AnchorSideTop.Control = Label5
+      Left = 334
+      Height = 15
+      Top = 160
+      Width = 49
+      Constraints.MaxWidth = 609
+      DataField = 'produkcja'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clTeal
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object Label6: TLabel
+      AnchorSideLeft.Control = Label5
+      AnchorSideTop.Control = Label5
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 175
+      Width = 57
+      BorderSpacing.Bottom = 16
+      Caption = 'Premiera:'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clGray
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+    object DBText9: TDBText
+      AnchorSideLeft.Control = DBText5
+      AnchorSideTop.Control = Label6
+      Left = 334
+      Height = 15
+      Top = 175
+      Width = 49
+      Constraints.MaxWidth = 609
+      DataField = 'premiera_str'
+      DataSource = ds_film
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clTeal
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object ECLink1: TECLink
+      AnchorSideLeft.Control = Label6
+      AnchorSideTop.Control = Label6
+      AnchorSideTop.Side = asrBottom
+      Left = 249
+      Height = 15
+      Top = 206
+      Width = 101
+      Caption = 'http://filmweb.pl'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clOlive
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      LinkType = eltWWW
+      ParentFont = False
+    end
+    object Label7: TLabel
+      AnchorSideLeft.Control = DBText5
+      AnchorSideTop.Control = Label4
+      Left = 334
+      Height = 15
+      Top = 145
+      Width = 40
+      Caption = 'Label7'
+      Constraints.MaxWidth = 609
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clTeal
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object shutdown_computer: TCheckBox
+      AnchorSideLeft.Control = BitBtn2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = BitBtn2
+      AnchorSideTop.Side = asrCenter
+      Left = 146
+      Height = 22
+      Top = 631
+      Width = 252
+      BorderSpacing.Left = 8
+      Caption = 'Po zakończeniu filmu wyłącz komputer!'
+      Color = clDefault
+      Font.Color = clRed
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 2
+    end
+  end
+  object film: TZQuery
+    Connection = dm.db
+    SortedFields = 'tytul'
+    AfterOpen = _OPEN_CLOSE
+    AfterClose = _OPEN_CLOSE
+    AfterScroll = filmAfterScroll
+    OnCalcFields = filmCalcFields
+    SQL.Strings = (
+      'select * from multimedia'
+      'where id=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'tytul Asc'
+    left = 44
+    top = 44
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object filmid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmtytul: TStringField
+      DisplayLabel = 'Tytuł'
+      DisplayWidth = 200
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmrok_prod: TLargeintField
+      DisplayLabel = 'Rok prod.'
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmtytul_oryg: TStringField
+      DisplayLabel = 'Tytuł oryg.'
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmdlugosc: TLargeintField
+      DisplayLabel = 'Długość'
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmzdjecie: TBlobField
+      DisplayLabel = 'Zdjęcie'
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmopis: TMemoField
+      DisplayLabel = 'Opis'
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmlink: TStringField
+      DisplayLabel = 'Link'
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmrezyseria: TStringField
+      DisplayLabel = 'Reżyseria'
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmscenariusz: TStringField
+      DisplayLabel = 'Scenariusz'
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmprodukcja: TStringField
+      DisplayLabel = 'Produkcja'
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmpremiera: TDateField
+      DisplayLabel = 'Premiera'
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'dd.mm.yyyy'
+    end
+    object filmpremiera_pl: TDateField
+      DisplayLabel = 'Premiera_w Polsce'
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'dd.mm.yyyy'
+    end
+    object filmboxoffice: TFloatField
+      DisplayLabel = 'Inwestycja'
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = '### ### ### ##0.00'
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmplik: TStringField
+      DisplayLabel = 'Plik'
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmczas: TTimeField
+      FieldKind = fkCalculated
+      FieldName = 'czas'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnGetText = filmczasGetText
+      DisplayFormat = 'hh:nn'
+    end
+    object filmrz_premiera: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rz_premiera'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
+    object filmrz_premiera_pl: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rz_premiera_pl'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
+    object filminwestycja: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'inwestycja'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmrok_str: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rok_str'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 6
+    end
+    object filmpremiera_str: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'premiera_str'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+  end
+  object ds_film: TDataSource
+    AutoEdit = False
+    DataSet = film
+    left = 88
+    top = 44
+  end
+  object ds_gat: TDataSource
+    AutoEdit = False
+    DataSet = gat
+    left = 88
+    top = 104
+  end
+  object gat: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select'
+      '  distinct k.nazwa'
+      'from gatunek g'
+      'join kategorie k on k.id=g.id_kategorii'
+      'where g.id_filmu=:id'
+      'order by k.nazwa'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_film
+    left = 44
+    top = 104
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object gatnazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+end

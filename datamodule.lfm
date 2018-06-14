@@ -1,0 +1,930 @@
+object dm: Tdm
+  OldCreateOrder = False
+  Height = 529
+  HorizontalOffset = 315
+  VerticalOffset = 143
+  Width = 507
+  PPI = 88
+  object db: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    ClientCodepage = 'UTF-8'
+    Properties.Strings = (
+      'codepage=UTF-8'
+    )
+    Port = 0
+    Database = '/home/tao/Projekty/apps/cat_films/base.dat'
+    Protocol = 'sqlite-3'
+    left = 22
+    top = 22
+  end
+  object tr: TZTransaction
+    Database = db
+    left = 66
+    top = 22
+  end
+  object db_create: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'create table config'
+      '('
+      '  id integer primary key,'
+      '  nazwa varchar(50),'
+      '  wartosc varchar(255)'
+      ');'
+      'create index idx_config_nazwa on config(nazwa);'
+      ''
+      'create table kategorie'
+      '('
+      '  id integer primary key,'
+      '  nazwa varchar(30)'
+      ');'
+      'create index idx_kategorie_nazwa on kategorie(nazwa);'
+      ''
+      'create table multimedia'
+      '('
+      '  id integer primary key,'
+      '  tytul varchar(50),'
+      '  rok_prod integer,'
+      '  tytul_oryg varchar(50),'
+      '  dlugosc integer,'
+      '  zdjecie blob,'
+      '  opis text,'
+      '  link varchar(100),'
+      '  rezyseria varchar(50),'
+      '  scenariusz varchar(50),'
+      '  produkcja varchar(50),'
+      '  premiera date,'
+      '  premiera_pl date,'
+      '  boxoffice numeric,'
+      '  plik varchar(255),'
+      '  subtitles varchar(255),'
+      '  nowy_zestaw integer default 0'
+      ');'
+      'create index idx_multimedia_tytul on multimedia(tytul);'
+      'create index idx_multimedia_tytul_oryg on multimedia(tytul_oryg);'
+      'create index idx_multimedia_rok_prod on multimedia(rok_prod);'
+      'create index idx_multimedia_nowy_zestaw on multimedia(nowy_zestaw);'
+      ''
+      'create table gatunek'
+      '('
+      '  id integer primary key,'
+      '  id_filmu integer,'
+      '  id_kategorii integer'
+      ');'
+      'create index idx_gatunek_id_filmu on gatunek(id_filmu);'
+      'create index idx_gatunek_id_kategorii on gatunek(id_kategorii);'
+    )
+    Connection = db
+    Delimiter = ';'
+    left = 125
+    top = 22
+  end
+  object db_appends: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'insert into kategorie (nazwa) values (''Akcja'');'
+      'insert into kategorie (nazwa) values (''Animacja'');'
+      'insert into kategorie (nazwa) values (''Dokumentalny'');'
+      'insert into kategorie (nazwa) values (''Dramat'');'
+      'insert into kategorie (nazwa) values (''Familijny'');'
+      'insert into kategorie (nazwa) values (''Fantasy'');'
+      'insert into kategorie (nazwa) values (''Horror'');'
+      'insert into kategorie (nazwa) values (''Komedia'');'
+      'insert into kategorie (nazwa) values (''Krótkometrażowy'');'
+      'insert into kategorie (nazwa) values (''Kryminał'');'
+      'insert into kategorie (nazwa) values (''Melodramat'');'
+      'insert into kategorie (nazwa) values (''Niemy'');'
+      'insert into kategorie (nazwa) values (''Przygodowy'');'
+      'insert into kategorie (nazwa) values (''Romans'');'
+      'insert into kategorie (nazwa) values (''Sci-Fi'');'
+      'insert into kategorie (nazwa) values (''Thriller'');'
+    )
+    Connection = db
+    Delimiter = ';'
+    left = 205
+    top = 22
+  end
+  object cselect: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'select id,wartosc from config'
+      'where nazwa=:nazwa'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    left = 22
+    top = 80
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    object cselectid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object cselectwartosc: TStringField
+      FieldKind = fkData
+      FieldName = 'wartosc'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+  object cinsert: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'insert into config'
+      '(nazwa,wartosc)'
+      'values'
+      '(:nazwa,:wartosc)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'wartosc'
+        ParamType = ptUnknown
+      end>
+    left = 22
+    top = 132
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'wartosc'
+        ParamType = ptUnknown
+      end>
+  end
+  object cupdate: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'update config'
+      'set wartosc=:wartosc'
+      'where id=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'wartosc'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    left = 22
+    top = 188
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'wartosc'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+  end
+  object cdelete: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'delete from config'
+      'where id=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    left = 22
+    top = 244
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+  end
+  object db2: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    ClientCodepage = 'UTF-8'
+    Properties.Strings = (
+      'codepage=UTF-8'
+    )
+    Port = 0
+    Database = '/home/tao/.config/Cat-Films/config.dat'
+    Protocol = 'sqlite-3'
+    left = 392
+    top = 24
+  end
+  object filmy2: TZQuery
+    Connection = db2
+    AfterOpen = _OPEN_CLOSE_2
+    AfterClose = _OPEN_CLOSE_2
+    OnCalcFields = filmy2CalcFields
+    SQL.Strings = (
+      'select * from multimedia'
+      'order by id;'
+    )
+    Params = <>
+    left = 392
+    top = 82
+    object filmy2id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2plik: TStringField
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmy2filename: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'filename'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object filmy2tytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmy2rok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2tytul_oryg: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmy2dlugosc: TLargeintField
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2zdjecie: TBlobField
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2opis: TMemoField
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmy2link: TStringField
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmy2rezyseria: TStringField
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmy2scenariusz: TStringField
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmy2produkcja: TStringField
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmy2premiera: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2premiera_pl: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmy2boxoffice: TFloatField
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmy2subtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+  object ds_filmy2: TDataSource
+    DataSet = filmy2
+    left = 456
+    top = 82
+  end
+  object gatunki2: TZQuery
+    Connection = db2
+    SQL.Strings = (
+      'select k.id,k.nazwa from kategorie k'
+      'join gatunek g on g.id_kategorii=k.id'
+      'where g.id_filmu=:id'
+      'order by k.nazwa;'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_filmy2
+    left = 392
+    top = 138
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object gatunki2id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object gatunki2nazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+  object ds_gatunki2: TDataSource
+    DataSet = gatunki2
+    left = 456
+    top = 138
+  end
+  object filmy: TZQuery
+    Connection = db
+    AfterOpen = _OPEN_CLOSE
+    AfterClose = _OPEN_CLOSE
+    OnCalcFields = filmyCalcFields
+    SQL.Strings = (
+      'select * from multimedia'
+      'order by id;'
+    )
+    Params = <>
+    left = 128
+    top = 80
+    object filmyid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyplik: TStringField
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmyfilename: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'filename'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object filmytytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyrok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul_oryg: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmydlugosc: TLargeintField
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyzdjecie: TBlobField
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyopis: TMemoField
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmylink: TStringField
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmyrezyseria: TStringField
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyscenariusz: TStringField
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyprodukcja: TStringField
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmypremiera: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmypremiera_pl: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyboxoffice: TFloatField
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmysubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+  object ds_filmy: TDataSource
+    DataSet = filmy
+    left = 192
+    top = 80
+  end
+  object gatunki: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'select k.id,k.nazwa from kategorie k'
+      'join gatunek g on g.id_kategorii=k.id'
+      'where g.id_filmu=:id'
+      'order by k.nazwa;'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_filmy
+    left = 128
+    top = 136
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object gatunkiid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object gatunkinazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+  object ds_gatunki: TDataSource
+    DataSet = gatunki
+    left = 192
+    top = 136
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 456
+    top = 24
+  end
+  object EventLog1: TEventLog
+    AppendContent = False
+    Identification = 'cat_film'
+    LogType = ltFile
+    Active = False
+    RaiseExceptionOnError = False
+    DefaultEventType = etWarning
+    FileName = '/home/tao/oper.log'
+    TimeStampFormat = 'yyyy-mm-dd hh:nn:ss'
+    CustomLogType = 0
+    EventIDOffset = 0
+    Paused = False
+    left = 189
+    top = 222
+  end
+  object add_gatunek: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'insert into kategorie'
+      '(nazwa)'
+      'values'
+      '(:nazwa)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    left = 88
+    top = 336
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+  end
+  object show_gatunek: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'select id from kategorie'
+      'where nazwa=:nazwa'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    left = 88
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    object show_gatunekid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object plus_gatunek: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'insert into gatunek'
+      '(id_filmu,id_kategorii)'
+      'values'
+      '(:id_filmu,:id_kategorii)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id_filmu'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+    left = 184
+    top = 336
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id_filmu'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+  end
+  object minus_gatunek: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'delete from gatunek'
+      'where id_filmu=:id_filmu and id_kategorii=:id_kategorii'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id_filmu'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+    left = 184
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id_filmu'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+  end
+  object is_dir2: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'select count(*) as ile from multimedia'
+      'where nowy_zestaw=1;'
+    )
+    Params = <>
+    left = 22
+    top = 304
+  end
+  object vacuum: TZQuery
+    Connection = db
+    SQL.Strings = (
+      'vacuum;'
+    )
+    Params = <>
+    left = 88
+    top = 448
+  end
+  object db_loc: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    ClientCodepage = 'UTF-8'
+    Properties.Strings = (
+      'codepage=UTF-8'
+    )
+    Port = 0
+    Database = '/home/tao/.config/Cat-Films/config.dat'
+    Protocol = 'sqlite-3'
+    left = 288
+    top = 24
+  end
+  object tr_loc: TZTransaction
+    Database = db_loc
+    left = 288
+    top = 80
+  end
+  object loc_create: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'create table config'
+      '('
+      '  id integer primary key,'
+      '  nazwa varchar(50),'
+      '  wartosc varchar(255)'
+      ');'
+      'create index idx_config_nazwa on config(nazwa);'
+      ''
+      'create table filmy'
+      '('
+      '  id integer primary key,'
+      '  tytul varchar(50),'
+      '  rok_prod integer,'
+      '  widziany integer default 0'
+      ' );'
+      'create index idx_filmy_nazwa on filmy(tytul);'
+      'create index idx_filmy_rok_prod on filmy(rok_prod);'
+    )
+    Connection = db_loc
+    Delimiter = ';'
+    left = 288
+    top = 136
+  end
+  object http: TNetSynHTTP
+    Method = meGet
+    UserAgent = '<auto>'
+    left = 296
+    top = 268
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.txt'
+    Filter = 'Pliki tekstowe|*.txt'
+    Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+    left = 392
+    top = 208
+  end
+end

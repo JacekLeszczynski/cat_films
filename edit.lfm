@@ -1,0 +1,1238 @@
+object FEdit: TFEdit
+  Left = 530
+  Height = 748
+  Top = 129
+  Width = 689
+  HorzScrollBar.Page = 645
+  HorzScrollBar.Range = 645
+  VertScrollBar.Page = 650
+  VertScrollBar.Range = 650
+  AutoSize = True
+  BorderStyle = bsSingle
+  Caption = 'Edycja danych'
+  ClientHeight = 748
+  ClientWidth = 689
+  Constraints.MinWidth = 689
+  DesignTimePPI = 88
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object DBNavigator1: TDBNavigator
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 32
+    Top = 4
+    Width = 681
+    Anchors = [akTop, akLeft, akRight]
+    BevelOuter = bvNone
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 32
+    ClientWidth = 681
+    DataSource = ds_films
+    Options = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = DBEdit5
+    AnchorSideTop.Control = DBEdit5
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 90
+    Width = 31
+    BorderSpacing.Top = 4
+    Caption = 'Tytuł:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit1: TDBEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = gatunki
+    Left = 4
+    Height = 28
+    Top = 108
+    Width = 416
+    DataField = 'tytul'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = DBEdit1
+    AnchorSideTop.Control = DBEdit1
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 140
+    Width = 95
+    BorderSpacing.Top = 4
+    Caption = 'Tytuł oryginalny:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit2: TDBEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBEdit1
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 158
+    Width = 416
+    DataField = 'tytul_oryg'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = DBEdit2
+    AnchorSideTop.Control = DBEdit2
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 190
+    Width = 83
+    BorderSpacing.Top = 4
+    Caption = 'Rok produkcji:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit3: TDBEdit
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 208
+    Width = 92
+    DataField = 'rok_prod'
+    DataSource = ds_films
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = DBEdit3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label3
+    Left = 103
+    Height = 18
+    Top = 190
+    Width = 30
+    BorderSpacing.Left = 7
+    Caption = 'Czas:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit4: TDBEdit
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 103
+    Height = 28
+    Top = 208
+    Width = 92
+    DataField = 'dlugosc'
+    DataSource = ds_films
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 4
+  end
+  object DBImage1: TDBImage
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 183
+    Top = 358
+    Width = 128
+    Constraints.MaxHeight = 183
+    Constraints.MaxWidth = 128
+    Constraints.MinHeight = 183
+    Constraints.MinWidth = 128
+    DataField = 'zdjecie'
+    DataSource = ds_films
+    OnDblClick = DBImage1DblClick
+    PopupMenu = PopupMenu1
+    Stretch = True
+  end
+  object Label5: TLabel
+    AnchorSideLeft.Control = DBEdit11
+    AnchorSideTop.Control = DBEdit11
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 340
+    Width = 103
+    BorderSpacing.Top = 4
+    Caption = 'Zdjęcie (140x200):'
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label6: TLabel
+    AnchorSideLeft.Control = DBImage1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label5
+    Left = 139
+    Height = 18
+    Top = 340
+    Width = 30
+    BorderSpacing.Left = 7
+    Caption = 'Opis:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBMemo1: TDBMemo
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = gatunki
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = DBImage1
+    AnchorSideBottom.Side = asrBottom
+    Left = 139
+    Height = 183
+    Top = 358
+    Width = 546
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    DataField = 'opis'
+    DataSource = ds_films
+    ParentFont = False
+    TabOrder = 5
+  end
+  object Label7: TLabel
+    AnchorSideLeft.Control = DBNavigator1
+    AnchorSideTop.Control = DBNavigator1
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 40
+    Width = 145
+    BorderSpacing.Top = 4
+    Caption = 'Link do serwisu FilmWeb:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit5: TDBEdit
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton1
+    Left = 4
+    Height = 28
+    Top = 58
+    Width = 651
+    DataField = 'link'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    Color = clYellow
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 6
+  end
+  object Label8: TLabel
+    AnchorSideLeft.Control = DBImage1
+    AnchorSideTop.Control = DBImage1
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 545
+    Width = 58
+    BorderSpacing.Top = 4
+    Caption = 'Reżyseria:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit6: TDBEdit
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBMemo1
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 563
+    Width = 681
+    DataField = 'rezyseria'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 7
+  end
+  object Label9: TLabel
+    AnchorSideLeft.Control = DBEdit6
+    AnchorSideTop.Control = DBEdit6
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 595
+    Width = 66
+    BorderSpacing.Top = 4
+    Caption = 'Scenariusz:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit7: TDBEdit
+    AnchorSideLeft.Control = Label9
+    AnchorSideTop.Control = Label9
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBEdit6
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 613
+    Width = 681
+    DataField = 'scenariusz'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 8
+  end
+  object Label10: TLabel
+    AnchorSideLeft.Control = DBEdit7
+    AnchorSideTop.Control = DBEdit7
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 645
+    Width = 183
+    BorderSpacing.Top = 4
+    Caption = 'Produkcja (kto wyprodukował):)'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit8: TDBEdit
+    AnchorSideLeft.Control = Label10
+    AnchorSideTop.Control = Label10
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 28
+    Top = 663
+    Width = 285
+    DataField = 'produkcja'
+    DataSource = ds_films
+    BorderSpacing.Bottom = 4
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 9
+  end
+  object Label11: TLabel
+    AnchorSideLeft.Control = DBEdit8
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label10
+    Left = 296
+    Height = 18
+    Top = 645
+    Width = 118
+    BorderSpacing.Left = 7
+    Caption = 'Premiera na świecie:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBDateEdit1: TDBDateEdit
+    AnchorSideLeft.Control = Label11
+    AnchorSideTop.Control = Label11
+    AnchorSideTop.Side = asrBottom
+    Left = 296
+    Height = 28
+    Top = 663
+    Width = 144
+    CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+    DateOrder = doNone
+    DateFormat = 'dd mmm yyyy'
+    ButtonWidth = 21
+    NumGlyphs = 1
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 10
+    Text = 'DBDateEdit1'
+    DataField = 'premiera'
+    DataSource = ds_films
+  end
+  object Label12: TLabel
+    AnchorSideLeft.Control = DBDateEdit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label11
+    Left = 447
+    Height = 18
+    Top = 645
+    Width = 107
+    BorderSpacing.Left = 7
+    Caption = 'Premiera w Polsce:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBDateEdit2: TDBDateEdit
+    AnchorSideLeft.Control = Label12
+    AnchorSideTop.Control = Label12
+    AnchorSideTop.Side = asrBottom
+    Left = 447
+    Height = 28
+    Top = 663
+    Width = 144
+    CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+    DateOrder = doNone
+    DateFormat = 'dd mmm yyyy'
+    ButtonWidth = 21
+    NumGlyphs = 1
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 11
+    Text = 'DBDateEdit2'
+    DataField = 'premiera_pl'
+    DataSource = ds_films
+  end
+  object Label13: TLabel
+    AnchorSideLeft.Control = DBEdit4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label4
+    Left = 202
+    Height = 18
+    Top = 190
+    Width = 82
+    BorderSpacing.Left = 7
+    Caption = 'Inwestycja ($):'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit9: TDBEdit
+    AnchorSideLeft.Control = Label13
+    AnchorSideTop.Control = Label13
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBEdit2
+    AnchorSideRight.Side = asrBottom
+    Left = 202
+    Height = 28
+    Top = 208
+    Width = 218
+    DataField = 'boxoffice'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 12
+  end
+  object Label14: TLabel
+    AnchorSideLeft.Control = DBEdit3
+    AnchorSideTop.Control = DBEdit3
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 240
+    Width = 23
+    BorderSpacing.Top = 4
+    Caption = 'Plik:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit10: TDBEdit
+    AnchorSideLeft.Control = Label14
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton2
+    Left = 4
+    Height = 28
+    Top = 258
+    Width = 386
+    DataField = 'plik'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    Color = clYellow
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 13
+  end
+  object gatunki: TCheckGroup
+    AnchorSideTop.Control = DBEdit5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton1
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = DBEdit11
+    AnchorSideBottom.Side = asrBottom
+    Left = 427
+    Height = 246
+    Top = 90
+    Width = 258
+    Anchors = [akTop, akRight, akBottom]
+    AutoFill = True
+    BorderSpacing.Left = 7
+    BorderSpacing.Top = 4
+    Caption = 'Gatunki:'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    Columns = 2
+    Font.Height = -11
+    Font.Name = 'Sans'
+    ParentFont = False
+    PopupMenu = PopupMenu3
+    TabOrder = 14
+  end
+  object Label16: TLabel
+    AnchorSideLeft.Control = DBEdit10
+    AnchorSideTop.Control = DBEdit10
+    AnchorSideTop.Side = asrBottom
+    Left = 4
+    Height = 18
+    Top = 290
+    Width = 88
+    BorderSpacing.Top = 4
+    Caption = 'Plik z napisami:'
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBEdit11: TDBEdit
+    AnchorSideLeft.Control = Label16
+    AnchorSideTop.Control = Label16
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton3
+    Left = 4
+    Height = 28
+    Top = 308
+    Width = 386
+    DataField = 'subtitles'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    Color = clYellow
+    MaxLength = 0
+    ParentFont = False
+    TabOrder = 15
+  end
+  object SpeedButton1: TSpeedButton
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DBEdit5
+    AnchorSideRight.Control = DBNavigator1
+    AnchorSideRight.Side = asrBottom
+    Left = 655
+    Height = 30
+    Top = 58
+    Width = 30
+    Anchors = [akTop, akRight]
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000F7B2AFF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000107C2BFF0E7B29FF0D7A27FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000127E2DFF107D2BFF0E7B28FF0C7A27FF0B79
+      26FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000014802EFF127F2DFF107E2BFF0E7C29FF0C7A27FF0B79
+      26FF0A7925FF0000000000000000000000000000000000000000000000000000
+      000000000000168231FF15812FFF13802DFF107F2BFF0E7D29FF0C7B27FF0B7A
+      26FF0B7926FF0B7926FF00000000000000000000000000000000000000000000
+      0000178332FF178331FF158330FF13822EFF11802CFF0F7E2AFF0D7D29FF0C7B
+      27FF0C7A27FF0C7A27FF0D7A28FF000000000000000000000000000000000000
+      000000000000000000000000000014832FFF12812DFF10802CFF0F7E2AFF0E7C
+      29FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000158430FF13822EFF12812DFF107F2BFF0F7E
+      2AFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000158430FF14832FFF13822EFF12802DFF117E
+      2CFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000168531FF158430FF14822FFF14812EFF137F
+      2DFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000178532FF168431FF168330FF158130FF1480
+      2FFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000188532FF178432FF178331FF178231FF1680
+      30FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000
+    }
+    OnClick = SpeedButton1Click
+    ParentFont = False
+    PopupMenu = PopupMenu2
+  end
+  object Button1: TButton
+    Left = 89
+    Height = 23
+    Top = 704
+    Width = 69
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 16
+    Visible = False
+  end
+  object SpeedButton2: TSpeedButton
+    AnchorSideTop.Control = DBEdit10
+    AnchorSideRight.Control = gatunki
+    Left = 390
+    Height = 30
+    Top = 258
+    Width = 30
+    Anchors = [akTop, akRight]
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000004C92DEE95698
+      DEFF5B9BDEFF5B9BDEFF5B9BDEFF5A9BDEFF5A9BDEFF5A9BDEFF5A9BDEFF5A9A
+      DEFF599ADDFF5999DDFF4E93DEF54C92DE0E00000000000000005195DEFF96BE
+      E1FFADCEE4FFABCEE5FFA9CDE5FFA7CCE6FFA7CCE6FFA6CBE5FFA5CAE4FFA3C8
+      E1FFA0C5DDFF9DC1D9FF78AAD9FF4C92DE6A0000000000000000599ADFFF7BB1
+      E5FFB6D8EFFFB4D8F0FFB2D7F1FFB0D7F1FFAFD6F1FFAFD6F1FFADD5EFFFABD2
+      ECFFA7CCE6FFA2C7DFFF95BCDAFF598DC4FF7C807EFF7C807EFF5E9FE2FF62A1
+      E3FFBDE1F8FFBCE1F9FFBAE0FBFFB9E0FBFFB8E0FBFFB7DFFAFFB6DEF8FFB3DA
+      F5FFAFD4EFFFA8CDE6FFA2C6DDFF5E9CDDFFE5E7E9FF7B807EFF5FA0E3FF6CA9
+      E7FFB5DDFAFFC2E7FFFFC1E6FFFFC0E6FFFFC0E6FFFFBFE5FFFFBDE4FEFFBAE0
+      FBFFB5DAF4FFAED3EBFFA8CAE1FF73A8DCFFBED2E7FF7C807EFF60A0E3FF93C4
+      F1FF8FC2F0FFC6E8FFFFC6E8FFFFC5E8FFFFC4E8FFFFC4E7FFFFC1E6FFFFBEE3
+      FCFFBADEF6FFB3D6EEFFACCDE3FF90B9DBFF8EB7E3FF7C807FFF60A0E4FFBEE2
+      FCFF61A0E3FF60A0E4FF60A0E4FF60A0E4FF60A0E4FF60A0E4FF60A0E3FF5FA0
+      E3FF5F9FE2FF5E9DE1FF5C9CDFFF5698DEFF74A9E2FF7C817FFF60A0E4FFC8E9
+      FFFFCAE9FFFFC9EAFFFFC7E9FFFFC6E9FFFF8A8E8DFFF7F7F7FFF7F7F7FFF7F7
+      F7FFF5F5F5FFF3F3F3FFF1F1F1FFEFEFEFFFEDEDEDFF7D8180FF5397E0F8BCE1
+      FCFFC7E9FFFFC6E8FFFFC4E7FFFFB9E0FCFF8B908EFFF9F9F9FFF9F9F9FFF8F8
+      F8FFF7F7F7FFF4F4F4FFF2F2F2FFF0F0F0FFEDEDEDFF7E8280FF4C92DE6A5397
+      E0F860A0E4FF60A0E3FF60A0E3FF5397E0F88C908FFFFAFAFAFFFAFAFAFFFAFA
+      FAFFF8F8F8FFF6F6F6FFF3F3F3FFF0F0F0FFEEEEEEFF7F8381FF000000000000
+      0000000000000000000000000000000000008D918FFFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF4F4F4FFF1F1F1FFEEEEEEFF808482FF000000000000
+      0000000000000000000000000000000000008D9190FFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF3F3F3FFF1F1F1FFEEEEEEFF818584FF000000000000
+      0000000000000000000000000000000000008D9290FFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF4F4F4FFF0F0F0FFEDEDEDFF828685FF000000000000
+      0000000000000000000000000000000000008D9290FFFAFAFAFFFAFAFAFFF9F9
+      F9FFF8F8F8FFF6F6F6FFF3F3F3FFF0F0F0FFEDEDEDFF838786FF000000000000
+      0000000000000000000000000000000000008D9190FF8D918FFF8D918FFF8C90
+      8FFF8B8F8DFF898E8CFF888C8AFF878B89FF858988FF848887FF
+    }
+    OnClick = SpeedButton2Click
+    PopupMenu = PopupFilm
+  end
+  object SpeedButton3: TSpeedButton
+    AnchorSideTop.Control = DBEdit11
+    AnchorSideRight.Control = gatunki
+    Left = 390
+    Height = 30
+    Top = 308
+    Width = 30
+    Anchors = [akTop, akRight]
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000004C92DEE95698
+      DEFF5B9BDEFF5B9BDEFF5B9BDEFF5A9BDEFF5A9BDEFF5A9BDEFF5A9BDEFF5A9A
+      DEFF599ADDFF5999DDFF4E93DEF54C92DE0E00000000000000005195DEFF96BE
+      E1FFADCEE4FFABCEE5FFA9CDE5FFA7CCE6FFA7CCE6FFA6CBE5FFA5CAE4FFA3C8
+      E1FFA0C5DDFF9DC1D9FF78AAD9FF4C92DE6A0000000000000000599ADFFF7BB1
+      E5FFB6D8EFFFB4D8F0FFB2D7F1FFB0D7F1FFAFD6F1FFAFD6F1FFADD5EFFFABD2
+      ECFFA7CCE6FFA2C7DFFF95BCDAFF598DC4FF7C807EFF7C807EFF5E9FE2FF62A1
+      E3FFBDE1F8FFBCE1F9FFBAE0FBFFB9E0FBFFB8E0FBFFB7DFFAFFB6DEF8FFB3DA
+      F5FFAFD4EFFFA8CDE6FFA2C6DDFF5E9CDDFFE5E7E9FF7B807EFF5FA0E3FF6CA9
+      E7FFB5DDFAFFC2E7FFFFC1E6FFFFC0E6FFFFC0E6FFFFBFE5FFFFBDE4FEFFBAE0
+      FBFFB5DAF4FFAED3EBFFA8CAE1FF73A8DCFFBED2E7FF7C807EFF60A0E3FF93C4
+      F1FF8FC2F0FFC6E8FFFFC6E8FFFFC5E8FFFFC4E8FFFFC4E7FFFFC1E6FFFFBEE3
+      FCFFBADEF6FFB3D6EEFFACCDE3FF90B9DBFF8EB7E3FF7C807FFF60A0E4FFBEE2
+      FCFF61A0E3FF60A0E4FF60A0E4FF60A0E4FF60A0E4FF60A0E4FF60A0E3FF5FA0
+      E3FF5F9FE2FF5E9DE1FF5C9CDFFF5698DEFF74A9E2FF7C817FFF60A0E4FFC8E9
+      FFFFCAE9FFFFC9EAFFFFC7E9FFFFC6E9FFFF8A8E8DFFF7F7F7FFF7F7F7FFF7F7
+      F7FFF5F5F5FFF3F3F3FFF1F1F1FFEFEFEFFFEDEDEDFF7D8180FF5397E0F8BCE1
+      FCFFC7E9FFFFC6E8FFFFC4E7FFFFB9E0FCFF8B908EFFF9F9F9FFF9F9F9FFF8F8
+      F8FFF7F7F7FFF4F4F4FFF2F2F2FFF0F0F0FFEDEDEDFF7E8280FF4C92DE6A5397
+      E0F860A0E4FF60A0E3FF60A0E3FF5397E0F88C908FFFFAFAFAFFFAFAFAFFFAFA
+      FAFFF8F8F8FFF6F6F6FFF3F3F3FFF0F0F0FFEEEEEEFF7F8381FF000000000000
+      0000000000000000000000000000000000008D918FFFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF4F4F4FFF1F1F1FFEEEEEEFF808482FF000000000000
+      0000000000000000000000000000000000008D9190FFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF3F3F3FFF1F1F1FFEEEEEEFF818584FF000000000000
+      0000000000000000000000000000000000008D9290FFFBFBFBFFFBFBFBFFFAFA
+      FAFFF9F9F9FFF6F6F6FFF4F4F4FFF0F0F0FFEDEDEDFF828685FF000000000000
+      0000000000000000000000000000000000008D9290FFFAFAFAFFFAFAFAFFF9F9
+      F9FFF8F8F8FFF6F6F6FFF3F3F3FFF0F0F0FFEDEDEDFF838786FF000000000000
+      0000000000000000000000000000000000008D9190FF8D918FFF8D918FFF8C90
+      8FFF8B8F8DFF898E8CFF888C8AFF878B89FF858988FF848887FF
+    }
+    OnClick = SpeedButton3Click
+    PopupMenu = PopupNapisy
+  end
+  object DBText1: TDBText
+    AnchorSideTop.Control = Label7
+    AnchorSideRight.Control = DBEdit5
+    AnchorSideRight.Side = asrBottom
+    Left = 608
+    Height = 18
+    Top = 40
+    Width = 47
+    Anchors = [akTop, akRight]
+    DataField = 'id'
+    DataSource = ds_films
+    Font.Color = clRed
+    ParentColor = False
+    ParentFont = False
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideTop.Control = DBDateEdit2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBEdit7
+    AnchorSideRight.Side = asrBottom
+    Left = 616
+    Height = 28
+    Top = 699
+    Width = 69
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 4
+    Caption = 'Anuluj'
+    OnClick = BitBtn1Click
+    TabOrder = 17
+  end
+  object BitBtn2: TBitBtn
+    AnchorSideTop.Control = BitBtn1
+    AnchorSideRight.Control = BitBtn1
+    Left = 547
+    Height = 28
+    Top = 699
+    Width = 69
+    Anchors = [akTop, akRight]
+    BorderSpacing.Bottom = 4
+    Caption = 'OK'
+    OnClick = BitBtn2Click
+    TabOrder = 18
+  end
+  object films: TZQuery
+    Connection = dm.db
+    AfterOpen = _OPEN_CLOSE
+    AfterClose = _OPEN_CLOSE
+    AfterScroll = filmsAfterScroll
+    AfterPost = filmsAfterPost
+    BeforeDelete = filmsBeforeDelete
+    SQL.Strings = (
+      'select * from multimedia'
+      'order by tytul'
+    )
+    Params = <>
+    left = 168
+    top = 392
+    object filmsid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmstytul: TStringField
+      DisplayLabel = 'Tytuł'
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmsrok_prod: TLargeintField
+      DisplayLabel = 'Rok'
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmstytul_oryg: TStringField
+      DisplayLabel = 'Tytuł oryg.'
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmsdlugosc: TLargeintField
+      DisplayLabel = 'Długość'
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnGetText = filmsdlugoscGetText
+      OnSetText = filmsdlugoscSetText
+    end
+    object filmszdjecie: TBlobField
+      DisplayLabel = 'Zdjęcie'
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmsopis: TMemoField
+      DisplayLabel = 'Opis'
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmslink: TStringField
+      DisplayLabel = 'Link'
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmsrezyseria: TStringField
+      DisplayLabel = 'Reżyseria'
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmsscenariusz: TStringField
+      DisplayLabel = 'Scenariusz'
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmsprodukcja: TStringField
+      DisplayLabel = 'Produkcja'
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmspremiera: TDateField
+      DisplayLabel = 'Premiera'
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmspremiera_pl: TDateField
+      DisplayLabel = 'Premiera_w Polsce'
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmsboxoffice: TFloatField
+      DisplayLabel = 'Inwestycja'
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = '### ### ### ##0.00'
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmsplik: TStringField
+      DisplayLabel = 'Plik'
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmssubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+  object ds_films: TDataSource
+    DataSet = films
+    left = 216
+    top = 392
+  end
+  object kats: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select * from kategorie'
+      'order by nazwa'
+    )
+    Params = <>
+    left = 168
+    top = 495
+    object katsid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object katsnazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+  object ds_kats: TDataSource
+    DataSet = kats
+    left = 216
+    top = 495
+  end
+  object gat: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select id_kategorii from gatunek'
+      'where id_filmu=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_films
+    left = 168
+    top = 443
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object gatid_kategorii: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id_kategorii'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object ds_gat: TDataSource
+    DataSet = gat
+    left = 216
+    top = 443
+  end
+  object OpenDialog1: TOpenDialog
+    left = 304
+    top = 458
+  end
+  object g_is: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select count(*) from gatunek'
+      'where id_filmu=:id and id_kategorii=:id_kategorii'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_films
+    left = 304
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+  end
+  object g_add: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'insert into gatunek'
+      '(id_filmu,id_kategorii)'
+      'values'
+      '(:id,:id_kategorii)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_films
+    left = 348
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+  end
+  object g_del: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'delete from gatunek'
+      'where id_filmu=:id and id_kategorii=:id_kategorii'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_films
+    left = 390
+    top = 396
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'id_kategorii'
+        ParamType = ptUnknown
+      end>
+  end
+  object add_gatunek: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'insert into kategorie'
+      '(nazwa)'
+      'values'
+      '(:nazwa)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+    left = 512
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'nazwa'
+        ParamType = ptUnknown
+      end>
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    Position = psOwnerFormCenter
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 464
+    top = 467
+  end
+  object PopupMenu1: TPopupMenu
+    left = 56
+    top = 488
+    object MenuItem1: TMenuItem
+      Caption = 'Załaduj obrazek z dysku'
+      OnClick = DBImage1DblClick
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Załaduj obrazek z sieci'
+      OnClick = MenuItem2Click
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.txt'
+    Filter = 'Pliki tekstowe|*.txt'
+    Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+    left = 546
+    top = 464
+  end
+  object PopupMenu2: TPopupMenu
+    left = 616
+    top = 112
+    object MenuItem3: TMenuItem
+      Caption = 'Ściągnij dane z sieci'
+      Default = True
+      OnClick = SpeedButton1Click
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Ściągnij dane z sieci i zapisz do pliku'
+      OnClick = MenuItem4Click
+    end
+  end
+  object OpenFilm: TOpenDialog
+    Filter = 'Pliki filmowe|*.avi;*.mp4;*.rmvb;*.mkv;*.m2ts|Wszystkie pliki|*.*'
+    Options = [ofNoChangeDir, ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 480
+    top = 128
+  end
+  object OpenNapisy: TOpenDialog
+    Filter = 'Napisy do filmów|*.txt;*.sub;*.mpl;*.srt|Wszystkie pliki|*.*'
+    Options = [ofNoChangeDir, ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 480
+    top = 184
+  end
+  object PopupFilm: TPopupMenu
+    left = 464
+    top = 248
+    object MenuItem5: TMenuItem
+      Caption = 'Otwórz plik filmowy'
+      Default = True
+      OnClick = SpeedButton2Click
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'Wyczyść pole'
+      OnClick = MenuItem6Click
+    end
+  end
+  object PopupNapisy: TPopupMenu
+    left = 464
+    top = 296
+    object MenuItem7: TMenuItem
+      Caption = 'Otwórz plik z napisami do filmu'
+      Default = True
+      OnClick = SpeedButton3Click
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'Wyczyść pole'
+      OnClick = MenuItem8Click
+    end
+  end
+  object PopupMenu3: TPopupMenu
+    left = 616
+    top = 176
+    object MenuItem9: TMenuItem
+      Caption = 'Dodaj nowy gatunek'
+      OnClick = MenuItem9Click
+    end
+  end
+  object minus_gatunki: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'delete from gatunek'
+      'where id_filmu=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_films
+    left = 616
+    top = 392
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+  end
+end

@@ -1,0 +1,1266 @@
+object FMain: TFMain
+  Left = 360
+  Height = 668
+  Top = 208
+  Width = 1052
+  Caption = 'Katalog zawartości płyty'
+  ClientHeight = 640
+  ClientWidth = 1052
+  DesignTimePPI = 88
+  KeyPreview = True
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  Position = poDefault
+  SessionProperties = 'ComboBox1.ItemIndex;filmy.SortedFields;filmy.SortType;f_tryb.ItemIndex;Height;JDBGridControl1.Columns;Left;MenuItem10.Checked;MenuItem11.Checked;MenuItem12.Checked;MenuItem13.Checked;MenuItem2.Checked;MenuItem4.Checked;MenuItem6.Checked;MenuItem9.Checked;Top;Width;WindowState'
+  LCLVersion = '1.9.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 22
+    Top = 0
+    Width = 1052
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 22
+    ClientWidth = 1052
+    ParentFont = False
+    TabOrder = 0
+    object f_gatunki: TCheckGroup
+      Left = 0
+      Height = 20
+      Top = 2
+      Width = 1052
+      Align = alClient
+      AutoFill = True
+      AutoSize = True
+      BorderSpacing.Top = 2
+      Caption = 'Gatunki:'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ChildSizing.ControlsPerLine = 1
+      ColumnLayout = clVerticalThenHorizontal
+      Columns = 8
+      OnItemClick = f_gatunkiItemClick
+      ParentFont = False
+      PopupMenu = PopupMenu2
+      TabOrder = 0
+    end
+  end
+  object Panel2: TPanel
+    Left = 1
+    Height = 28
+    Top = 611
+    Width = 1050
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Around = 1
+    BevelOuter = bvNone
+    ClientHeight = 28
+    ClientWidth = 1050
+    ParentFont = False
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 945
+      Height = 28
+      Top = 0
+      Width = 105
+      Anchors = [akTop, akRight]
+      Caption = 'Wyjście'
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = BitBtn1Click
+      ParentFont = False
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 0
+      Height = 28
+      Top = 0
+      Width = 113
+      Caption = 'Pokaż opis'
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = BitBtn2Click
+      ParentFont = False
+      TabOrder = 1
+    end
+    object BitBtn3: TBitBtn
+      AnchorSideLeft.Control = BitBtn2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = BitBtn2
+      Left = 117
+      Height = 28
+      Top = 0
+      Width = 136
+      BorderSpacing.Left = 4
+      Caption = 'Odtwórz teraz'
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = BitBtn3Click
+      ParentFont = False
+      TabOrder = 2
+    end
+    object shutdown_computer: TCheckBox
+      AnchorSideLeft.Control = BitBtn3
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = BitBtn3
+      AnchorSideTop.Side = asrCenter
+      Left = 257
+      Height = 22
+      Top = 3
+      Width = 252
+      BorderSpacing.Left = 4
+      Caption = 'Po zakończeniu filmu wyłącz komputer!'
+      Color = clDefault
+      Font.Color = clRed
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 3
+    end
+    object BitBtn4: TBitBtn
+      AnchorSideTop.Control = BitBtn1
+      AnchorSideRight.Control = BitBtn1
+      Left = 846
+      Height = 28
+      Top = 0
+      Width = 95
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 4
+      Caption = 'O Autorze'
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = BitBtn4Click
+      ParentFont = False
+      TabOrder = 4
+    end
+    object usun: TBitBtn
+      AnchorSideTop.Control = BitBtn4
+      AnchorSideRight.Control = BitBtn4
+      Left = 789
+      Height = 28
+      Top = 0
+      Width = 53
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 4
+      Caption = 'Usuń'
+      Font.Color = clRed
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = usunClick
+      ParentFont = False
+      TabOrder = 5
+    end
+    object edytuj: TBitBtn
+      AnchorSideTop.Control = usun
+      AnchorSideRight.Control = usun
+      Left = 724
+      Height = 28
+      Top = 0
+      Width = 61
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 4
+      Caption = 'Edytuj'
+      Font.Color = clRed
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = edytujClick
+      ParentFont = False
+      TabOrder = 6
+    end
+    object dodaj: TBitBtn
+      AnchorSideTop.Control = edytuj
+      AnchorSideRight.Control = edytuj
+      Left = 664
+      Height = 28
+      Top = 0
+      Width = 56
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 4
+      Caption = 'Dodaj'
+      Font.Color = clRed
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = dodajClick
+      ParentFont = False
+      TabOrder = 7
+    end
+    object DBCheckBox1: TDBCheckBox
+      AnchorSideLeft.Control = shutdown_computer
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = shutdown_computer
+      Left = 517
+      Height = 22
+      Top = 3
+      Width = 80
+      AutoSize = True
+      BorderSpacing.Left = 8
+      Caption = 'NEW.KAT '
+      DataField = 'nowy_zestaw'
+      DataSource = ds_filmy
+      Font.Color = clNavy
+      Font.Height = -12
+      Font.Name = 'Sans'
+      Font.Style = [fsItalic]
+      OnChange = DBCheckBox1Change
+      ParentFont = False
+      TabOrder = 8
+      ValueChecked = '1'
+      ValueUnchecked = '0'
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 562
+    Top = 22
+    Width = 1052
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 562
+    ClientWidth = 1052
+    ParentFont = False
+    TabOrder = 2
+    object JDBGridControl1: TJDBGridControl
+      Left = 0
+      Height = 562
+      Top = 0
+      Width = 1052
+      Align = alClient
+      BorderStyle = bsNone
+      Color = clWindow
+      Columns = <      
+        item
+          Title.Caption = 'id'
+          Visible = False
+          FieldName = 'id'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Font.Style = [fsBold]
+          Title.Caption = 'Tytuł ▼'
+          Width = 150
+          FieldName = 'tytul'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Rok'
+          Width = 45
+          FieldName = 'rok_str'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Tytuł oryginalny'
+          Width = 150
+          FieldName = 'tytul_oryg'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Czas'
+          Width = 55
+          FieldName = 'czas'
+          DisplayFormat = 'hh:nn'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Title.Caption = 'Zdjęcie'
+          Visible = False
+          FieldName = 'zdjecie'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Title.Caption = 'Opis'
+          Visible = False
+          FieldName = 'opis'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Title.Caption = 'Link'
+          Width = 0
+          Visible = False
+          FieldName = 'link'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Reżyseria'
+          Width = 100
+          FieldName = 'rezyseria'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Scenariusz'
+          Width = 100
+          FieldName = 'scenariusz'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Tag = 1
+          Title.Caption = 'Produkcja'
+          Width = 100
+          FieldName = 'produkcja'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Alignment = taRightJustify
+          Tag = 1
+          Title.Caption = 'Prem. (Świat)'
+          Width = 110
+          FieldName = 'premiera'
+          DisplayFormat = 'yyyy-mm-dd'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Alignment = taRightJustify
+          Tag = 1
+          Title.Caption = 'Prem. (Polska)'
+          Width = 110
+          FieldName = 'premiera_pl'
+          DisplayFormat = 'yyyy-mm-dd'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Alignment = taRightJustify
+          Tag = 1
+          Title.Caption = 'Inwestycja [$]'
+          Width = 100
+          FieldName = 'inwestycja'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Title.Caption = 'Plik'
+          Width = 0
+          Visible = False
+          FieldName = 'plik'
+          Decimals = 0
+          MaxLength = 0
+        end      
+        item
+          Title.Caption = 'fileexist'
+          Visible = False
+          ValueChecked = 'true'
+          ValueUnchecked = 'false'
+          FieldName = 'fileexist'
+          Decimals = 0
+          MaxLength = 0
+        end>
+      DataSource = ds_filmy
+      DefaultDrawing = False
+      FixedCols = 0
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Options = [dgTitles, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+      ParentFont = False
+      PopupMenu = PopupMenu1
+      TabOrder = 0
+      TitleFont.Height = -12
+      TitleFont.Name = 'Arial'
+      OnDrawColumnCell = JDBGridControl1DrawColumnCell
+      OnDblClick = JDBGridControl1DblClick
+      OnTitleClick = JDBGridControl1TitleClick
+    end
+  end
+  object pinfo: TPanel
+    Left = 0
+    Height = 26
+    Top = 584
+    Width = 1052
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 26
+    ClientWidth = 1052
+    TabOrder = 3
+    Visible = False
+    object ComboBox1: TComboBox
+      AnchorSideTop.Control = pinfo
+      AnchorSideRight.Control = pinfo
+      AnchorSideRight.Side = asrBottom
+      Left = 939
+      Height = 29
+      Top = 0
+      Width = 113
+      Anchors = [akTop, akRight, akBottom]
+      Font.Height = -10
+      Font.Name = 'Sans'
+      ItemHeight = 0
+      ItemIndex = 3
+      Items.Strings = (
+        '650MB'
+        '700MB'
+        '880MB'
+        '4.4GB'
+        '8GB'
+        '25GB'
+        '50GB'
+        '100GB'
+      )
+      OnChange = ComboBox1Change
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 0
+      Text = '4.4GB'
+    end
+    object pile: TColorProgress
+      AnchorSideLeft.Control = pinfo
+      AnchorSideTop.Control = pinfo
+      AnchorSideRight.Control = pile2
+      AnchorSideBottom.Control = pinfo
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 26
+      Top = 0
+      Width = 669
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      ForeColor = clGray
+      ForeStyle = bsClear
+      Progress = 0
+    end
+    object pile2: TLabel
+      AnchorSideTop.Control = pinfo
+      AnchorSideRight.Control = ComboBox1
+      AnchorSideBottom.Control = pinfo
+      AnchorSideBottom.Side = asrBottom
+      Left = 669
+      Height = 26
+      Top = 0
+      Width = 270
+      Alignment = taCenter
+      Anchors = [akTop, akRight, akBottom]
+      AutoSize = False
+      Caption = 'Zajęte: 4.1GB  Wolne: 256KB'
+      Font.Height = -12
+      Font.Name = 'Sans'
+      Layout = tlCenter
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object params: TExtParams
+    ParamsForValues.Strings = (
+      'custom-play'
+      'set-directory'
+      'force-dir'
+      'optical-disc'
+      'UDI'
+    )
+    left = 32
+    top = 296
+  end
+  object ds_filmy: TDataSource
+    DataSet = filmy
+    OnDataChange = ds_filmyDataChange
+    left = 184
+    top = 296
+  end
+  object filmy: TZQuery
+    Connection = dm.db
+    SortedFields = 'tytul'
+    BeforeOpen = filmyBeforeOpen
+    AfterOpen = _OPEN_CLOSE
+    AfterClose = _OPEN_CLOSE
+    OnCalcFields = filmyCalcFields
+    UpdateObject = upd_filmy
+    SQL.Strings = (
+      'select *, case when tytul_oryg is null or tytul_oryg='''' then rok_prod||tytul else rok_prod||tytul_oryg end as tyt from multimedia'
+      'order by tytul'
+    )
+    Params = <>
+    IndexFieldNames = 'tytul Asc'
+    left = 112
+    top = 296
+    object filmyid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul: TStringField
+      DisplayLabel = 'Tytuł'
+      DisplayWidth = 200
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyrok_prod: TLargeintField
+      DisplayLabel = 'Rok prod.'
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul_oryg: TStringField
+      DisplayLabel = 'Tytuł oryg.'
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmydlugosc: TLargeintField
+      DisplayLabel = 'Długość'
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyzdjecie: TBlobField
+      DisplayLabel = 'Zdjęcie'
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyopis: TMemoField
+      DisplayLabel = 'Opis'
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmylink: TStringField
+      DisplayLabel = 'Link'
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmyrezyseria: TStringField
+      DisplayLabel = 'Reżyseria'
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyscenariusz: TStringField
+      DisplayLabel = 'Scenariusz'
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyprodukcja: TStringField
+      DisplayLabel = 'Produkcja'
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmypremiera: TDateField
+      DisplayLabel = 'Premiera'
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'yyyy-mm-dd'
+    end
+    object filmypremiera_pl: TDateField
+      DisplayLabel = 'Premiera_w Polsce'
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'yyyy-mm-dd'
+    end
+    object filmyboxoffice: TFloatField
+      DisplayLabel = 'Inwestycja'
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = '### ### ### ##0.00'
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmyplik: TStringField
+      DisplayLabel = 'Plik'
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmysubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmynowy_zestaw: TLargeintField
+      FieldKind = fkData
+      FieldName = 'nowy_zestaw'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyczas: TTimeField
+      FieldKind = fkCalculated
+      FieldName = 'czas'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'hh:nn'
+    end
+    object filmyrz_premiera: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rz_premiera'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
+    object filmyrz_premiera_pl: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rz_premiera_pl'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
+    object filmyinwestycja: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'inwestycja'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyrok_str: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'rok_str'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 6
+    end
+    object filmyfileexist: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'fileexist'
+      Index = 22
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object filmytyt: TStringField
+      FieldKind = fkData
+      FieldName = 'tyt'
+      Index = 23
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1020
+    end
+    object filmywidziany: TLargeintField
+      FieldKind = fkLookup
+      FieldName = 'widziany'
+      Index = 24
+      KeyFields = 'tyt'
+      LookupCache = False
+      LookupDataSet = historia
+      LookupKeyFields = 'tyt'
+      LookupResultField = 'widziany'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object gatunki: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select'
+      '  id,nazwa'
+      'from kategorie where id in (select distinct id_kategorii from gatunek)'
+      'order by nazwa'
+    )
+    Params = <>
+    left = 112
+    top = 352
+    object gatunkiid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object gatunkinazwa: TStringField
+      FieldKind = fkData
+      FieldName = 'nazwa'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+  end
+  object ds_kats: TDataSource
+    DataSet = gatunki
+    left = 184
+    top = 352
+  end
+  object PropStorage: TJSONPropStorage
+    StoredValues = <    
+      item
+        Name = 'f_gatunki'
+      end>
+    Formatted = True
+    Active = False
+    OnSavingProperties = PropStorageSavingProperties
+    left = 112
+    top = 176
+  end
+  object PopupMenu1: TPopupMenu
+    left = 309
+    top = 162
+    object MenuItem1: TMenuItem
+      Caption = 'Kolumny'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem14: TMenuItem
+      Caption = 'Edycja pozycii'
+      OnClick = MenuItem14Click
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'Konfiguracja:'
+      Enabled = False
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Dwuklik odpala okno informaycjne'
+      Checked = True
+      OnClick = MenuItem4Click
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'Dwuklik uruchamia film'
+      OnClick = MenuItem6Click
+    end
+    object MenuItem7: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'Standardowy odtwarzacz:'
+      Enabled = False
+    end
+    object MenuItem9: TMenuItem
+      Caption = 'Auto'
+      Checked = True
+      OnClick = MenuItem9Click
+    end
+    object MenuItem11: TMenuItem
+      Caption = 'MPV'
+      OnClick = MenuItem11Click
+    end
+    object MenuItem10: TMenuItem
+      Caption = 'MPlayer'
+      OnClick = MenuItem10Click
+    end
+    object MenuItem24: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem25: TMenuItem
+      Caption = 'Oglądnięty Ustaw/Wyłącz'
+      OnClick = MenuItem25Click
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    left = 309
+    top = 37
+    object MenuItem13: TMenuItem
+      Caption = 'Zaznaczaj pojedyńczo'
+      Checked = True
+      OnClick = MenuItem13Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Pozwól na zaznaczenie wielu i pokaż tylko te spełniające wszystkie warunki'
+      OnClick = MenuItem2Click
+    end
+    object MenuItem12: TMenuItem
+      Caption = 'Pozwól na zaznaczanie wielu i pokaż te, które spełniają choć jeden warunek'
+      OnClick = MenuItem12Click
+    end
+  end
+  object player: TAsyncProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 304
+    top = 264
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    Position = psOwnerFormCenter
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 304
+    top = 336
+  end
+  object zamknij_komputer: TExtShutdown
+    left = 408
+    top = 384
+  end
+  object cdrom: TAsyncProcess
+    Active = False
+    CommandLine = 'mount'
+    Executable = 'mount'
+    Options = [poWaitOnExit, poUsePipes]
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 368
+    top = 264
+  end
+  object setcd: TAsyncProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 432
+    top = 264
+  end
+  object sort1: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select'
+      '  m.id, m.nazwa, count(m.nazwa)'
+      'from multimedia m'
+      'join gatunek g on g.id_filmu=m.id'
+      'join kategorie k on k.id=g.id_kategorii'
+      'where g.id_kategorii=1 or g.id_kategorii=4'
+      'group by m.id,m.nazwa'
+      'having count(m.nazwa)=2'
+    )
+    Params = <>
+    left = 112
+    top = 424
+  end
+  object ds_sort1: TDataSource
+    DataSet = sort1
+    left = 184
+    top = 424
+  end
+  object MainMenu1: TMainMenu
+    left = 72
+    top = 80
+    object MenuItem15: TMenuItem
+      Caption = 'Dodatkowe narzędzia'
+      object MenuItem16: TMenuItem
+        Caption = 'Aktualizacja bazy danych na podstawie innej bazy'
+        OnClick = MenuItem16Click
+      end
+      object MenuItem17: TMenuItem
+        Caption = 'Normalizacja nazw plików'
+        OnClick = MenuItem17Click
+      end
+      object MenuItem23: TMenuItem
+        Caption = 'Wygeneruj spis filmów wg. żądanego wzorca'
+        OnClick = MenuItem23Click
+      end
+      object MenuItem18: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem19: TMenuItem
+        Caption = 'Ścieżka do nowego zestawu filmów'
+        OnClick = MenuItem19Click
+      end
+      object MenuItem20: TMenuItem
+        Caption = 'Wyłączenie tworzenia nowego zestawu'
+        OnClick = MenuItem20Click
+      end
+      object MenuItem21: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem22: TMenuItem
+        Caption = 'Czyszczenie bazy (VACUUM)'
+        OnClick = MenuItem22Click
+      end
+    end
+    object MenuItem26: TMenuItem
+      Caption = 'Serwisy filmowe'
+      object MenuItem27: TMenuItem
+        Caption = 'filmweb.pl'
+        OnClick = MenuItem27Click
+      end
+    end
+  end
+  object OpenSynchroDB: TOpenDialog
+    Title = 'Otwórz istniejącą bazę danych'
+    DefaultExt = '.dat'
+    Filter = 'Bazy danych|*.dat'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 407
+    top = 161
+  end
+  object add_plik: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'insert into multimedia'
+      '(plik)'
+      'values'
+      '(:plik)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'plik'
+        ParamType = ptUnknown
+      end>
+    left = 112
+    top = 496
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'plik'
+        ParamType = ptUnknown
+      end>
+  end
+  object minus_gatunki: TZQuery
+    Connection = dm.db
+    BeforeDelete = minus_gatunkiBeforeDelete
+    SQL.Strings = (
+      'delete from gatunek'
+      'where id_filmu=:id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    DataSource = ds_filmy
+    left = 184
+    top = 496
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+  end
+  object NowyKatalog: TSelectDirectoryDialog
+    left = 544
+    top = 161
+  end
+  object upd_filmy: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM multimedia'
+      'WHERE'
+      '  ((multimedia.id IS NULL AND :OLD_id IS NULL) OR (multimedia.id = :OLD_id))'
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO multimedia'
+      '  (tytul, rok_prod, tytul_oryg, dlugosc, zdjecie, opis, link, rezyseria, '
+      '   scenariusz, produkcja, premiera, premiera_pl, boxoffice, plik, subtitles, '
+      '   nowy_zestaw)'
+      'VALUES'
+      '  (:tytul, :rok_prod, :tytul_oryg, :dlugosc, :zdjecie, :opis, :link, :rezyseria, '
+      '   :scenariusz, :produkcja, :premiera, :premiera_pl, :boxoffice, :plik, '
+      '   :subtitles, :nowy_zestaw)'
+    )
+    ModifySQL.Strings = (
+      'UPDATE multimedia SET'
+      '  tytul = :tytul,'
+      '  rok_prod = :rok_prod,'
+      '  tytul_oryg = :tytul_oryg,'
+      '  dlugosc = :dlugosc,'
+      '  zdjecie = :zdjecie,'
+      '  opis = :opis,'
+      '  link = :link,'
+      '  rezyseria = :rezyseria,'
+      '  scenariusz = :scenariusz,'
+      '  produkcja = :produkcja,'
+      '  premiera = :premiera,'
+      '  premiera_pl = :premiera_pl,'
+      '  boxoffice = :boxoffice,'
+      '  plik = :plik,'
+      '  subtitles = :subtitles,'
+      '  nowy_zestaw = :nowy_zestaw'
+      'WHERE'
+      '  multimedia.id = :OLD_id'
+    )
+    UseSequenceFieldForRefreshSQL = False
+    left = 248
+    top = 296
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'tytul'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rok_prod'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'tytul_oryg'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'dlugosc'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'zdjecie'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'opis'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'link'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rezyseria'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'scenariusz'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'produkcja'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera_pl'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'boxoffice'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'plik'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'subtitles'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'nowy_zestaw'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end>
+  end
+  object historia: TZQuery
+    Connection = dm.db_loc
+    SQL.Strings = (
+      'select'
+      '  *,'
+      '  rok_prod||tytul as tyt'
+      'from filmy'
+    )
+    Params = <>
+    left = 544
+    top = 296
+    object historiaid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object historiatytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object historiarok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object historiawidziany: TLargeintField
+      FieldKind = fkData
+      FieldName = 'widziany'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object historiatyt: TStringField
+      FieldKind = fkData
+      FieldName = 'tyt'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1020
+    end
+  end
+  object ds_historia: TDataSource
+    DataSet = historia
+    left = 616
+    top = 296
+  end
+end

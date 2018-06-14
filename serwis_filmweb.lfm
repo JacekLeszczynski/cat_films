@@ -1,0 +1,360 @@
+object FSerwisFilmWeb: TFSerwisFilmWeb
+  Left = 421
+  Height = 503
+  Top = 298
+  Width = 687
+  BorderStyle = bsDialog
+  Caption = 'Serwis FilmWeb'
+  ClientHeight = 503
+  ClientWidth = 687
+  DesignTimePPI = 88
+  OnClose = FormClose
+  Position = poOwnerFormCenter
+  LCLVersion = '1.9.0.0'
+  object ListBox1: TListBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 420
+    Top = 72
+    Width = 328
+    Font.Color = clBlue
+    ItemHeight = 0
+    ParentFont = False
+    ScrollWidth = 322
+    TabOrder = 0
+    TopIndex = -1
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = Edit1
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 18
+    Top = 54
+    Width = 37
+    Caption = 'Tytuły:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 18
+    Top = 8
+    Width = 94
+    Caption = 'Strona startowa:'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 28
+    Top = 26
+    Width = 641
+    TabOrder = 1
+    Text = 'http://www.filmweb.pl/films/search'
+  end
+  object SpeedButton1: TSpeedButton
+    AnchorSideLeft.Control = Edit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit1
+    AnchorSideRight.Side = asrBottom
+    Left = 649
+    Height = 30
+    Top = 26
+    Width = 30
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000F7B2AFF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000107C2BFF0E7B29FF0D7A27FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000127E2DFF107D2BFF0E7B28FF0C7A27FF0B79
+      26FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000014802EFF127F2DFF107E2BFF0E7C29FF0C7A27FF0B79
+      26FF0A7925FF0000000000000000000000000000000000000000000000000000
+      000000000000168231FF15812FFF13802DFF107F2BFF0E7D29FF0C7B27FF0B7A
+      26FF0B7926FF0B7926FF00000000000000000000000000000000000000000000
+      0000178332FF178331FF158330FF13822EFF11802CFF0F7E2AFF0D7D29FF0C7B
+      27FF0C7A27FF0C7A27FF0D7A28FF000000000000000000000000000000000000
+      000000000000000000000000000014832FFF12812DFF10802CFF0F7E2AFF0E7C
+      29FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000158430FF13822EFF12812DFF107F2BFF0F7E
+      2AFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000158430FF14832FFF13822EFF12802DFF117E
+      2CFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000168531FF158430FF14822FFF14812EFF137F
+      2DFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000178532FF168431FF168330FF158130FF1480
+      2FFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000188532FF178432FF178331FF178231FF1680
+      30FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000
+    }
+    OnClick = SpeedButton1Click
+    ParentFont = False
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = ListBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    Left = 340
+    Height = 18
+    Top = 54
+    Width = 160
+    BorderSpacing.Left = 4
+    Caption = 'Ilość tytułów przeczytanych:'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label3
+    Left = 508
+    Height = 18
+    Top = 54
+    Width = 75
+    BorderSpacing.Left = 8
+    Caption = '00000/00000'
+    Font.Color = clBlue
+    ParentColor = False
+    ParentFont = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 608
+    Height = 28
+    Top = 464
+    Width = 69
+    Caption = 'Wyjście'
+    OnClick = BitBtn1Click
+    TabOrder = 2
+  end
+  object BitBtn2: TBitBtn
+    Left = 536
+    Height = 28
+    Top = 464
+    Width = 69
+    Caption = 'Stop'
+    OnClick = BitBtn2Click
+    TabOrder = 3
+  end
+  object http: TNetSynHTTP
+    Method = meGet
+    UserAgent = '<auto>'
+    left = 65
+    top = 115
+  end
+  object dodaj: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'insert into multimedia'
+      '(tytul,rok_prod,tytul_oryg,dlugosc,zdjecie,opis,link,rezyseria,scenariusz,produkcja,premiera,premiera_pl,boxoffice)'
+      'values'
+      '(:tytul,:rok,:tytul_oryg,:czas,:zdjecie,:opis,:link,:rezyseria,:scenariusz,:produkcja,:premiera,:premiera_pl,:boxoffice)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'tytul'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rok'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'tytul_oryg'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'czas'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'zdjecie'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'opis'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'link'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rezyseria'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'scenariusz'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'produkcja'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera_pl'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'boxoffice'
+        ParamType = ptUnknown
+      end>
+    left = 65
+    top = 240
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'tytul'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rok'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'tytul_oryg'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'czas'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'zdjecie'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'opis'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'link'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'rezyseria'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'scenariusz'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'produkcja'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'premiera_pl'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'boxoffice'
+        ParamType = ptUnknown
+      end>
+  end
+  object czy_jest: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select count(*) as ile from multimedia'
+      'where coalesce(rok_prod,'''')=:rok and (coalesce(tytul,'''')=:tytul or coalesce(tytul_oryg,'''')=:tytul)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'rok'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'tytul'
+        ParamType = ptUnknown
+      end>
+    left = 65
+    top = 176
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'rok'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'tytul'
+        ParamType = ptUnknown
+      end>
+    object czy_jestile: TStringField
+      FieldKind = fkData
+      FieldName = 'ile'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1020
+    end
+  end
+  object last_id: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select last_insert_rowid() as id'
+    )
+    Params = <>
+    left = 64
+    top = 304
+    object last_idid: TStringField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+end

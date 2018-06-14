@@ -1,0 +1,90 @@
+object FAbout: TFAbout
+  Left = 357
+  Height = 321
+  Top = 307
+  Width = 421
+  BorderStyle = bsDialog
+  Caption = 'O Autorze'
+  ClientHeight = 321
+  ClientWidth = 421
+  DesignTimePPI = 88
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '1.9.0.0'
+  object ScrollingText1: TScrollingText
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = BitBtn1
+    Left = 8
+    Height = 269
+    Top = 8
+    Width = 405
+    About.Description.Strings = (
+      'Component that shows a scrolling window.'#10'Use Lines property to set text and Active=True'#10'to use the component'
+    )
+    About.Title = 'About About ScrollingText component'
+    About.Height = 280
+    About.Width = 400
+    About.Font.Color = clNavy
+    About.Font.Height = -12
+    About.Font.Name = 'Arial'
+    About.BackGroundColor = clWindow
+    About.Version = '1.0.2.0'
+    About.Authorname = 'Gordon Bamber and Andrey Gunenko'
+    About.Organisation = 'Public Domain'
+    About.AuthorEmail = 'minesadorada@charcodelvalle.com'
+    About.ComponentName = 'ScrollingText component'
+    About.LicenseType = abModifiedGPL
+    Active = False
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Borderspacing.Left = 8
+    Borderspacing.Top = 8
+    Borderspacing.Right = 8
+    Borderspacing.Bottom = 8
+    Lines.Strings = (
+      'Program służy do odtwarzania multimedii'
+      'z płyt Blue-Ray,'
+      'oczywiście nadaje się również do odtwarzania'
+      'z wielu innych różnych mediów,'
+      'czy też dysku twardego...'
+      ''
+      ' * * *'
+      ''
+      'Autorem programu jest:'
+      ''
+      'Jacek Leszczyński'
+      'mailto: sam@bialan.pl'
+      ''
+      '* * *'
+      ''
+      'Kraków,'
+      'Maj 2018'
+    )
+    Font.Height = -13
+    Font.Name = 'Sans'
+    LinkFont.Height = -13
+    LinkFont.Name = 'Sans'
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 320
+    Height = 28
+    Top = 285
+    Width = 93
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Caption = 'OK'
+    Font.Height = -15
+    Font.Name = 'Sans'
+    OnClick = BitBtn1Click
+    ParentFont = False
+    TabOrder = 0
+  end
+end

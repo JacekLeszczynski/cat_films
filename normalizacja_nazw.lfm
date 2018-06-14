@@ -1,0 +1,264 @@
+object FNormalizacja_nazw: TFNormalizacja_nazw
+  Left = 429
+  Height = 169
+  Top = 189
+  Width = 672
+  AutoSize = True
+  Caption = 'Normalizacja nazw plików'
+  ClientHeight = 169
+  ClientWidth = 672
+  DesignTimePPI = 88
+  Position = poOwnerFormCenter
+  LCLVersion = '1.9.0.0'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 36
+    Top = 4
+    Width = 664
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 4
+    Caption = 'Wszystkie nazwy plików zostaną zmienione zgodnie z wybranym algorytmem, odniesienia w bazie także zostaną dopasowane, by dalej na nie wskazywały.'
+    ParentColor = False
+    WordWrap = True
+  end
+  object RadioGroup1: TRadioGroup
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    AnchorSideRight.Side = asrBottom
+    Left = 4
+    Height = 72
+    Top = 48
+    Width = 664
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    BorderSpacing.Top = 8
+    Caption = 'Algorytm normalizacji:'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 52
+    ClientWidth = 660
+    Items.Strings = (
+      'Nazwy plików mają dokładnie odwzorowywać polskie tytuły z rokiem powstania'
+      'Jak wyżej, z różnicami: wszystkie spacje zamieniane na znaki podkreślenia, oraz bez dużych i polskich liter'
+    )
+    OnClick = RadioGroup1Click
+    TabOrder = 0
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideTop.Control = BitBtn2
+    AnchorSideRight.Control = BitBtn2
+    Left = 526
+    Height = 28
+    Top = 128
+    Width = 69
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 4
+    Caption = 'Wykonaj'
+    Enabled = False
+    OnClick = BitBtn1Click
+    TabOrder = 1
+  end
+  object BitBtn2: TBitBtn
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = RadioGroup1
+    AnchorSideRight.Side = asrBottom
+    Left = 599
+    Height = 28
+    Top = 128
+    Width = 69
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 4
+    Caption = 'Anuluj'
+    OnClick = BitBtn2Click
+    TabOrder = 2
+  end
+  object filmy: TZQuery
+    Connection = dm.db
+    SQL.Strings = (
+      'select * from multimedia'
+      'order by id;'
+    )
+    Params = <>
+    left = 88
+    top = 88
+    object filmyid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyrok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul_oryg: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmydlugosc: TLargeintField
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyzdjecie: TBlobField
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyopis: TMemoField
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmylink: TStringField
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmyrezyseria: TStringField
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyscenariusz: TStringField
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyprodukcja: TStringField
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmypremiera: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmypremiera_pl: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyboxoffice: TFloatField
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmyplik: TStringField
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmysubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmynowy_zestaw: TLargeintField
+      FieldKind = fkData
+      FieldName = 'nowy_zestaw'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+end
