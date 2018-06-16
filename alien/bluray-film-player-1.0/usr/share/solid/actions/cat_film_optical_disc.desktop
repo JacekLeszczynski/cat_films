@@ -1,0 +1,11 @@
+[Desktop Entry]
+X-KDE-Solid-Predicate=OpticalDisc.availableContent & 'Data'
+Type=Service
+Actions=open;
+
+[Desktop Action open]
+# %f gives StorageAccess.filePath, %d gives Block.device, %i gives UDI
+Exec=cat_films --force-dir "%f" --optical-disc "%d"
+Icon=cat_films
+Name=Open Optical Disc Films
+Name[pl]=Otwórz optyczny dysk filmowy

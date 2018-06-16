@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+
+  AR=$(arch)
+  if [ "$AR" = "x86_64" ]; then
+    ln -s /usr/bin/cat_films.linux.64bit /usr/bin/cat_films
+  else
+    ln -s /usr/bin/cat_films.linux.32bit /usr/bin/cat_films
+  fi
+
+fi
+
+exit 0
+

@@ -1,0 +1,24 @@
+[Desktop Entry]
+Categories=Qt;KDE;AudioVideo;Player;Video;
+Comment=Blu-ray Catalog Player
+Exec=cat_films
+GenericName=Blu-Ray Catalog Player
+Icon=cat_films
+Name=CatFilms
+Type=Application
+X-KDE-StartupNotify=false
+Keywords=movie;player;media;kde;qt;
+
+X-Ayatana-Desktop-Shortcuts=Screen;Window
+
+# Translations
+
+Comment[en_GB]=Blu-Ray Catalog Player
+GenericName[en_GB]=Blu-Ray Catalog Player
+Name[en_GB]=CatFilms
+Icon[en_GB]=cat_films
+
+Comment[pl]=Odtwarzacz multimedii złożonych Blu-Ray
+GenericName[pl]=Odtwarzacz mediów
+Name[pl]=CatFilms
+Icon[pl]=cat_films

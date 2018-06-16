@@ -1,0 +1,10 @@
+Source: bluray-film-player
+Section: multimedia
+Priority: extra
+Maintainer: Jacek Leszczyński <sam@bialan.pl>
+
+Package: bluray-film-player
+Architecture: all
+Depends: ${shlibs:Depends}, setcd, mpv | mplayer
+Description: Odtwarzacz zestawów filmowych
+ Odtwarzacz zestawów filmowych
