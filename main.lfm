@@ -466,17 +466,6 @@ object FMain: TFMain
       ParentFont = False
     end
   end
-  object params: TExtParams
-    ParamsForValues.Strings = (
-      'custom-play'
-      'set-directory'
-      'force-dir'
-      'optical-disc'
-      'UDI'
-    )
-    left = 32
-    top = 296
-  end
   object ds_filmy: TDataSource
     DataSet = filmy
     OnDataChange = ds_filmyDataChange

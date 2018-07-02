@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, ZDataset, ZSqlUpdate, JDBGridControl, Forms, Controls,
-  Graphics, Dialogs, ExtCtrls, JSONPropStorage, Menus, ExtParams, ExtMessage,
+  Graphics, Dialogs, ExtCtrls, JSONPropStorage, Menus, ExtMessage,
   ExtShutdown, ColorProgress, db, DBGrids, StdCtrls, Buttons, AsyncProcess,
   ComCtrls, Grids, DBCtrls;
 
@@ -110,7 +110,6 @@ type
     PopupMenu1: TPopupMenu;
     PopupMenu2: TPopupMenu;
     PropStorage: TJSONPropStorage;
-    params: TExtParams;
     sort1: TZQuery;
     add_plik: TZQuery;
     upd_filmy: TZUpdateSQL;
@@ -222,98 +221,24 @@ var
   s,pom,pom1,pom2: string;
   t: TStringList;
   i,a: integer;
-  new_create: boolean;
 begin
   {$IFDEF MSWINDOWS}
   shutdown_computer.Visible:=false;
   {$ENDIF}
   tab:=TStringList.Create;
   gatunki_ids:=TStringList.Create;
-  params.Execute;
 
-  if params.IsParam('help') then
+  customCmd:=CUSTOM_CMD;
+  if FORCE_DIR<>'' then
   begin
-    writeln;
-    writeln('Podpowiedzi wywołania programu z parametrami:');
-    writeln('  --new                    Założenie czystej bazy danych');
-    writeln('  --scan                   Skanuje katalog z plikami i dodaje je do bazy');
-    writeln('  --set-directory          Ustawienie alternatywnego katalogu z plikami');
-    writeln('  --set-showmenu           Włączenie menu głównego');
-    writeln('  --set-hidemenu           Wyłączenie menu głównego');
-    writeln('  --set-showfilters        Włączenie opcji filtrowania');
-    writeln('  --set-hidefilters        Wyłączenie opcji filtrowania');
-    writeln('  --set-readonly           Ustawienie bazy w trybie tylko do odczytu');
-    writeln('  --set-readwrite          Ustawienie bazy w trybie także do zapisu');
-    writeln('  --edit                   Uruchomienie programu w trybie edycji danych (ignoruje flagę tylko do odczytu)');
-    writeln('  --force-dir [patch]      Podmontuj się pod bazę wskazywaną przez podaną ścieżkę');
-    writeln('  --optical-disc [device]  Podany z --force-dir informuje o użyciu nośnika optycznego');
-    writeln('  --custom-play [command]  Program będzie odtwarzał filmy za pomocą podanej w parametrze komendy');
-    writeln;
-    COM_CLOSE:=true;
-  end;
-
-  new_create:=params.IsParam('new');
-  if params.IsParam('force-dir') then FORCE_DIR:=params.GetValue('force-dir');
-  if params.IsParam('optical-disc') then OPTICAL_DISC:=params.GetValue('optical-disc');
-  if params.IsParam('custom-play') then customCmd:=params.GetValue('custom-play');
-  SetConfDir('Cat-Films');
-  if FORCE_DIR='' then s:=params.GetValue('_1') else
-  begin
-    s:=FORCE_DIR;
-    if params.IsParam('optical-disc') and (FileExists(s+_FF+'base.dat')) then
+    if (OPTICAL_DISC<>'') and (FileExists(s+_FF+'base.dat')) then
     begin
       setcd.CommandLine:='setcd -x 2 '+ OPTICAL_DISC;
       setcd.Execute;
     end;
   end;
 
-  if (s='') and (not FileExists('./base.dat')) then
-  begin
-    (* poszukiwanie zamontowanych cdromów z zawartą na nich bazą danych *)
-    t:=TStringList.Create;
-    try
-      cdrom.Execute;
-      t.LoadFromStream(cdrom.Output);
-      for i:=0 to t.Count-1 do
-      begin
-        pom:=t[i];
-        a:=pos('/media/cdrom',pom);
-        if a>1 then
-        begin
-          pom1:=GetLineToStr(pom,1,' ');
-          pom2:=GetLineToStr(pom,3,' ');
-          if FileExists(pom2+'/base.dat') then
-          begin
-            s:=pom2;
-            if FindDefaultExecutablePath('setcd')<>'' then
-            begin
-              setcd.CommandLine:='setcd -x 2 '+pom1;
-              setcd.Execute;
-            end;
-            break;
-          end;
-        end;
-      end;
-    finally
-      t.Free;
-    end;
-  end;
-
-  SetDir(s);
-  dm.db.Database:=MyDir('base.dat');
-  b:=not FileExists(dm.db.Database);
-
-  if (not b) or new_create then
-  begin
-    dm.db.Connect;
-    if b then
-    begin
-      dm.tr.StartTransaction;
-      dm.db_create.Execute;
-      dm.tr.Commit;
-    end;
-    PropStorage.JSONFileName:=MyConfDir('config.xml');
-  end;
+  PropStorage.JSONFileName:=MyConfDir('config.xml');
 
   (* baza lokalna *)
   dm.db_loc.Database:=MyConfDir('config.dat');
@@ -323,53 +248,6 @@ begin
     dm.loc_create.Execute;
   end else dm.db_loc.Connect;
 
-  (* katalog domyślny *)
-  if params.IsParam('set-directory') then
-  begin
-    DEF_DIR:=params.GetValue('set-directory');
-    dm.WriteString('katalog_domyślny',DEF_DIR);
-    writeln('Katalog domyślny plików został ustawiony na: '+DEF_DIR);
-    COM_CLOSE:=true;
-  end;
-  (* Czy pokazywac menu główne? *)
-  if params.IsParam('set-showmenu') then
-  begin
-    dm.WriteBool('pokazuj_menu_główne',true);
-    writeln('Włączono pokazywanie menu głównego.');
-    COM_CLOSE:=true;
-  end;
-  if params.IsParam('set-hidemenu') then
-  begin
-    dm.WriteBool('pokazuj_menu_główne',false);
-    writeln('Wyłączono pokazywanie menu głównego.');
-    COM_CLOSE:=true;
-  end;
-  (* Czy pokazywac filtrowanie po gatunkach? *)
-  if params.IsParam('set-showfilters') then
-  begin
-    dm.WriteBool('pokazuj_filtrowanie',true);
-    writeln('Włączono opcję filtrowania.');
-    COM_CLOSE:=true;
-  end;
-  if params.IsParam('set-hidefilters') then
-  begin
-    dm.WriteBool('pokazuj_filtrowanie',false);
-    writeln('Wyłączono opcję filtrowania.');
-    COM_CLOSE:=true;
-  end;
-  (* katalog tylko do odczytu, lub także do zapisu *)
-  if params.IsParam('set-readonly') then
-  begin
-    dm.WriteBool('db_readwrite',false);
-    writeln('System został skonfigurowany jako tylko do odczytu.');
-    COM_CLOSE:=true;
-  end;
-  if params.IsParam('set-readwrite') then
-  begin
-    dm.WriteBool('db_readwrite',true);
-    writeln('System został skonfigurowany w trybie do odczytu jak i do zapisu.');
-    COM_CLOSE:=true;
-  end;
   if dm.db.Connected then
   begin
     DEF_DIR:=dm.ReadString('katalog_domyślny','.');
@@ -385,8 +263,9 @@ begin
     end;
     Panel1.Visible:=DEF_FILTERS;
   end;
+
   {$IFDEF UNIX}
-  if params.IsParam('scan') then
+  if FORCE_SCAN then
   begin
     (* przeskanowanie katalogu z multimediami i dołączenie ich do bazy danych *)
     if dm.db.Connected then
@@ -507,7 +386,6 @@ begin
   {$ELSE}
   playCmd:=GetNonWindowsPlayCommand;
   L:=TStringList.Create;
-  mess.ShowInformation('ttt');
   mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
   application.ProcessMessages;
   try
@@ -647,7 +525,7 @@ begin
     pinfo_oblicz;
   end;
   (* edycja katalogu filmów *)
-  if params.IsParam('edit') then
+  if FORCE_EDIT then
   begin
     FEdit:=TFEdit.Create(self);
     try
