@@ -507,6 +507,7 @@ begin
   {$ELSE}
   playCmd:=GetNonWindowsPlayCommand;
   L:=TStringList.Create;
+  mess.ShowInformation('ttt');
   mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
   application.ProcessMessages;
   try
