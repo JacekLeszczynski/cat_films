@@ -5,8 +5,8 @@ unit datamodule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, db, eventlog, ZTransaction, ExtMessage,
-  NetSynHTTP, ZConnection, ZSqlProcessor, ZDataset;
+  Classes, SysUtils, Dialogs, AsyncProcess, db, eventlog, ZTransaction,
+  ExtMessage, NetSynHTTP, ZConnection, ZSqlProcessor, ZDataset;
 
 type
 
@@ -34,10 +34,12 @@ type
 
   Tdm = class(TDataModule)
     add_gatunek: TZQuery;
+    add_plik: TZQuery;
     loc_create: TZSQLProcessor;
     db_loc: TZConnection;
     http: TNetSynHTTP;
     SaveDialog1: TSaveDialog;
+    setcd: TAsyncProcess;
     tr_loc: TZTransaction;
     vacuum: TZQuery;
     filmy2filename: TStringField;
@@ -122,6 +124,11 @@ type
     procedure SynchronizujGatunki;
     function CountZestaw2: integer;
     function FilmwebToFilm(strona: string; element: TElement; z_zapisem_do_pliku: boolean = false): boolean;
+    {$IFDEF UNIX}
+    procedure Search(const StartDir: string);
+    function SearchSize(const StartDir: string): int64;
+    {$ENDIF}
+    procedure zwolnij_naped_optyczny;
   end;
 
 var
@@ -133,7 +140,7 @@ function usun_wszystko_mmw(s: string): string;
 implementation
 
 uses
-  ecode;
+  ecode, functions;
 
 {$R *.lfm}
 
@@ -683,6 +690,77 @@ begin
     end;
   end;
 end;
+
+{$IFDEF UNIX}
+procedure Tdm.Search(const StartDir: string);
+var
+  SR,DR: TSearchRec;
+  found,FoundFile: Integer;
+  s,ext: string;
+  function IsDir(value: string): string; begin if value[Length(value)]<>_FF then result:=value+_FF else result:=value; end;
+begin
+  found:=FindFirst(IsDir(StartDir)+'*',faDirectory,DR);
+  while found=0 do
+  begin
+    if ((DR.Attr and faDirectory)=faDirectory) and ((DR.Name<>'.') and (DR.Name<>'..')) then
+    begin
+      FoundFile:=FindFirst(IsDir(StartDir)+DR.Name+_FF+'*',faAnyFile,SR);
+      while FoundFile=0 do FoundFile:=FindNext(SR);
+      FindClose(SR);
+      Search(IsDir(StartDir)+DR.Name);
+    end else begin
+      if (DR.Name<>'.') and (DR.Name<>'..') then
+      begin
+        s:=StartDir+_FF+DR.Name;
+        delete(s,1,length(MyDir(DEF_DIR))+1);
+        ext:=ExtractFileExt(s);
+        //Pliki filmowe|*.avi;*.mp4;*.rmvb;*.mkv;*.m2ts|Wszystkie pliki|*.*
+        if (ext='.avi') or (ext='.mp4') or (ext='.rmvb') or (ext='.mkv') or (ext='.m2ts') then
+        begin
+          writeln('Dodaję plik: '+s);
+          add_plik.Params[0].AsString:=s;
+          add_plik.ExecSQL;
+        end;
+      end;
+    end;
+    Found:=FindNext(DR);
+  end;
+  FindClose(DR);
+end;
+
+function Tdm.SearchSize(const StartDir: string): int64;
+var
+  wielkosc: int64 = 0;
+  SR,DR: TSearchRec;
+  found,FoundFile: Integer;
+  function IsDir(value: string): string; begin if value[Length(value)]<>_FF then result:=value+_FF else result:=value; end;
+begin
+  found:=FindFirst(IsDir(StartDir)+'*',faDirectory,DR);
+  while found=0 do
+  begin
+    if ((DR.Attr and faDirectory)=faDirectory) and ((DR.Name<>'.') and (DR.Name<>'..')) then
+    begin
+      FoundFile:=FindFirst(IsDir(StartDir)+DR.Name+_FF+'*',faAnyFile,SR);
+      while FoundFile=0 do FoundFile:=FindNext(SR);
+      FindClose(SR);
+      wielkosc+=SearchSize(IsDir(StartDir)+DR.Name);
+    end else begin
+      if (DR.Name<>'.') and (DR.Name<>'..') then wielkosc+=DR.Size;
+    end;
+
+    Found:=FindNext(DR);
+  end;
+  FindClose(DR);
+  result:=wielkosc;
+end;
+
+procedure Tdm.zwolnij_naped_optyczny;
+begin
+  setcd.CommandLine:='setcd -x 2 '+ OPTICAL_DISC;
+  setcd.Execute;
+end;
+
+{$ENDIF}
 
 end.
 

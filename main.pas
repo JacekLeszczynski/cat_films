@@ -58,7 +58,6 @@ type
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     OpenSynchroDB: TOpenDialog;
-    setcd: TAsyncProcess;
     shutdown_computer: TCheckBox;
     zamknij_komputer: TExtShutdown;
     mess: TExtMessage;
@@ -111,7 +110,6 @@ type
     PopupMenu2: TPopupMenu;
     PropStorage: TJSONPropStorage;
     sort1: TZQuery;
-    add_plik: TZQuery;
     upd_filmy: TZUpdateSQL;
     historia: TZQuery;
     procedure BitBtn1Click(Sender: TObject);
@@ -167,10 +165,6 @@ type
     procedure reopen;
     function GetZaznaczoneGatunki(ciapki: boolean = false): string;
     function GetZaznaczoneGatunkiIds(ciapki: boolean = false): string;
-    {$IFDEF UNIX}
-    procedure Search(const StartDir: string);
-    function SearchSize(const StartDir: string): int64;
-    {$ENDIF}
     procedure pinfo_oblicz;
     procedure przenies_film;
   public
@@ -216,28 +210,13 @@ end;
 { TFMain }
 
 procedure TFMain.FormCreate(Sender: TObject);
-var
-  b: boolean;
-  s,pom,pom1,pom2: string;
-  t: TStringList;
-  i,a: integer;
 begin
   {$IFDEF MSWINDOWS}
   shutdown_computer.Visible:=false;
   {$ENDIF}
   tab:=TStringList.Create;
   gatunki_ids:=TStringList.Create;
-
   customCmd:=CUSTOM_CMD;
-  if FORCE_DIR<>'' then
-  begin
-    if (OPTICAL_DISC<>'') and (FileExists(s+_FF+'base.dat')) then
-    begin
-      setcd.CommandLine:='setcd -x 2 '+ OPTICAL_DISC;
-      setcd.Execute;
-    end;
-  end;
-
   PropStorage.JSONFileName:=MyConfDir('config.xml');
 
   (* baza lokalna *)
@@ -263,20 +242,6 @@ begin
     end;
     Panel1.Visible:=DEF_FILTERS;
   end;
-
-  {$IFDEF UNIX}
-  if FORCE_SCAN then
-  begin
-    (* przeskanowanie katalogu z multimediami i dołączenie ich do bazy danych *)
-    if dm.db.Connected then
-    begin
-      writeln('Skanuję katalog z multimediami: '+MyDir(DEF_DIR));
-      dm.tr.StartTransaction;
-      search(MyDir(DEF_DIR));
-      dm.tr.Commit;
-    end;
-  end;
-  {$ENDIF}
 end;
 
 procedure TFMain.FormDestroy(Sender: TObject);
@@ -518,12 +483,7 @@ begin
   dodaj.Visible:=DEF_READWRITE;
   edytuj.Visible:=DEF_READWRITE;
   usun.Visible:=DEF_READWRITE;
-  if DEF_MENU and (DEF_NEW_DIR<>'') then if DirectoryExists(DEF_NEW_DIR) then
-  begin
-    //DBCheckBox1.Visible:=true;
-    //pinfo.Visible:=true;
-    pinfo_oblicz;
-  end;
+  if DEF_MENU and (DEF_NEW_DIR<>'') then if DirectoryExists(DEF_NEW_DIR) then pinfo_oblicz;
   (* edycja katalogu filmów *)
   if FORCE_EDIT then
   begin
@@ -944,85 +904,6 @@ begin
   result:=s;
 end;
 
-{$IFDEF UNIX}
-
-procedure TFMain.Search(const StartDir: string);
-var
-  SR,DR: TSearchRec;
-  found,FoundFile: Integer;
-  s,ext: string;
-  function IsDir(value: string): string; begin if value[Length(value)]<>_FF then result:=value+_FF else result:=value; end;
-begin
-  found:=FindFirst(IsDir(StartDir)+'*',faDirectory,DR);
-  while found=0 do
-  begin
-    application.ProcessMessages;
-
-    if ((DR.Attr and faDirectory)=faDirectory) and ((DR.Name<>'.') and (DR.Name<>'..')) then
-    begin
-      FoundFile:=FindFirst(IsDir(StartDir)+DR.Name+_FF+'*',faAnyFile,SR);
-      while FoundFile=0 do
-      begin
-        application.ProcessMessages;
-        FoundFile:=FindNext(SR);
-      end;
-      FindClose(SR);
-      Search(IsDir(StartDir)+DR.Name);
-    end else begin
-      if (DR.Name<>'.') and (DR.Name<>'..') then
-      begin
-        s:=StartDir+_FF+DR.Name;
-        delete(s,1,length(MyDir(DEF_DIR))+1);
-        ext:=ExtractFileExt(s);
-        //Pliki filmowe|*.avi;*.mp4;*.rmvb;*.mkv;*.m2ts|Wszystkie pliki|*.*
-        if (ext='.avi') or (ext='.mp4') or (ext='.rmvb') or (ext='.mkv') or (ext='.m2ts') then
-        begin
-          writeln('Dodaję plik: '+s);
-          add_plik.Params[0].AsString:=s;
-          add_plik.ExecSQL;
-        end;
-      end;
-    end;
-
-    Found:=FindNext(DR);
-  end;
-  FindClose(DR);
-end;
-
-function TFMain.SearchSize(const StartDir: string): int64;
-var
-  wielkosc: int64 = 0;
-  SR,DR: TSearchRec;
-  found,FoundFile: Integer;
-  function IsDir(value: string): string; begin if value[Length(value)]<>_FF then result:=value+_FF else result:=value; end;
-begin
-  found:=FindFirst(IsDir(StartDir)+'*',faDirectory,DR);
-  while found=0 do
-  begin
-    application.ProcessMessages;
-
-    if ((DR.Attr and faDirectory)=faDirectory) and ((DR.Name<>'.') and (DR.Name<>'..')) then
-    begin
-      FoundFile:=FindFirst(IsDir(StartDir)+DR.Name+_FF+'*',faAnyFile,SR);
-      while FoundFile=0 do
-      begin
-        application.ProcessMessages;
-        FoundFile:=FindNext(SR);
-      end;
-      FindClose(SR);
-      wielkosc+=SearchSize(IsDir(StartDir)+DR.Name);
-    end else begin
-      if (DR.Name<>'.') and (DR.Name<>'..') then wielkosc+=DR.Size;
-    end;
-
-    Found:=FindNext(DR);
-  end;
-  FindClose(DR);
-  result:=wielkosc;
-end;
-
-{$ENDIF}
-
 procedure TFMain.pinfo_oblicz;
 var
   a,b,c: int64;
@@ -1038,7 +919,7 @@ begin
     6: a:=50*1024*1024*1024;
     7: a:=Round((100-6.8)*1024*1024*1024);
   end;
-  b:=SearchSize(DEF_NEW_DIR);
+  b:=dm.SearchSize(DEF_NEW_DIR);
   pile.MaxValue:=round(a/1024/1024);
   pile.Progress:=round(b/1024/1024);
   if b<=a then pile2.Caption:='Zajęte: '+FormatFloat('0.0',b/1024/1024/1024)+'GB  Wolne: '+FormatFloat('0.0',(a-b)/1024/1024/1024)+'GB'

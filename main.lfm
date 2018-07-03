@@ -922,22 +922,6 @@ object FMain: TFMain
     left = 368
     top = 264
   end
-  object setcd: TAsyncProcess
-    Active = False
-    Options = []
-    Priority = ppNormal
-    StartupOptions = []
-    ShowWindow = swoNone
-    WindowColumns = 0
-    WindowHeight = 0
-    WindowLeft = 0
-    WindowRows = 0
-    WindowTop = 0
-    WindowWidth = 0
-    FillAttribute = 0
-    left = 432
-    top = 264
-  end
   object sort1: TZQuery
     Connection = dm.db
     SQL.Strings = (
@@ -1010,29 +994,6 @@ object FMain: TFMain
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     left = 407
     top = 161
-  end
-  object add_plik: TZQuery
-    Connection = dm.db
-    SQL.Strings = (
-      'insert into multimedia'
-      '(plik)'
-      'values'
-      '(:plik)'
-    )
-    Params = <    
-      item
-        DataType = ftUnknown
-        Name = 'plik'
-        ParamType = ptUnknown
-      end>
-    left = 112
-    top = 496
-    ParamData = <    
-      item
-        DataType = ftUnknown
-        Name = 'plik'
-        ParamType = ptUnknown
-      end>
   end
   object minus_gatunki: TZQuery
     Connection = dm.db

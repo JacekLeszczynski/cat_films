@@ -89,6 +89,7 @@ begin
     if parameters.IsParam('optical-disc') then OPTICAL_DISC:=parameters.GetValue('optical-disc');
     if parameters.IsParam('custom-play') then CUSTOM_CMD:=parameters.GetValue('custom-play');
     FORCE_EDIT:=parameters.IsParam('edit');
+    if FORCE_DIR<>'' then if (OPTICAL_DISC<>'') and (FileExists(s+_FF+'base.dat')) then dm.zwolnij_naped_optyczny;
 
     if dm.db.Connected then
     begin
@@ -135,6 +136,15 @@ begin
         writeln('System został skonfigurowany w trybie do odczytu jak i do zapisu.');
         PP_EXIT:=true;
       end;
+      {$IFDEF UNIX}
+      if FORCE_SCAN then
+      begin
+        writeln('Skanuję katalog z multimediami: '+MyDir(DEF_DIR));
+        dm.tr.StartTransaction;
+        dm.search(MyDir(DEF_DIR));
+        dm.tr.Commit;
+      end;
+      {$ENDIF}
     end;
   finally
     parameters.Free;
@@ -156,6 +166,7 @@ begin
   finally
     FMain.Free;
   end;
+
   Terminate;
 end;
 
