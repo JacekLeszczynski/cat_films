@@ -753,14 +753,13 @@ begin
   FindClose(DR);
   result:=wielkosc;
 end;
+{$ENDIF}
 
 procedure Tdm.zwolnij_naped_optyczny;
 begin
   setcd.CommandLine:='setcd -x 2 '+ OPTICAL_DISC;
   setcd.Execute;
 end;
-
-{$ENDIF}
 
 end.
 
