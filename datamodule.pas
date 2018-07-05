@@ -117,6 +117,8 @@ type
     procedure WriteString(nazwa: string; wartosc: string = '');
     function ReadBool(nazwa: string; def_bool: boolean = false): boolean;
     procedure WriteBool(nazwa: string; wartosc: boolean = false);
+    function ReadInteger(nazwa: string; def_integer: integer = 0): integer;
+    procedure WriteInteger(nazwa: string; wartosc: integer = 0);
     function nowy_gatunek(gatunek: string): integer;
     procedure skojarz_gatunek(id_filmu,id_kategorii: integer);
     procedure rozkojarz_gatunek(id_filmu,id_kategorii: integer);
@@ -283,6 +285,25 @@ var
 begin
   if wartosc then s:='1' else s:='0';
   WriteString(nazwa,s);
+end;
+
+function Tdm.ReadInteger(nazwa: string; def_integer: integer): integer;
+var
+  s: string;
+  a: integer;
+begin
+  s:=ReadString(nazwa,s);
+  try
+    if s='' then a:=def_integer else a:=StrToInt(s);
+  except
+    a:=def_integer;
+  end;
+  result:=a;
+end;
+
+procedure Tdm.WriteInteger(nazwa: string; wartosc: integer);
+begin
+  WriteString(nazwa,IntToStr(wartosc));
 end;
 
 function Tdm.nowy_gatunek(gatunek: string): integer;

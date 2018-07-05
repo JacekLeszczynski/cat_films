@@ -31,7 +31,7 @@ type
 
 procedure TBluePlayerVideo.DoRun;
 var
-  s: string;
+  s,pom: string;
   b: boolean;
 begin
   SetConfDir('Cat-Films');
@@ -42,6 +42,8 @@ begin
     parameters.ParamsForValues.Add('force-dir');
     parameters.ParamsForValues.Add('optical-disc');
     parameters.ParamsForValues.Add('UDI');
+    parameters.ParamsForValues.Add('set-video');
+    parameters.ParamsForValues.Add('edit');
     parameters.Execute;
     if parameters.IsParam('help') then
     begin
@@ -56,7 +58,11 @@ begin
       writeln('  --set-hidefilters        Wyłączenie opcji filtrowania');
       writeln('  --set-readonly           Ustawienie bazy w trybie tylko do odczytu');
       writeln('  --set-readwrite          Ustawienie bazy w trybie także do zapisu');
-      writeln('  --edit                   Uruchomienie programu w trybie edycji danych (ignoruje flagę tylko do odczytu)');
+      writeln('  --set-video [nr]         Tryb video, gdzie nr oznacza:');
+      writeln('         nr = 0            - tryb domyślny (opcja domyślna, gdy nr nie zostanie podany)');
+      writeln('         nr = 1            - tryb pojedyńczego filmu');
+      writeln('         nr = 2            - tryb serii (wykorzystuje pole "SORT")');
+      writeln('  --edit [sortowanie]      Uruchomienie programu w trybie edycji danych (ignoruje flagę tylko do odczytu)');
       writeln('  --force-dir [patch]      Podmontuj się pod bazę wskazywaną przez podaną ścieżkę');
       writeln('  --optical-disc [device]  Podany z --force-dir informuje o użyciu nośnika optycznego');
       writeln('  --custom-play [command]  Program będzie odtwarzał filmy za pomocą podanej w parametrze komendy');
@@ -82,6 +88,7 @@ begin
       begin
         dm.tr.StartTransaction;
         dm.db_create.Execute;
+        dm.WriteInteger('wersja_bazy_danych',CONST_DB_VERSION);
         dm.tr.Commit;
       end;
     end;
@@ -89,6 +96,11 @@ begin
     if parameters.IsParam('optical-disc') then OPTICAL_DISC:=parameters.GetValue('optical-disc');
     if parameters.IsParam('custom-play') then CUSTOM_CMD:=parameters.GetValue('custom-play');
     FORCE_EDIT:=parameters.IsParam('edit');
+    if FORCE_EDIT then
+    begin
+      FORCE_SORT:=parameters.GetValue('edit');
+      if FORCE_SORT='' then FORCE_SORT:='tytul';
+    end;
     if FORCE_DIR<>'' then if (OPTICAL_DISC<>'') and (FileExists(s+_FF+'base.dat')) then dm.zwolnij_naped_optyczny;
 
     if dm.db.Connected then
@@ -136,6 +148,26 @@ begin
         writeln('System został skonfigurowany w trybie do odczytu jak i do zapisu.');
         PP_EXIT:=true;
       end;
+      if parameters.IsParam('set-video') then
+      begin
+        pom:=parameters.GetValue('set-video');
+        if pom='' then pom:='0';
+        try
+          DEF_VIDEO:=StrToInt(pom);
+        except
+          DEF_VIDEO:=0;
+        end;
+        if (DEF_VIDEO<0) or (DEF_VIDEO>2) then
+        begin
+          writeln('Info: Parametr --set-video NR został podany poza dopuszczalnym zakresem, ustawiam domyślną wartość...');
+          DEF_VIDEO:=0;
+        end;
+        dm.WriteInteger('tryb_video',DEF_VIDEO);
+        writeln('Tryb video został ustawiony na: '+IntToStr(DEF_VIDEO));
+        PP_EXIT:=true;
+      end;
+      DB_VERSION:=dm.ReadInteger('wersja_bazy_danych',1);
+      DEF_VIDEO:=dm.ReadInteger('tryb_video',0);
       {$IFDEF UNIX}
       if FORCE_SCAN then
       begin
@@ -188,6 +220,7 @@ end;
 var
   Apps: TBluePlayerVideo;
 begin
+  Application.Scaled:=True;
   Apps:=TBluePlayerVideo.Create(nil);
   Apps.Title:='BluePlayerVideo';
   Apps.Run;

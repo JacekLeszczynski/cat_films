@@ -1,7 +1,7 @@
 object FEdit: TFEdit
-  Left = 530
+  Left = 584
   Height = 748
-  Top = 129
+  Top = 176
   Width = 689
   HorzScrollBar.Page = 645
   HorzScrollBar.Range = 645
@@ -53,7 +53,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 90
+    Top = 88
     Width = 31
     BorderSpacing.Top = 4
     Caption = 'Tytuł:'
@@ -66,8 +66,8 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = gatunki
     Left = 4
-    Height = 28
-    Top = 108
+    Height = 26
+    Top = 106
     Width = 416
     DataField = 'tytul'
     DataSource = ds_films
@@ -83,7 +83,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 140
+    Top = 136
     Width = 95
     BorderSpacing.Top = 4
     Caption = 'Tytuł oryginalny:'
@@ -97,8 +97,8 @@ object FEdit: TFEdit
     AnchorSideRight.Control = DBEdit1
     AnchorSideRight.Side = asrBottom
     Left = 4
-    Height = 28
-    Top = 158
+    Height = 26
+    Top = 154
     Width = 416
     DataField = 'tytul_oryg'
     DataSource = ds_films
@@ -114,7 +114,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 190
+    Top = 184
     Width = 83
     BorderSpacing.Top = 4
     Caption = 'Rok produkcji:'
@@ -126,8 +126,8 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 4
-    Height = 28
-    Top = 208
+    Height = 26
+    Top = 202
     Width = 92
     DataField = 'rok_prod'
     DataSource = ds_films
@@ -142,7 +142,7 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label3
     Left = 103
     Height = 18
-    Top = 190
+    Top = 184
     Width = 30
     BorderSpacing.Left = 7
     Caption = 'Czas:'
@@ -154,8 +154,8 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     Left = 103
-    Height = 28
-    Top = 208
+    Height = 26
+    Top = 202
     Width = 92
     DataField = 'dlugosc'
     DataSource = ds_films
@@ -170,7 +170,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 183
-    Top = 358
+    Top = 346
     Width = 128
     Constraints.MaxHeight = 183
     Constraints.MaxWidth = 128
@@ -188,7 +188,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 340
+    Top = 328
     Width = 103
     BorderSpacing.Top = 4
     Caption = 'Zdjęcie (140x200):'
@@ -201,7 +201,7 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label5
     Left = 139
     Height = 18
-    Top = 340
+    Top = 328
     Width = 30
     BorderSpacing.Left = 7
     Caption = 'Opis:'
@@ -218,7 +218,7 @@ object FEdit: TFEdit
     AnchorSideBottom.Side = asrBottom
     Left = 139
     Height = 183
-    Top = 358
+    Top = 346
     Width = 546
     Anchors = [akTop, akLeft, akRight, akBottom]
     DataField = 'opis'
@@ -245,7 +245,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = SpeedButton1
     Left = 4
-    Height = 28
+    Height = 26
     Top = 58
     Width = 651
     DataField = 'link'
@@ -263,7 +263,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 545
+    Top = 533
     Width = 58
     BorderSpacing.Top = 4
     Caption = 'Reżyseria:'
@@ -277,8 +277,8 @@ object FEdit: TFEdit
     AnchorSideRight.Control = DBMemo1
     AnchorSideRight.Side = asrBottom
     Left = 4
-    Height = 28
-    Top = 563
+    Height = 26
+    Top = 551
     Width = 681
     DataField = 'rezyseria'
     DataSource = ds_films
@@ -294,7 +294,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 595
+    Top = 581
     Width = 66
     BorderSpacing.Top = 4
     Caption = 'Scenariusz:'
@@ -308,8 +308,8 @@ object FEdit: TFEdit
     AnchorSideRight.Control = DBEdit6
     AnchorSideRight.Side = asrBottom
     Left = 4
-    Height = 28
-    Top = 613
+    Height = 26
+    Top = 599
     Width = 681
     DataField = 'scenariusz'
     DataSource = ds_films
@@ -325,7 +325,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 645
+    Top = 629
     Width = 183
     BorderSpacing.Top = 4
     Caption = 'Produkcja (kto wyprodukował):)'
@@ -337,8 +337,8 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label10
     AnchorSideTop.Side = asrBottom
     Left = 4
-    Height = 28
-    Top = 663
+    Height = 26
+    Top = 647
     Width = 285
     DataField = 'produkcja'
     DataSource = ds_films
@@ -354,7 +354,7 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label10
     Left = 296
     Height = 18
-    Top = 645
+    Top = 629
     Width = 118
     BorderSpacing.Left = 7
     Caption = 'Premiera na świecie:'
@@ -366,8 +366,8 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label11
     AnchorSideTop.Side = asrBottom
     Left = 296
-    Height = 28
-    Top = 663
+    Height = 26
+    Top = 647
     Width = 144
     CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
     DateOrder = doNone
@@ -387,7 +387,7 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label11
     Left = 447
     Height = 18
-    Top = 645
+    Top = 629
     Width = 107
     BorderSpacing.Left = 7
     Caption = 'Premiera w Polsce:'
@@ -399,8 +399,8 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label12
     AnchorSideTop.Side = asrBottom
     Left = 447
-    Height = 28
-    Top = 663
+    Height = 26
+    Top = 647
     Width = 144
     CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
     DateOrder = doNone
@@ -420,7 +420,7 @@ object FEdit: TFEdit
     AnchorSideTop.Control = Label4
     Left = 202
     Height = 18
-    Top = 190
+    Top = 184
     Width = 82
     BorderSpacing.Left = 7
     Caption = 'Inwestycja ($):'
@@ -434,8 +434,8 @@ object FEdit: TFEdit
     AnchorSideRight.Control = DBEdit2
     AnchorSideRight.Side = asrBottom
     Left = 202
-    Height = 28
-    Top = 208
+    Height = 26
+    Top = 202
     Width = 218
     DataField = 'boxoffice'
     DataSource = ds_films
@@ -451,7 +451,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 240
+    Top = 232
     Width = 23
     BorderSpacing.Top = 4
     Caption = 'Plik:'
@@ -464,8 +464,8 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = SpeedButton2
     Left = 4
-    Height = 28
-    Top = 258
+    Height = 26
+    Top = 250
     Width = 386
     DataField = 'plik'
     DataSource = ds_films
@@ -484,8 +484,8 @@ object FEdit: TFEdit
     AnchorSideBottom.Control = DBEdit11
     AnchorSideBottom.Side = asrBottom
     Left = 427
-    Height = 246
-    Top = 90
+    Height = 236
+    Top = 88
     Width = 258
     Anchors = [akTop, akRight, akBottom]
     AutoFill = True
@@ -513,7 +513,7 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     Left = 4
     Height = 18
-    Top = 290
+    Top = 280
     Width = 88
     BorderSpacing.Top = 4
     Caption = 'Plik z napisami:'
@@ -526,8 +526,8 @@ object FEdit: TFEdit
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = SpeedButton3
     Left = 4
-    Height = 28
-    Top = 308
+    Height = 26
+    Top = 298
     Width = 386
     DataField = 'subtitles'
     DataSource = ds_films
@@ -603,7 +603,7 @@ object FEdit: TFEdit
     AnchorSideRight.Control = gatunki
     Left = 390
     Height = 30
-    Top = 258
+    Top = 250
     Width = 30
     Anchors = [akTop, akRight]
     Glyph.Data = {
@@ -650,7 +650,7 @@ object FEdit: TFEdit
     AnchorSideRight.Control = gatunki
     Left = 390
     Height = 30
-    Top = 308
+    Top = 298
     Width = 30
     Anchors = [akTop, akRight]
     Glyph.Data = {
@@ -714,7 +714,7 @@ object FEdit: TFEdit
     AnchorSideRight.Side = asrBottom
     Left = 616
     Height = 28
-    Top = 699
+    Top = 681
     Width = 69
     Anchors = [akTop, akRight]
     BorderSpacing.Top = 8
@@ -728,7 +728,7 @@ object FEdit: TFEdit
     AnchorSideRight.Control = BitBtn1
     Left = 547
     Height = 28
-    Top = 699
+    Top = 681
     Width = 69
     Anchors = [akTop, akRight]
     BorderSpacing.Bottom = 4
@@ -736,15 +736,50 @@ object FEdit: TFEdit
     OnClick = BitBtn2Click
     TabOrder = 18
   end
+  object DBEdit12: TDBEdit
+    AnchorSideLeft.Control = Label15
+    AnchorSideTop.Control = Label15
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = DBEdit7
+    AnchorSideRight.Side = asrBottom
+    Left = 598
+    Height = 26
+    Top = 647
+    Width = 87
+    DataField = 'sort'
+    DataSource = ds_films
+    Anchors = [akTop, akLeft, akRight]
+    CharCase = ecNormal
+    Color = clYellow
+    MaxLength = 0
+    TabOrder = 19
+  end
+  object Label15: TLabel
+    AnchorSideLeft.Control = DBDateEdit2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label12
+    Left = 598
+    Height = 18
+    Top = 629
+    Width = 26
+    BorderSpacing.Left = 7
+    Caption = 'Sort:'
+    ParentColor = False
+  end
   object films: TZQuery
     Connection = dm.db
+    BeforeOpen = filmsBeforeOpen
     AfterOpen = _OPEN_CLOSE
     AfterClose = _OPEN_CLOSE
     AfterScroll = filmsAfterScroll
     AfterPost = filmsAfterPost
     BeforeDelete = filmsBeforeDelete
     SQL.Strings = (
-      'select * from multimedia'
+      'select'
+      '  id,tytul,rok_prod,tytul_oryg,dlugosc,zdjecie,opis,link,'
+      '  rezyseria,scenariusz,produkcja,premiera,premiera_pl,boxoffice,plik,subtitles,'
+      '  sort'
+      'from multimedia'
       'order by tytul'
     )
     Params = <>
@@ -923,6 +958,15 @@ object FEdit: TFEdit
       ReadOnly = False
       Required = False
       Size = 1020
+    end
+    object filmssort: TLargeintField
+      FieldKind = fkData
+      FieldName = 'sort'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object ds_films: TDataSource

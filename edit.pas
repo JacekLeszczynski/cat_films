@@ -21,7 +21,10 @@ type
     BitBtn2: TBitBtn;
     Button1: TButton;
     DBEdit11: TDBEdit;
+    DBEdit12: TDBEdit;
     DBText1: TDBText;
+    filmssort: TLargeintField;
+    Label15: TLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -111,6 +114,7 @@ type
     procedure filmsAfterPost(DataSet: TDataSet);
     procedure filmsAfterScroll(DataSet: TDataSet);
     procedure filmsBeforeDelete(DataSet: TDataSet);
+    procedure filmsBeforeOpen(DataSet: TDataSet);
     procedure filmsdlugoscGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
     procedure filmsdlugoscSetText(Sender: TField; const aText: string);
@@ -356,6 +360,8 @@ procedure TFEdit.FormCreate(Sender: TObject);
 begin
   tab:=TStringList.Create;
   in_id:=0;
+  Label15.Visible:=DB_VERSION>1;
+  DBEdit12.Visible:=DB_VERSION>1;
 end;
 
 procedure TFEdit.FormDestroy(Sender: TObject);
@@ -432,6 +438,17 @@ end;
 procedure TFEdit.filmsBeforeDelete(DataSet: TDataSet);
 begin
   minus_gatunki.ExecSQL;
+end;
+
+procedure TFEdit.filmsBeforeOpen(DataSet: TDataSet);
+begin
+  films.SQL.Clear;
+  films.SQL.Add('select');
+  films.SQL.Add('  id,tytul,rok_prod,tytul_oryg,dlugosc,zdjecie,opis,link,');
+  if DB_VERSION>1 then films.SQL.Add('  rezyseria,scenariusz,produkcja,premiera,premiera_pl,boxoffice,plik,subtitles,sort')
+                  else films.SQL.Add('  rezyseria,scenariusz,produkcja,premiera,premiera_pl,boxoffice,plik,subtitles,0 as sort');
+  films.SQL.Add('from multimedia');
+  films.SQL.Add('order by '+FORCE_SORT);
 end;
 
 procedure TFEdit.filmsdlugoscGetText(Sender: TField; var aText: string;

@@ -4,7 +4,11 @@ unit functions;
 
 interface
 
+const
+  CONST_DB_VERSION = 2;
+
 var
+  DB_VERSION: integer = 1;
   NEW_CREATE: boolean = false;
   CUSTOM_CMD: string = '';
   PARAM_1: string = '';
@@ -18,6 +22,8 @@ var
   FORCE_SCAN: boolean = false;
   OPTICAL_DISC: string = '';
   DEF_FILTERS: boolean = true;
+  DEF_VIDEO: integer = 0;
+  FORCE_SORT: string = 'tytul';
 
 implementation
 

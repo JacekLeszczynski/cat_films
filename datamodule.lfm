@@ -1,8 +1,8 @@
 object dm: Tdm
   OldCreateOrder = False
   Height = 529
-  HorizontalOffset = 315
-  VerticalOffset = 143
+  HorizontalOffset = 502
+  VerticalOffset = 135
   Width = 507
   PPI = 88
   object db: TZConnection
@@ -59,12 +59,16 @@ object dm: Tdm
       '  boxoffice numeric,'
       '  plik varchar(255),'
       '  subtitles varchar(255),'
-      '  nowy_zestaw integer default 0'
+      '  nowy_zestaw integer default 0,'
+      '  sort integer default 0'
       ');'
       'create index idx_multimedia_tytul on multimedia(tytul);'
       'create index idx_multimedia_tytul_oryg on multimedia(tytul_oryg);'
       'create index idx_multimedia_rok_prod on multimedia(rok_prod);'
       'create index idx_multimedia_nowy_zestaw on multimedia(nowy_zestaw);'
+      'create index idx_multimedia_premiera on multimedia(premiera);'
+      'create index idx_multimedia_premiera_pl on multimedia(premiera_pl);'
+      'create index idx_multimedia_sort on multimedia(sort);'
       ''
       'create table gatunek'
       '('
