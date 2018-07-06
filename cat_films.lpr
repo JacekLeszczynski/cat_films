@@ -8,7 +8,8 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   Interfaces, Forms,
-  main, datamodule, functions, ecode, ExtParams;
+  main, datamodule, functions, ecode, cverinfo,
+  ExtParams;
   //zcomponent, uecontrols, edit, kolumny, opis,
   //unit_exit, functions, about, normalizacja_nazw, gen_spis, serwis_filmweb
   //{ you can add units after this };
@@ -31,9 +32,12 @@ type
 
 procedure TBluePlayerVideo.DoRun;
 var
+  s1,s2,s3: string;
   s,pom: string;
   b: boolean;
 begin
+  GetProgramVersion(s1,s2,s3);
+  PROG_VERSION:=s1;
   SetConfDir('Cat-Films');
   parameters:=TExtParams.Create(self);
   try

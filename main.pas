@@ -211,6 +211,7 @@ end;
 
 procedure TFMain.FormCreate(Sender: TObject);
 begin
+  Caption:='Katalog zawartości płyty (ver. '+PROG_VERSION+')';
   {$IFDEF MSWINDOWS}
   shutdown_computer.Visible:=false;
   {$ENDIF}

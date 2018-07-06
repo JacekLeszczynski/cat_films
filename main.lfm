@@ -1151,7 +1151,6 @@ object FMain: TFMain
   end
   object historia: TZQuery
     Connection = dm.db_loc
-    Active = True
     SQL.Strings = (
       'select'
       '  *,'

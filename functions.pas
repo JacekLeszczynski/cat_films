@@ -8,6 +8,7 @@ const
   CONST_DB_VERSION = 2;
 
 var
+  PROG_VERSION: string;
   DB_VERSION: integer = 1;
   NEW_CREATE: boolean = false;
   CUSTOM_CMD: string = '';
