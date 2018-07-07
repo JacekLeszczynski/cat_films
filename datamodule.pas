@@ -5,8 +5,9 @@ unit datamodule;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, AsyncProcess, db, eventlog, ZTransaction,
-  ExtMessage, NetSynHTTP, ZConnection, ZSqlProcessor, ZDataset;
+  Classes, SysUtils, Dialogs, AsyncProcess, JSONPropStorage, db, eventlog,
+  XMLConf, ZTransaction, ExtMessage, NetSynHTTP, ExtShutdown, ZConnection,
+  ZSqlProcessor, ZDataset;
 
 type
 
@@ -35,9 +36,14 @@ type
   Tdm = class(TDataModule)
     add_gatunek: TZQuery;
     add_plik: TZQuery;
+    id_video1film: TStringField;
+    id_video1id: TLargeintField;
+    id_video1napisy: TStringField;
+    config: TJSONPropStorage;
     loc_create: TZSQLProcessor;
     db_loc: TZConnection;
     http: TNetSynHTTP;
+    player: TAsyncProcess;
     SaveDialog1: TSaveDialog;
     setcd: TAsyncProcess;
     tr_loc: TZTransaction;
@@ -107,6 +113,8 @@ type
     cselect: TZQuery;
     filmy2: TZQuery;
     is_dir2: TZQuery;
+    id_video1: TZReadOnlyQuery;
+    zamknij_komputer: TExtShutdown;
     procedure filmy2CalcFields(DataSet: TDataSet);
     procedure filmyCalcFields(DataSet: TDataSet);
     procedure _OPEN_CLOSE(DataSet: TDataSet);
@@ -131,6 +139,8 @@ type
     function SearchSize(const StartDir: string): int64;
     {$ENDIF}
     procedure zwolnij_naped_optyczny;
+    function GetNonWindowsPlayCommand(napisy: string): string;
+    procedure odtworz_film_teraz(plik,napisy: string);
   end;
 
 var
@@ -142,7 +152,10 @@ function usun_wszystko_mmw(s: string): string;
 implementation
 
 uses
-  ecode, functions;
+  {$IFDEF MSWINDOWS}
+  windows,
+  {$ENDIF}
+  ecode, functions, FileUtil;
 
 {$R *.lfm}
 
@@ -739,7 +752,7 @@ begin
         if (ext='.avi') or (ext='.mp4') or (ext='.rmvb') or (ext='.mkv') or (ext='.m2ts') then
         begin
           writeln('Dodaję plik: '+s);
-          add_plik.Params[0].AsString:=s;
+          add_plik.Params[0].AsString:=ExtractFilename(s);
           add_plik.ExecSQL;
         end;
       end;
@@ -780,6 +793,77 @@ procedure Tdm.zwolnij_naped_optyczny;
 begin
   setcd.CommandLine:='setcd -x 2 '+ OPTICAL_DISC;
   setcd.Execute;
+end;
+
+function Tdm.GetNonWindowsPlayCommand(napisy: string): string;
+const
+  SUB_POS = '90';
+  SUB_SCALE_MPV = '0.60';
+  SUB_SCALE_MPL = '2.3';
+var
+  sub: string;
+begin
+  config.JSONFileName:=MyConfDir('config.xml');
+  config.Active:=true;
+  try
+    sub:=trim(napisy);
+    if length(sub)>0 then if sub[1]<>'-' then sub:='-sub-file "'+sub+'"';
+    config.RootObjectPath:='TApplication/FMain_1';
+    if config.ReadBoolean('MenuItem9_Checked',false) then
+    begin
+      if CUSTOM_CMD<>'' then result:=CUSTOM_CMD else
+      if FindDefaultExecutablePath('mpv')<>'' then
+      begin
+        if sub='' then
+          result:='mpv -quiet -fs -framedrop=vo'
+        else
+          result:='mpv -quiet -fs -framedrop=vo -sub-codepage cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPV+' -subpos '+SUB_POS+' '+sub;
+      end else
+      if FindDefaultExecutablePath('mplayer')<>'' then result:='mplayer -quiet -fs -framedrop -subcp cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPL+' -subpos '+SUB_POS
+      else result:='';
+    end else if config.ReadBoolean('MenuItem10_Checked',false) then result:='mplayer -quiet -fs -framedrop -subcp cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPL+' -subpos '+SUB_POS
+    else if config.ReadBoolean('MenuItem11_Checked',false) then
+    begin
+      if sub='' then
+        result:='mpv -quiet -fs -framedrop=vo'
+      else
+        result:='mpv -quiet -fs -framedrop=vo -sub-codepage cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPV+' -subpos '+SUB_POS+' '+sub;
+    end else result:='';
+  finally
+    config.Active:=false;
+  end;
+end;
+
+procedure Tdm.odtworz_film_teraz(plik, napisy: string);
+var
+  playCmd: string;
+  L: TStrings;
+  i: integer;
+  b: boolean;
+begin
+  {$IFDEF MSWINDOWS}
+  ShellExecute(Handle,'open',pchar(plik),nil,nil,SW_NORMAL);
+  {$ELSE}
+  playCmd:=GetNonWindowsPlayCommand(napisy);
+  writeln('PlayCMD='+playCmd);
+  L:=TStringList.Create;
+  try
+    L.Delimiter:=' ';
+    L.DelimitedText:=playCmd;
+    player.CurrentDirectory:=ExtractFileDir(plik);
+    player.Executable:=FindDefaultExecutablePath(L[0]);
+    player.Parameters.Clear;
+    for i:=1 to L.Count-1 do player.Parameters.Add(L[i]);
+    player.Parameters.Add(plik);
+    try
+      player.Execute;
+    except
+      on E: Exception do E.CreateFmt('Nie mogę odtworzyć pliku %s. Komunikat błędu: %s.',[plik,E.Message]);
+    end;
+  finally
+    L.Free;
+  end;
+  {$ENDIF}
 end;
 
 end.

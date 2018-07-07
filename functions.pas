@@ -14,6 +14,7 @@ var
   CUSTOM_CMD: string = '';
   PARAM_1: string = '';
   COM_CLOSE: boolean = false;
+  COM_SHUTDOWN: boolean = false;
   DEF_DIR: string = '';
   DEF_READWRITE: boolean = false;
   DEF_MENU: boolean = false;

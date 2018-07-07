@@ -408,7 +408,7 @@ object FOpis: TFOpis
       Left = 146
       Height = 22
       Top = 631
-      Width = 252
+      Width = 249
       BorderSpacing.Left = 8
       Caption = 'Po zakończeniu filmu wyłącz komputer!'
       Color = clDefault
@@ -717,5 +717,15 @@ object FOpis: TFOpis
       Required = False
       Size = 120
     end
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    Position = psOwnerFormCenter
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 44
+    top = 168
   end
 end

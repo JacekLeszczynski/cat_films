@@ -1,9 +1,9 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 529
+  Height = 552
   HorizontalOffset = 502
   VerticalOffset = 135
-  Width = 507
+  Width = 587
   PPI = 88
   object db: TZConnection
     ControlsCodePage = cCP_UTF8
@@ -969,5 +969,71 @@ object dm: Tdm
     FillAttribute = 0
     left = 458
     top = 290
+  end
+  object id_video1: TZReadOnlyQuery
+    Connection = db
+    SQL.Strings = (
+      'select id,plik as film,subtitles as napisy from multimedia'
+      'limit 1'
+    )
+    Params = <>
+    left = 345
+    top = 459
+    object id_video1id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object id_video1film: TStringField
+      FieldKind = fkData
+      FieldName = 'film'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object id_video1napisy: TStringField
+      FieldKind = fkData
+      FieldName = 'napisy'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+  end
+  object config: TJSONPropStorage
+    StoredValues = <>
+    Formatted = True
+    Active = False
+    left = 408
+    top = 459
+  end
+  object player: TAsyncProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 472
+    top = 459
+  end
+  object zamknij_komputer: TExtShutdown
+    left = 456
+    top = 384
   end
 end

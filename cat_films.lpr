@@ -6,10 +6,8 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp,
-  Interfaces, Forms,
-  main, datamodule, functions, ecode, cverinfo,
-  ExtParams;
+  Classes, SysUtils, CustApp, Interfaces, Forms, ExtParams, Controls,
+  main, datamodule, functions, ecode, cverinfo, opis;
   //zcomponent, uecontrols, edit, kolumny, opis,
   //unit_exit, functions, about, normalizacja_nazw, gen_spis, serwis_filmweb
   //{ you can add units after this };
@@ -29,6 +27,9 @@ type
     PP_EXIT: boolean;
     parameters: TExtParams;
   end;
+
+var
+  Apps: TBluePlayerVideo;
 
 procedure TBluePlayerVideo.DoRun;
 var
@@ -172,6 +173,11 @@ begin
       end;
       DB_VERSION:=dm.ReadInteger('wersja_bazy_danych',1);
       DEF_VIDEO:=dm.ReadInteger('tryb_video',0);
+      DEF_DIR:=dm.ReadString('katalog_domyślny','.');
+      DEF_MENU:=dm.ReadBool('pokazuj_menu_główne');
+      DEF_FILTERS:=dm.ReadBool('pokazuj_filtrowanie',true);
+      DEF_READWRITE:=dm.ReadBool('db_readwrite',false);
+      DEF_NEW_DIR:=dm.ReadString('katalog_wtórny','');
       {$IFDEF UNIX}
       if FORCE_SCAN then
       begin
@@ -192,17 +198,38 @@ begin
     exit;
   end;
 
-  FMain:=TFMain.Create(Application);
-  try
-    RequireDerivedFormResource:=True;
-    Application.Scaled:=True;
-    Application.Initialize;
-    Application.CreateForm(TFMain, FMain);
-    Application.Run;
-  finally
-    FMain.Free;
+  if (DB_VERSION>1) and (DEF_VIDEO=1) and (not DEF_READWRITE) then
+  begin
+    FOpis:=TFOpis.Create(Application);
+    try
+      RequireDerivedFormResource:=True;
+      Application.Scaled:=True;
+      Application.Initialize;
+      Application.CreateForm(TFOpis,FOpis);
+      FOpis.BorderStyle:=bsSingle;
+      FOpis.Position:=poScreenCenter;
+      FOpis.Caption:='Film Video z dysku optycznego (ver. '+PROG_VERSION+')';
+      FOpis.in_shutdown:=false;
+      Application.Title:=Apps.Title;
+      Application.Run;
+    finally
+      FOpis.Free;
+    end;
+  end else begin
+    FMain:=TFMain.Create(Application);
+    try
+      RequireDerivedFormResource:=True;
+      Application.Scaled:=True;
+      Application.Initialize;
+      Application.CreateForm(TFMain, FMain);
+      Application.Title:=Apps.Title;
+      Application.Run;
+    finally
+      FMain.Free;
+    end;
   end;
 
+  if COM_SHUTDOWN then dm.zamknij_komputer.execute;
   Terminate;
 end;
 
@@ -221,8 +248,6 @@ begin
   inherited Destroy;
 end;
 
-var
-  Apps: TBluePlayerVideo;
 begin
   Application.Scaled:=True;
   Apps:=TBluePlayerVideo.Create(nil);

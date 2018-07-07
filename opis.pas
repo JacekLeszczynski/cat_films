@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-  DBCtrls, StdCtrls, ECLink,
+  DBCtrls, StdCtrls, ExtMessage, ECLink,
   uETileImage, db, ZDataset;
 
 type
@@ -28,6 +28,7 @@ type
     ds_film: TDataSource;
     ds_gat: TDataSource;
     ECLink1: TECLink;
+    mess: TExtMessage;
     film: TZQuery;
     filmboxoffice: TFloatField;
     filmczas: TTimeField;
@@ -74,7 +75,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure _OPEN_CLOSE(DataSet: TDataSet);
   private
-
+    plik,napisy: string;
   public
     in_id: integer;
     in_shutdown: boolean;
@@ -88,7 +89,7 @@ var
 implementation
 
 uses
-  ecode;
+  ecode, datamodule, functions, unit_exit;
 
 {$R *.lfm}
 
@@ -134,6 +135,14 @@ end;
 
 procedure TFOpis.FormCreate(Sender: TObject);
 begin
+  if (DB_VERSION>1) and (DEF_VIDEO=1) and (not DEF_READWRITE) then
+  begin
+    dm.id_video1.Open;
+    in_id:=dm.id_video1id.AsInteger;
+    plik:=MyDir(DEF_DIR+_FF+dm.id_video1film.AsString);
+    napisy:=dm.id_video1napisy.AsString;
+    dm.id_video1.Close;
+  end;
   {$IFDEF MSWINDOWS}
   shutdown_computer.Visible:=false;
   {$ENDIF}
@@ -175,10 +184,42 @@ begin
 end;
 
 procedure TFOpis.BitBtn2Click(Sender: TObject);
+var
+  b: boolean;
 begin
-  out_play:=true;
-  out_shutdown:=shutdown_computer.Checked;
-  close;
+  if (DB_VERSION>1) and (DEF_VIDEO=1) and (not DEF_READWRITE) then
+  begin
+    mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
+    application.ProcessMessages;
+    try
+      dm.odtworz_film_teraz(plik,napisy);
+    finally
+      application.ProcessMessages;
+      sleep(2000);
+      mess.HideInfo;
+    end;
+    while dm.player.Active do
+    begin
+      application.ProcessMessages;
+      sleep(500);
+    end;
+    application.ProcessMessages;
+    if shutdown_computer.Checked then
+    begin
+      FHalt:=TFHalt.Create(self);
+      try
+        FHalt.ShowModal;
+        COM_SHUTDOWN:=FHalt.wylaczenie;
+      finally
+        FHalt.Free;
+      end;
+      if COM_SHUTDOWN then close else shutdown_computer.Checked:=false;
+    end;
+  end else begin
+    out_play:=true;
+    out_shutdown:=shutdown_computer.Checked;
+    close;
+  end;
 end;
 
 procedure TFOpis.filmAfterScroll(DataSet: TDataSet);

@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, ZDataset, ZSqlUpdate, JDBGridControl, Forms, Controls,
   Graphics, Dialogs, ExtCtrls, JSONPropStorage, Menus, ExtMessage,
-  ExtShutdown, ColorProgress, db, DBGrids, StdCtrls, Buttons, AsyncProcess,
+  ColorProgress, db, DBGrids, StdCtrls, Buttons, AsyncProcess,
   ComCtrls, Grids, DBCtrls;
 
 type
@@ -59,7 +59,6 @@ type
     MenuItem17: TMenuItem;
     OpenSynchroDB: TOpenDialog;
     shutdown_computer: TCheckBox;
-    zamknij_komputer: TExtShutdown;
     mess: TExtMessage;
     filmysubtitles: TStringField;
     MenuItem10: TMenuItem;
@@ -159,7 +158,6 @@ type
   private
     tab,gatunki_ids: TStringList;
     zaznaczone_gatunki_count: integer;
-    function GetNonWindowsPlayCommand: string;
     procedure gatunki_read;
     procedure restore_gatunki;
     procedure reopen;
@@ -180,7 +178,7 @@ uses
   {$IFDEF MSWINDOWS}
   windows,
   {$ENDIF}
-  LCLType, FileUtil, LazFileUtils, ZAbstractRODataset, Process, datamodule,
+  LCLType, ZAbstractRODataset, Process, datamodule,
   functions, ecode, edit, kolumny, opis, unit_exit, about, normalizacja_nazw,
   gen_spis, serwis_filmweb;
 
@@ -230,11 +228,6 @@ begin
 
   if dm.db.Connected then
   begin
-    DEF_DIR:=dm.ReadString('katalog_domyślny','.');
-    DEF_MENU:=dm.ReadBool('pokazuj_menu_główne');
-    DEF_FILTERS:=dm.ReadBool('pokazuj_filtrowanie',true);
-    DEF_READWRITE:=dm.ReadBool('db_readwrite',false);
-    DEF_NEW_DIR:=dm.ReadString('katalog_wtórny','');
     DBCheckBox1.Visible:=false;
     if DEF_MENU and (DEF_NEW_DIR<>'') then if DirectoryExists(DEF_NEW_DIR) then
     begin
@@ -333,71 +326,45 @@ end;
 
 procedure TFMain.BitBtn3Click(Sender: TObject);
 var
-  plik,playCmd: string;
-  L: TStrings;
-  i: integer;
-  b: boolean;
+  plik,napisy: string;
 begin
   if filmyplik.IsNull then exit;
   if filmyplik.AsString='' then exit;
   if filmynowy_zestaw.AsInteger=0 then plik:=MyDir(DEF_DIR+_FF+filmyplik.AsString)
                                   else plik:=DEF_NEW_DIR+_FF+ExtractFilename(filmyplik.AsString);
+  napisy:=filmysubtitles.AsString;
   if not FileExists(plik) then
   begin
     showmessage('Nie znaleziono pliku filmowego.');
     exit;
   end;
-  {$IFDEF MSWINDOWS}
-  ShellExecute(Handle,'open',pchar(plik),nil,nil,SW_NORMAL);
-  {$ELSE}
-  playCmd:=GetNonWindowsPlayCommand;
-  L:=TStringList.Create;
+
   mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
   application.ProcessMessages;
   try
-    L.Delimiter:=' ';
-    L.DelimitedText:=playCmd;
-    player.CurrentDirectory:=ExtractFileDir(plik);
-    player.Executable:=FindDefaultExecutablePath(L[0]);
-    player.Parameters.Clear;
-    for i:=1 to L.Count-1 do player.Parameters.Add(L[i]);
-    player.Parameters.Add(plik);
-    try
-      player.Execute;
-    except
-      on E: Exception do E.CreateFmt('Nie mogę odtworzyć pliku %s. Komunikat błędu: %s.',[plik,E.Message]);
-    end;
+    dm.odtworz_film_teraz(plik,napisy);
   finally
-    L.Free;
+    application.ProcessMessages;
     sleep(2000);
     mess.HideInfo;
   end;
-  //application.minimize;
-  while player.Active do
+  while dm.player.Active do
   begin
     application.ProcessMessages;
     sleep(500);
   end;
-  //application.Restore;
   application.ProcessMessages;
-  (* wyłączenie komputera *)
   if shutdown_computer.Checked then
   begin
     FHalt:=TFHalt.Create(self);
     try
       FHalt.ShowModal;
-      b:=FHalt.wylaczenie;
+      COM_SHUTDOWN:=FHalt.wylaczenie;
     finally
       FHalt.Free;
     end;
-    if b then
-    begin
-      zamknij_komputer.execute;
-      close;
-    end
-    else shutdown_computer.Checked:=false;
+    if COM_SHUTDOWN then close else shutdown_computer.Checked:=false;
   end;
-  {$ENDIF}
 end;
 
 procedure TFMain.BitBtn4Click(Sender: TObject);
@@ -789,38 +756,6 @@ end;
 procedure TFMain._OPEN_CLOSE(DataSet: TDataSet);
 begin
   historia.Active:=DataSet.Active;
-end;
-
-function TFMain.GetNonWindowsPlayCommand: string;
-const
-  SUB_POS = '90';
-  SUB_SCALE_MPV = '0.60';
-  SUB_SCALE_MPL = '2.3';
-var
-  sub: string;
-begin
-  sub:=trim(filmysubtitles.AsString);
-  if length(sub)>0 then if sub[1]<>'-' then sub:='-sub-file "'+sub+'"';
-  if Menuitem9.Checked then
-  begin
-    if customCmd<>'' then result:=customCmd else
-    if FindDefaultExecutablePath('mpv')<>'' then
-    begin
-      if sub='' then
-        result:='mpv -quiet -fs -framedrop=vo'
-      else
-        result:='mpv -quiet -fs -framedrop=vo -sub-codepage cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPV+' -subpos '+SUB_POS+' '+sub;
-    end else
-    if FindDefaultExecutablePath('mplayer')<>'' then result:='mplayer -quiet -fs -framedrop -subcp cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPL+' -subpos '+SUB_POS
-    else result:='';
-  end else if Menuitem10.Checked then result:='mplayer -quiet -fs -framedrop -subcp cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPL+' -subpos '+SUB_POS
-  else if Menuitem11.Checked then
-  begin
-    if sub='' then
-      result:='mpv -quiet -fs -framedrop=vo'
-    else
-      result:='mpv -quiet -fs -framedrop=vo -sub-codepage cp1250 -font "Liberation Sans" -subfont-text-scale '+SUB_SCALE_MPV+' -subpos '+SUB_POS+' '+sub;
-  end else result:='';
 end;
 
 procedure TFMain.gatunki_read;

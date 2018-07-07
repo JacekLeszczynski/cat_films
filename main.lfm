@@ -900,10 +900,6 @@ object FMain: TFMain
     left = 304
     top = 336
   end
-  object zamknij_komputer: TExtShutdown
-    left = 408
-    top = 384
-  end
   object cdrom: TAsyncProcess
     Active = False
     CommandLine = 'mount'
