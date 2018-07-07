@@ -48,6 +48,7 @@ type
     mess: TExtMessage;
     Panel1: TPanel;
     Panel2: TPanel;
+    PPPP: TPanel;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,6 +72,18 @@ uses
 
 {$R *.lfm}
 
+function optymalizuj(lp,max: integer): integer;
+var
+  a: integer;
+begin
+  case max of
+    5: if lp<=3 then a:=lp else a:=lp+1;
+    6: if lp<=3 then a:=lp else a:=lp+1;
+    else a:=lp;
+  end;
+  result:=a;
+end;
+
 { TFMulti }
 
 procedure TFMulti.BitBtn1Click(Sender: TObject);
@@ -92,19 +105,19 @@ end;
 
 procedure TFMulti.SHOW_OPIS(Sender: TObject);
 var
-  lp: integer;
+  id: integer;
   play,shutdown: boolean;
   plik,napisy: string;
 begin
   (* pokaz opis *)
-  lp:=TJButton(Sender).Tag;
-  if lp=0 then exit;
+  id:=TJButton(Sender).Tag;
+  if id=0 then exit;
   shutdown:=false;
   FOpis:=TFOpis.Create(self);
   try
     filmy.Open;
-    filmy.Locate('sort',lp,[]);
-    FOpis.in_id:=filmyid.AsInteger;
+    filmy.Locate('id',id,[]);
+    FOpis.in_id:=id;
     plik:=MyDir(DEF_DIR+_FF+filmyplik.AsString);
     napisy:=filmysubtitles.AsString;
     filmy.Close;
@@ -162,14 +175,18 @@ begin
 end;
 
 procedure TFMulti.wczytaj_dane;
+var
+  max: integer;
 begin
   filmy.Open;
+  max:=filmy.RecordCount;
   while not filmy.EOF do
   begin
-    uzupelnij(filmysort.AsInteger);
+    uzupelnij(optymalizuj(filmysort.AsInteger,max));
     filmy.Next;
   end;
   filmy.Close;
+  PPPP.Visible:=(max=5) or (max=7);
 end;
 
 procedure TFMulti.uzupelnij(lp: integer);
@@ -185,14 +202,14 @@ begin
     8: film8.Image.Picture.Assign(DBImage1.Picture);
   end;
   case lp of
-    1: film1.Tag:=1;
-    2: film2.Tag:=2;
-    3: film3.Tag:=3;
-    4: film4.Tag:=4;
-    5: film5.Tag:=5;
-    6: film6.Tag:=6;
-    7: film7.Tag:=7;
-    8: film8.Tag:=8;
+    1: film1.Tag:=filmyid.AsInteger;
+    2: film2.Tag:=filmyid.AsInteger;
+    3: film3.Tag:=filmyid.AsInteger;
+    4: film4.Tag:=filmyid.AsInteger;
+    5: film5.Tag:=filmyid.AsInteger;
+    6: film6.Tag:=filmyid.AsInteger;
+    7: film7.Tag:=filmyid.AsInteger;
+    8: film8.Tag:=filmyid.AsInteger;
   end;
   case lp of
     1: film1.Visible:=true;

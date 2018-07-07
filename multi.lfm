@@ -16,13 +16,13 @@ object FMulti: TFMulti
   LCLVersion = '1.9.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 643
+    Height = 638
     Top = 0
     Width = 904
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 643
+    ClientHeight = 638
     ClientWidth = 904
     TabOrder = 0
     object film1: TJButton
@@ -183,10 +183,11 @@ object FMulti: TFMulti
       OnClick = SHOW_OPIS
     end
     object film5: TJButton
-      AnchorSideLeft.Control = film1
+      AnchorSideLeft.Control = PPPP
+      AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = film1
       AnchorSideTop.Side = asrBottom
-      Left = 12
+      Left = 123
       Height = 300
       Top = 324
       Width = 210
@@ -209,8 +210,9 @@ object FMulti: TFMulti
       Image.Width = 208
       Image.Align = alClient
       Image.Stretch = True
+      BorderSpacing.Left = 12
       BorderSpacing.Top = 12
-      BorderSpacing.Bottom = 12
+      BorderSpacing.Right = 12
       ClientHeight = 300
       ClientWidth = 210
       Constraints.MaxHeight = 300
@@ -222,9 +224,10 @@ object FMulti: TFMulti
       OnClick = SHOW_OPIS
     end
     object film6: TJButton
-      AnchorSideLeft.Control = film2
+      AnchorSideLeft.Control = film5
+      AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = film5
-      Left = 234
+      Left = 345
       Height = 300
       Top = 324
       Width = 210
@@ -247,6 +250,8 @@ object FMulti: TFMulti
       Image.Width = 208
       Image.Align = alClient
       Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
       ClientHeight = 300
       ClientWidth = 210
       Constraints.MaxHeight = 300
@@ -258,9 +263,10 @@ object FMulti: TFMulti
       OnClick = SHOW_OPIS
     end
     object film7: TJButton
-      AnchorSideLeft.Control = film3
+      AnchorSideLeft.Control = film6
+      AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = film6
-      Left = 456
+      Left = 567
       Height = 300
       Top = 324
       Width = 210
@@ -283,6 +289,8 @@ object FMulti: TFMulti
       Image.Width = 208
       Image.Align = alClient
       Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
       ClientHeight = 300
       ClientWidth = 210
       Constraints.MaxHeight = 300
@@ -294,11 +302,12 @@ object FMulti: TFMulti
       OnClick = SHOW_OPIS
     end
     object film8: TJButton
-      AnchorSideLeft.Control = film4
+      AnchorSideLeft.Control = film7
+      AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = film7
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
-      Left = 678
+      Left = 789
       Height = 300
       Top = 324
       Width = 210
@@ -321,6 +330,8 @@ object FMulti: TFMulti
       Image.Width = 208
       Image.Align = alClient
       Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
       ClientHeight = 300
       ClientWidth = 210
       Constraints.MaxHeight = 300
@@ -331,31 +342,45 @@ object FMulti: TFMulti
       Visible = False
       OnClick = SHOW_OPIS
     end
+    object PPPP: TPanel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = film1
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 46
+      Top = 324
+      Width = 111
+      BorderSpacing.Top = 12
+      BevelOuter = bvNone
+      Constraints.MaxWidth = 111
+      Constraints.MinWidth = 111
+      TabOrder = 8
+      Visible = False
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Height = 43
-    Top = 643
+    Height = 48
+    Top = 638
     Width = 904
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 43
+    ClientHeight = 48
     ClientWidth = 904
     TabOrder = 1
     object BitBtn1: TBitBtn
       AnchorSideLeft.Side = asrCenter
       AnchorSideTop.Control = Panel2
-      AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Left = 796
       Height = 28
-      Top = 7
+      Top = 12
       Width = 96
       Anchors = [akTop, akRight]
-      BorderSpacing.Top = 8
+      BorderSpacing.Top = 12
       BorderSpacing.Right = 12
       BorderSpacing.Bottom = 8
       Caption = 'Wyjście'
@@ -370,7 +395,7 @@ object FMulti: TFMulti
       AnchorSideRight.Control = BitBtn1
       Left = 693
       Height = 28
-      Top = 7
+      Top = 12
       Width = 95
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 8
