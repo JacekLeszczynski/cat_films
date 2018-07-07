@@ -45,6 +45,14 @@ type
     filmytytul: TStringField;
     filmytytul_oryg: TStringField;
     filmyzdjecie: TBlobField;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
     mess: TExtMessage;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -99,6 +107,10 @@ end;
 
 procedure TFMulti.FormShow(Sender: TObject);
 begin
+  label1.AutoSize:=false;
+  if label1.Height<label2.Height then label1.Height:=label2.Height;
+  if label1.Height<label3.Height then label1.Height:=label3.Height;
+  if label1.Height<label4.Height then label1.Height:=label4.Height;
   Left:=Round((screen.Width/2)-(Width/2));
   Top:=Round((screen.Height/2)-(Height/2));
 end;
@@ -220,6 +232,26 @@ begin
     6: film6.Visible:=true;
     7: film7.Visible:=true;
     8: film8.Visible:=true;
+  end;
+  case lp of
+    1: label1.Caption:=filmytytul.AsString;
+    2: label2.Caption:=filmytytul.AsString;
+    3: label3.Caption:=filmytytul.AsString;
+    4: label4.Caption:=filmytytul.AsString;
+    5: label5.Caption:=filmytytul.AsString;
+    6: label6.Caption:=filmytytul.AsString;
+    7: label7.Caption:=filmytytul.AsString;
+    8: label8.Caption:=filmytytul.AsString;
+  end;
+  case lp of
+    1: label1.Visible:=true;
+    2: label2.Visible:=true;
+    3: label3.Visible:=true;
+    4: label4.Visible:=true;
+    5: label5.Visible:=true;
+    6: label6.Visible:=true;
+    7: label7.Visible:=true;
+    8: label8.Visible:=true;
   end;
 end;
 

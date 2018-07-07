@@ -1,13 +1,13 @@
 object FMulti: TFMulti
-  Left = 703
-  Height = 686
-  Top = 94
-  Width = 904
+  Left = 541
+  Height = 740
+  Top = 179
+  Width = 1041
   AutoSize = True
   BorderStyle = bsSingle
   Caption = 'FMulti'
-  ClientHeight = 686
-  ClientWidth = 904
+  ClientHeight = 740
+  ClientWidth = 1041
   DesignTimePPI = 88
   OnClose = FormClose
   OnCreate = FormCreate
@@ -16,14 +16,14 @@ object FMulti: TFMulti
   LCLVersion = '1.9.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 638
+    Height = 692
     Top = 0
-    Width = 904
+    Width = 1041
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 638
-    ClientWidth = 904
+    ClientHeight = 692
+    ClientWidth = 1041
     TabOrder = 0
     object film1: TJButton
       AnchorSideLeft.Control = Panel1
@@ -185,11 +185,11 @@ object FMulti: TFMulti
     object film5: TJButton
       AnchorSideLeft.Control = PPPP
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = film1
+      AnchorSideTop.Control = Label1
       AnchorSideTop.Side = asrBottom
       Left = 123
       Height = 300
-      Top = 324
+      Top = 342
       Width = 210
       LCaption.Left = 1
       LCaption.Height = 298
@@ -229,7 +229,7 @@ object FMulti: TFMulti
       AnchorSideTop.Control = film5
       Left = 345
       Height = 300
-      Top = 324
+      Top = 342
       Width = 210
       LCaption.Left = 1
       LCaption.Height = 298
@@ -268,7 +268,7 @@ object FMulti: TFMulti
       AnchorSideTop.Control = film6
       Left = 567
       Height = 300
-      Top = 324
+      Top = 342
       Width = 210
       LCaption.Left = 1
       LCaption.Height = 298
@@ -309,7 +309,7 @@ object FMulti: TFMulti
       AnchorSideBottom.Side = asrBottom
       Left = 789
       Height = 300
-      Top = 324
+      Top = 342
       Width = 210
       LCaption.Left = 1
       LCaption.Height = 298
@@ -344,11 +344,11 @@ object FMulti: TFMulti
     end
     object PPPP: TPanel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = film1
+      AnchorSideTop.Control = Label1
       AnchorSideTop.Side = asrBottom
       Left = 0
       Height = 46
-      Top = 324
+      Top = 342
       Width = 111
       BorderSpacing.Top = 12
       BevelOuter = bvNone
@@ -357,17 +357,153 @@ object FMulti: TFMulti
       TabOrder = 8
       Visible = False
     end
+    object Label1: TLabel
+      AnchorSideLeft.Control = film1
+      AnchorSideTop.Control = film1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film1
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 18
+      Top = 312
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label1'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = film2
+      AnchorSideTop.Control = film2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film2
+      AnchorSideRight.Side = asrBottom
+      Left = 234
+      Height = 18
+      Top = 312
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label2'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = film3
+      AnchorSideTop.Control = film3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film3
+      AnchorSideRight.Side = asrBottom
+      Left = 456
+      Height = 18
+      Top = 312
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label3'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = film4
+      AnchorSideTop.Control = film4
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film4
+      AnchorSideRight.Side = asrBottom
+      Left = 678
+      Height = 18
+      Top = 312
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label4'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label5: TLabel
+      AnchorSideLeft.Control = film5
+      AnchorSideTop.Control = film5
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film5
+      AnchorSideRight.Side = asrBottom
+      Left = 123
+      Height = 18
+      Top = 642
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label5'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label6: TLabel
+      AnchorSideLeft.Control = film6
+      AnchorSideTop.Control = film6
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film6
+      AnchorSideRight.Side = asrBottom
+      Left = 345
+      Height = 18
+      Top = 642
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label6'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label7: TLabel
+      AnchorSideLeft.Control = film7
+      AnchorSideTop.Control = film7
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film7
+      AnchorSideRight.Side = asrBottom
+      Left = 567
+      Height = 18
+      Top = 642
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label7'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
+    object Label8: TLabel
+      AnchorSideLeft.Control = film8
+      AnchorSideTop.Control = film8
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = film8
+      AnchorSideRight.Side = asrBottom
+      Left = 789
+      Height = 18
+      Top = 642
+      Width = 210
+      Alignment = taCenter
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Label8'
+      ParentColor = False
+      Visible = False
+      WordWrap = True
+    end
   end
   object Panel2: TPanel
     Left = 0
     Height = 48
-    Top = 638
-    Width = 904
+    Top = 692
+    Width = 1041
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 48
-    ClientWidth = 904
+    ClientWidth = 1041
     TabOrder = 1
     object BitBtn1: TBitBtn
       AnchorSideLeft.Side = asrCenter
@@ -375,7 +511,7 @@ object FMulti: TFMulti
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
-      Left = 796
+      Left = 933
       Height = 28
       Top = 12
       Width = 96
@@ -393,7 +529,7 @@ object FMulti: TFMulti
     object BitBtn4: TBitBtn
       AnchorSideTop.Control = BitBtn1
       AnchorSideRight.Control = BitBtn1
-      Left = 693
+      Left = 830
       Height = 28
       Top = 12
       Width = 95
