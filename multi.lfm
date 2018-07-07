@@ -1,0 +1,608 @@
+object FMulti: TFMulti
+  Left = 703
+  Height = 686
+  Top = 94
+  Width = 904
+  AutoSize = True
+  BorderStyle = bsSingle
+  Caption = 'FMulti'
+  ClientHeight = 686
+  ClientWidth = 904
+  DesignTimePPI = 88
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 643
+    Top = 0
+    Width = 904
+    Align = alClient
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 643
+    ClientWidth = 904
+    TabOrder = 0
+    object film1: TJButton
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 12
+      Height = 300
+      Top = 12
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlBottom
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Top = 12
+      BorderSpacing.Right = 12
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 0
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film2: TJButton
+      AnchorSideLeft.Control = film1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = film1
+      Left = 234
+      Height = 300
+      Top = 12
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 1
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film3: TJButton
+      AnchorSideLeft.Control = film2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = film2
+      Left = 456
+      Height = 300
+      Top = 12
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 2
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film4: TJButton
+      AnchorSideLeft.Control = film3
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = film3
+      AnchorSideRight.Side = asrBottom
+      Left = 678
+      Height = 300
+      Top = 12
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      BorderSpacing.Left = 12
+      BorderSpacing.Right = 12
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 3
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film5: TJButton
+      AnchorSideLeft.Control = film1
+      AnchorSideTop.Control = film1
+      AnchorSideTop.Side = asrBottom
+      Left = 12
+      Height = 300
+      Top = 324
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      BorderSpacing.Top = 12
+      BorderSpacing.Bottom = 12
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 4
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film6: TJButton
+      AnchorSideLeft.Control = film2
+      AnchorSideTop.Control = film5
+      Left = 234
+      Height = 300
+      Top = 324
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 5
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film7: TJButton
+      AnchorSideLeft.Control = film3
+      AnchorSideTop.Control = film6
+      Left = 456
+      Height = 300
+      Top = 324
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 6
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+    object film8: TJButton
+      AnchorSideLeft.Control = film4
+      AnchorSideTop.Control = film7
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 678
+      Height = 300
+      Top = 324
+      Width = 210
+      LCaption.Left = 1
+      LCaption.Height = 298
+      LCaption.Top = 1
+      LCaption.Width = 208
+      LCaption.ShadowColor = clBtnHighlight
+      LCaption.ShadowColor2 = clBtnShadow
+      LCaption.LabelStyle = lsRaised
+      LCaption.Align = alClient
+      LCaption.Alignment = taCenter
+      LCaption.Caption = ' '
+      LCaption.Layout = tlCenter
+      LCaption.ParentColor = False
+      LCaption.ParentFont = False
+      Image.Left = 1
+      Image.Height = 298
+      Image.Top = 1
+      Image.Width = 208
+      Image.Align = alClient
+      Image.Stretch = True
+      ClientHeight = 300
+      ClientWidth = 210
+      Constraints.MaxHeight = 300
+      Constraints.MaxWidth = 210
+      Constraints.MinHeight = 300
+      Constraints.MinWidth = 210
+      TabOrder = 7
+      Visible = False
+      OnClick = SHOW_OPIS
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 43
+    Top = 643
+    Width = 904
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 43
+    ClientWidth = 904
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Panel2
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 796
+      Height = 28
+      Top = 7
+      Width = 96
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 12
+      BorderSpacing.Bottom = 8
+      Caption = 'Wyjście'
+      Font.Height = -15
+      Font.Name = 'Arial'
+      OnClick = BitBtn1Click
+      ParentFont = False
+      TabOrder = 0
+    end
+    object BitBtn4: TBitBtn
+      AnchorSideTop.Control = BitBtn1
+      AnchorSideRight.Control = BitBtn1
+      Left = 693
+      Height = 28
+      Top = 7
+      Width = 95
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'O Autorze'
+      Font.Height = -15
+      Font.Name = 'Sans'
+      OnClick = BitBtn4Click
+      ParentFont = False
+      TabOrder = 1
+    end
+  end
+  object DBImage1: TDBImage
+    Left = 0
+    Height = 83
+    Top = 0
+    Width = 83
+    DataField = 'zdjecie'
+    DataSource = ds_filmy
+    Visible = False
+  end
+  object filmy: TZQuery
+    Connection = dm.db
+    SortedFields = 'tytul'
+    SQL.Strings = (
+      'select *, case when tytul_oryg is null or tytul_oryg='''' then rok_prod||tytul else rok_prod||tytul_oryg end as tyt from multimedia'
+      'order by sort,premiera,rok_prod'
+      'limit 8'
+    )
+    Params = <>
+    IndexFieldNames = 'tytul Asc'
+    left = 48
+    top = 56
+    object filmyid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyrok_prod: TLargeintField
+      FieldKind = fkData
+      FieldName = 'rok_prod'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytytul_oryg: TStringField
+      FieldKind = fkData
+      FieldName = 'tytul_oryg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmydlugosc: TLargeintField
+      FieldKind = fkData
+      FieldName = 'dlugosc'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyzdjecie: TBlobField
+      FieldKind = fkData
+      FieldName = 'zdjecie'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyopis: TMemoField
+      FieldKind = fkData
+      FieldName = 'opis'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object filmylink: TStringField
+      FieldKind = fkData
+      FieldName = 'link'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object filmyrezyseria: TStringField
+      FieldKind = fkData
+      FieldName = 'rezyseria'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyscenariusz: TStringField
+      FieldKind = fkData
+      FieldName = 'scenariusz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmyprodukcja: TStringField
+      FieldKind = fkData
+      FieldName = 'produkcja'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object filmypremiera: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmypremiera_pl: TDateField
+      FieldKind = fkData
+      FieldName = 'premiera_pl'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmyboxoffice: TFloatField
+      FieldKind = fkData
+      FieldName = 'boxoffice'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object filmyplik: TStringField
+      FieldKind = fkData
+      FieldName = 'plik'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmysubtitles: TStringField
+      FieldKind = fkData
+      FieldName = 'subtitles'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object filmynowy_zestaw: TLargeintField
+      FieldKind = fkData
+      FieldName = 'nowy_zestaw'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmysort: TLargeintField
+      FieldKind = fkData
+      FieldName = 'sort'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object filmytyt: TStringField
+      FieldKind = fkData
+      FieldName = 'tyt'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1020
+    end
+  end
+  object ds_filmy: TDataSource
+    AutoEdit = False
+    DataSet = filmy
+    left = 104
+    top = 56
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    Position = psOwnerFormCenter
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 48
+    top = 144
+  end
+end

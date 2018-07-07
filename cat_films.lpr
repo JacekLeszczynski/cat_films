@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp, Interfaces, Forms, ExtParams, Controls,
-  main, datamodule, functions, ecode, cverinfo, opis;
+  main, datamodule, functions, ecode, cverinfo, opis, multi;
   //zcomponent, uecontrols, edit, kolumny, opis,
   //unit_exit, functions, about, normalizacja_nazw, gen_spis, serwis_filmweb
   //{ you can add units after this };
@@ -209,6 +209,7 @@ begin
 
   if (DB_VERSION>1) and (DEF_VIDEO=1) and (not DEF_READWRITE) then
   begin
+    (* okno z jednym filmem w katalogu (max=1) *)
     FOpis:=TFOpis.Create(Application);
     try
       RequireDerivedFormResource:=True;
@@ -224,7 +225,23 @@ begin
     finally
       FOpis.Free;
     end;
+  end else if (DB_VERSION>1) and (DEF_VIDEO=2) and (not DEF_READWRITE) then
+  begin
+    (* okno z niewielką ilością filmów w katalogu (max=8) *)
+    FMulti:=TFMulti.Create(Application);
+    try
+      RequireDerivedFormResource:=True;
+      Application.Scaled:=True;
+      Application.Initialize;
+      Application.CreateForm(TFMulti,FMulti);
+      FMulti.Caption:='Filmy Video z dysku optycznego (ver. '+PROG_VERSION+')';
+      Application.Title:=Apps.Title;
+      Application.Run;
+    finally
+      FOpis.Free;
+    end;
   end else begin
+    (* okno z wielką ilością filmów w katalogu (max>8) *)
     FMain:=TFMain.Create(Application);
     try
       RequireDerivedFormResource:=True;

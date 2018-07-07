@@ -336,7 +336,6 @@ begin
     showmessage('Nie znaleziono pliku filmowego.');
     exit;
   end;
-
   mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
   application.ProcessMessages;
   try
