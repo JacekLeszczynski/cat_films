@@ -110,6 +110,15 @@ begin
 
     if dm.db.Connected then
     begin
+      if parameters.IsParam('vacuum') then
+      begin
+        try
+          dm.vacuum.ExecSQL;
+          writeln('Baza danych została zwakumowana.');
+        except
+        end;
+        PP_EXIT:=true;
+      end;
       if parameters.IsParam('set-directory') then
       begin
         DEF_DIR:=parameters.GetValue('set-directory');

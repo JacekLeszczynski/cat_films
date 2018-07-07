@@ -42,23 +42,10 @@ object FOpis: TFOpis
       Align = alClient
       ParentColor = False
     end
-    object DBImage2: TDBImage
-      AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Panel1
-      Left = 19
-      Height = 300
-      Top = 19
-      Width = 210
-      BorderSpacing.Left = 18
-      BorderSpacing.Top = 18
-      DataField = 'zdjecie'
-      DataSource = ds_film
-      Stretch = True
-    end
     object DBText2: TDBText
-      AnchorSideLeft.Control = DBImage2
+      AnchorSideLeft.Control = Panel2
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = DBImage2
+      AnchorSideTop.Control = Panel2
       Left = 249
       Height = 27
       Top = 19
@@ -169,8 +156,8 @@ object FOpis: TFOpis
       ParentFont = False
     end
     object Label1: TLabel
-      AnchorSideLeft.Control = DBImage2
-      AnchorSideTop.Control = DBImage2
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
       AnchorSideTop.Side = asrBottom
       Left = 19
       Height = 18
@@ -416,6 +403,29 @@ object FOpis: TFOpis
       ParentColor = False
       ParentFont = False
       TabOrder = 2
+    end
+    object Panel2: TPanel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 19
+      Height = 300
+      Top = 19
+      Width = 210
+      BorderSpacing.Left = 18
+      BorderSpacing.Top = 18
+      ClientHeight = 300
+      ClientWidth = 210
+      TabOrder = 3
+      object DBImage2: TDBImage
+        Left = 1
+        Height = 298
+        Top = 1
+        Width = 208
+        Align = alClient
+        DataField = 'zdjecie'
+        DataSource = ds_film
+        Stretch = True
+      end
     end
   end
   object film: TZQuery

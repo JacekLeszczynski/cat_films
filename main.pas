@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, ZDataset, ZSqlUpdate, JDBGridControl, Forms, Controls,
   Graphics, Dialogs, ExtCtrls, JSONPropStorage, Menus, ExtMessage,
-  ColorProgress, db, DBGrids, StdCtrls, Buttons, AsyncProcess,
+  ColorProgress, db, DBGrids, StdCtrls, Buttons,
   ComCtrls, Grids, DBCtrls;
 
 type
@@ -45,7 +45,6 @@ type
     pinfo: TPanel;
     usun: TBitBtn;
     edytuj: TBitBtn;
-    cdrom: TAsyncProcess;
     ds_sort1: TDataSource;
     dodaj: TBitBtn;
     gatunkiid: TLargeintField;
@@ -66,7 +65,6 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
-    player: TAsyncProcess;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
@@ -342,7 +340,7 @@ begin
   mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
   application.ProcessMessages;
   try
-    dm.odtworz_film_teraz(plik,napisy);
+    dm.odtworz_film_teraz(handle,plik,napisy);
   finally
     application.ProcessMessages;
     sleep(2000);

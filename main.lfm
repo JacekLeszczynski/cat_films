@@ -874,22 +874,6 @@ object FMain: TFMain
       OnClick = MenuItem12Click
     end
   end
-  object player: TAsyncProcess
-    Active = False
-    Options = []
-    Priority = ppNormal
-    StartupOptions = []
-    ShowWindow = swoNone
-    WindowColumns = 0
-    WindowHeight = 0
-    WindowLeft = 0
-    WindowRows = 0
-    WindowTop = 0
-    WindowWidth = 0
-    FillAttribute = 0
-    left = 304
-    top = 264
-  end
   object mess: TExtMessage
     Caption = '<Auto>'
     HelpContext = 0
@@ -899,24 +883,6 @@ object FMain: TFMain
     StringToCR = '^'
     left = 304
     top = 336
-  end
-  object cdrom: TAsyncProcess
-    Active = False
-    CommandLine = 'mount'
-    Executable = 'mount'
-    Options = [poWaitOnExit, poUsePipes]
-    Priority = ppNormal
-    StartupOptions = []
-    ShowWindow = swoNone
-    WindowColumns = 0
-    WindowHeight = 0
-    WindowLeft = 0
-    WindowRows = 0
-    WindowTop = 0
-    WindowWidth = 0
-    FillAttribute = 0
-    left = 368
-    top = 264
   end
   object sort1: TZQuery
     Connection = dm.db

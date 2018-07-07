@@ -140,7 +140,7 @@ type
     {$ENDIF}
     procedure zwolnij_naped_optyczny;
     function GetNonWindowsPlayCommand(napisy: string): string;
-    procedure odtworz_film_teraz(plik,napisy: string);
+    procedure odtworz_film_teraz(handle: THandle; plik,napisy: string);
   end;
 
 var
@@ -834,7 +834,7 @@ begin
   end;
 end;
 
-procedure Tdm.odtworz_film_teraz(plik, napisy: string);
+procedure Tdm.odtworz_film_teraz(handle: THandle; plik, napisy: string);
 var
   playCmd: string;
   L: TStrings;

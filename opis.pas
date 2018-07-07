@@ -60,6 +60,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Panel1: TPanel;
+    Panel2: TPanel;
     shutdown_computer: TCheckBox;
     uETileImage1: TuETileImage;
     gat: TZQuery;
@@ -192,7 +193,7 @@ begin
     mess.ShowInfo('Uruchamiam odtwarzanie filmu...');
     application.ProcessMessages;
     try
-      dm.odtworz_film_teraz(plik,napisy);
+      dm.odtworz_film_teraz(handle,plik,napisy);
     finally
       application.ProcessMessages;
       sleep(2000);
