@@ -84,7 +84,7 @@ generuj_prerm() {
 }
 
 generuj_all_bit() {
-  echo "Generuję pakiet DEB dla wersji 32 bitowej..."
+  echo "Generuję pakiet DEB dla wszystkich architektur..."
   czysc_katalog
   generuj_control 0
   generuj_changelog
