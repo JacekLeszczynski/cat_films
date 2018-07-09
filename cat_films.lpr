@@ -34,11 +34,13 @@ var
 procedure TBluePlayerVideo.DoRun;
 var
   s1,s2,s3: string;
+  v1,v2,v3,v4: integer;
   s,pom: string;
   b: boolean;
 begin
   GetProgramVersion(s1,s2,s3);
-  PROG_VERSION:=s1;
+  GetProgramVersion(v1,v2,v3,v4);
+  PROG_VERSION:=s2;
   SetConfDir('Cat-Films');
   parameters:=TExtParams.Create(self);
   try
@@ -49,14 +51,17 @@ begin
     parameters.ParamsForValues.Add('UDI');
     parameters.ParamsForValues.Add('set-video');
     parameters.ParamsForValues.Add('edit');
+    parameters.ParamsForValues.Add('set-title');
     parameters.Execute;
     if parameters.IsParam('help') then
     begin
       writeln;
       writeln('Podpowiedzi wywołania programu z parametrami:');
+      writeln('  --ver                    Informacja o wersji');
       writeln('  --new                    Założenie czystej bazy danych');
       writeln('  --scan                   Skanuje katalog z plikami i dodaje je do bazy');
       writeln('  --set-directory          Ustawienie alternatywnego katalogu z plikami');
+      writeln('  --set-title              Ustawienie tytułu płyty');
       writeln('  --set-showmenu           Włączenie menu głównego');
       writeln('  --set-hidemenu           Wyłączenie menu głównego');
       writeln('  --set-showfilters        Włączenie opcji filtrowania');
@@ -74,6 +79,12 @@ begin
       writeln;
       PP_EXIT:=true;
     end;
+    if parameters.IsParam('ver') then
+    begin
+      writeln(s2,'-',v4);
+      PP_EXIT:=true;
+    end;
+
     NEW_CREATE:=parameters.IsParam('new');
     if parameters.IsParam('force-dir') then
     begin
@@ -124,6 +135,13 @@ begin
         DEF_DIR:=parameters.GetValue('set-directory');
         dm.WriteString('katalog_domyślny',DEF_DIR);
         writeln('Katalog domyślny plików został ustawiony na: '+DEF_DIR);
+        PP_EXIT:=true;
+      end;
+      if parameters.IsParam('set-title') then
+      begin
+        DEF_TITLE:=parameters.GetValue('set-title');
+        dm.WriteString('tytuł_zestawu',DEF_TITLE);
+        writeln('Tytuł zestawu filmów ustawiony na: "'+DEF_TITLE+'"');
         PP_EXIT:=true;
       end;
       if parameters.IsParam('set-showmenu') then
@@ -183,6 +201,7 @@ begin
       DB_VERSION:=dm.ReadInteger('wersja_bazy_danych',1);
       DEF_VIDEO:=dm.ReadInteger('tryb_video',0);
       DEF_DIR:=dm.ReadString('katalog_domyślny','.');
+      DEF_TITLE:=dm.ReadString('tytuł_zestawu');
       DEF_MENU:=dm.ReadBool('pokazuj_menu_główne');
       DEF_FILTERS:=dm.ReadBool('pokazuj_filtrowanie',true);
       DEF_READWRITE:=dm.ReadBool('db_readwrite',false);
@@ -234,7 +253,8 @@ begin
       Application.Scaled:=True;
       Application.Initialize;
       Application.CreateForm(TFMulti,FMulti);
-      FMulti.Caption:='Filmy Video z dysku optycznego (ver. '+PROG_VERSION+')';
+      if DEF_TITLE='' then FMulti.Caption:='Filmy Video z dysku optycznego (ver. '+PROG_VERSION+')'
+                      else FMulti.Caption:=DEF_TITLE+' (ver. '+PROG_VERSION+')';
       Application.Title:=Apps.Title;
       Application.Run;
     finally

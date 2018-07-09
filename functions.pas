@@ -16,6 +16,7 @@ var
   COM_CLOSE: boolean = false;
   COM_SHUTDOWN: boolean = false;
   DEF_DIR: string = '';
+  DEF_TITLE: string = '';
   DEF_READWRITE: boolean = false;
   DEF_MENU: boolean = false;
   DEF_NEW_DIR: string = '';
