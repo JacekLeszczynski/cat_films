@@ -230,49 +230,37 @@ begin
   begin
     (* okno z jednym filmem w katalogu (max=1) *)
     FOpis:=TFOpis.Create(Application);
-    try
-      RequireDerivedFormResource:=True;
-      Application.Scaled:=True;
-      Application.Initialize;
-      Application.CreateForm(TFOpis,FOpis);
-      FOpis.BorderStyle:=bsSingle;
-      FOpis.Position:=poScreenCenter;
-      FOpis.Caption:='Film Video z dysku optycznego (ver. '+PROG_VERSION+')';
-      FOpis.in_shutdown:=false;
-      Application.Title:=Apps.Title;
-      Application.Run;
-    finally
-      FOpis.Free;
-    end;
+    RequireDerivedFormResource:=True;
+    Application.Scaled:=True;
+    Application.Initialize;
+    Application.CreateForm(TFOpis,FOpis);
+    FOpis.BorderStyle:=bsSingle;
+    FOpis.Position:=poScreenCenter;
+    FOpis.Caption:='Film Video z dysku optycznego (ver. '+PROG_VERSION+')';
+    FOpis.in_shutdown:=false;
+    Application.Title:=Apps.Title;
+    Application.Run;
   end else if (DB_VERSION>1) and (DEF_VIDEO=2) and (not DEF_READWRITE) then
   begin
     (* okno z niewielką ilością filmów w katalogu (max=8) *)
     FMulti:=TFMulti.Create(Application);
-    try
-      RequireDerivedFormResource:=True;
-      Application.Scaled:=True;
-      Application.Initialize;
-      Application.CreateForm(TFMulti,FMulti);
-      if DEF_TITLE='' then FMulti.Caption:='Filmy Video z dysku optycznego (ver. '+PROG_VERSION+')'
-                      else FMulti.Caption:=DEF_TITLE+' (ver. '+PROG_VERSION+')';
-      Application.Title:=Apps.Title;
-      Application.Run;
-    finally
-      FOpis.Free;
-    end;
+    RequireDerivedFormResource:=True;
+    Application.Scaled:=True;
+    Application.Initialize;
+    Application.CreateForm(TFMulti,FMulti);
+    if DEF_TITLE='' then FMulti.Caption:='Filmy Video z dysku optycznego (ver. '+PROG_VERSION+')'
+                    else FMulti.Caption:=DEF_TITLE+' (ver. '+PROG_VERSION+')';
+    Application.Title:=Apps.Title;
+    Application.Run;
   end else begin
     (* okno z wielką ilością filmów w katalogu (max>8) *)
     FMain:=TFMain.Create(Application);
-    try
-      RequireDerivedFormResource:=True;
-      Application.Scaled:=True;
-      Application.Initialize;
-      Application.CreateForm(TFMain, FMain);
-      Application.Title:=Apps.Title;
-      Application.Run;
-    finally
-      FMain.Free;
-    end;
+    RequireDerivedFormResource:=True;
+    Application.Scaled:=True;
+    Application.Initialize;
+    Application.CreateForm(TFMain, FMain);
+    Application.Title:=Apps.Title;
+    Application.Run;
   end;
 
   if COM_SHUTDOWN then dm.zamknij_komputer.execute;
