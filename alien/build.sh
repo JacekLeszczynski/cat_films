@@ -19,9 +19,9 @@ czysc_katalog() {
   rm -f files
   rm -f postinst
   rm -f prerm
-  rm -f ../usr/bin/cat_films
-  rm -f ../usr/bin/cat_films.linux.32bit
-  rm -f ../usr/bin/cat_films.linux.64bit
+  rm -f ../usr/bin/bluray-film-player
+  rm -f ../usr/bin/bluray-film-player.linux.32bit
+  rm -f ../usr/bin/bluray-film-player.linux.64bit
   cd ..
 }
 
@@ -64,9 +64,9 @@ generuj_postinst() {
   echo '' >>debian/postinst
   echo '  AR=$(arch)' >>debian/postinst
   echo '  if [ "$AR" = "x86_64" ]; then' >>debian/postinst
-  echo '    ln -s /usr/bin/cat_films.linux.64bit /usr/bin/cat_films' >>debian/postinst
+  echo '    ln -s /usr/bin/bluray-film-player.linux.64bit /usr/bin/bluray-film-player' >>debian/postinst
   echo '  else' >>debian/postinst
-  echo '    ln -s /usr/bin/cat_films.linux.32bit /usr/bin/cat_films' >>debian/postinst
+  echo '    ln -s /usr/bin/bluray-film-player.linux.32bit /usr/bin/bluray-film-player' >>debian/postinst
   echo '  fi' >>debian/postinst
   echo '' >>debian/postinst
   echo 'fi' >>debian/postinst
@@ -79,7 +79,7 @@ generuj_prerm() {
   echo '#!/bin/sh' > debian/prerm
   echo 'set -e' >> debian/prerm
   echo '# Automatically added by dh_installinit/11.2.1' >> debian/prerm
-  echo 'rm -f /usr/bin/cat_films' >> debian/prerm
+  echo 'rm -f /usr/bin/bluray-film-player' >> debian/prerm
   echo '# End automatically added section' >> debian/prerm
 }
 
@@ -90,8 +90,8 @@ generuj_all_bit() {
   generuj_changelog
   generuj_postinst
   generuj_prerm
-  cp ../../cat_films.linux.32bit ./usr/bin/
-  cp ../../cat_films.linux.64bit ./usr/bin/
+  cp ../../bluray-film-player.linux.32bit ./usr/bin/
+  cp ../../bluray-film-player.linux.64bit ./usr/bin/
   fakeroot ./debian/rules binary
 }
 
@@ -100,7 +100,7 @@ generuj_32bit() {
   czysc_katalog
   generuj_control 32
   generuj_changelog
-  cp ../../cat_films.linux.32bit ./usr/bin/cat_films
+  cp ../../bluray-film-player.linux.32bit ./usr/bin/bluray-film-player
   fakeroot ./debian/rules binary
 }
 
@@ -109,7 +109,7 @@ generuj_64bit() {
   czysc_katalog
   generuj_control 64
   generuj_changelog
-  cp ../../cat_films.linux.64bit ./usr/bin/cat_films
+  cp ../../bluray-film-player.linux.64bit ./usr/bin/bluray-film-player
   fakeroot ./debian/rules binary
 }
 

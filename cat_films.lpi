@@ -28,7 +28,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="cat_films.linux.32bit"/>
+            <Filename Value="bluray-film-player.linux.32bit"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -61,7 +61,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="cat_films.linux.64bit"/>
+            <Filename Value="bluray-film-player.linux.64bit"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -94,7 +94,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="cat_films.32bit"/>
+            <Filename Value="bluray-film-player.32bit"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -127,7 +127,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="cat_films.64bit"/>
+            <Filename Value="bluray-film-player.64bit"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -285,7 +285,7 @@
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="cat_films.debug"/>
+      <Filename Value="bluray-film-player.debug"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
