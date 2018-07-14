@@ -19,8 +19,7 @@ czysc_katalog() {
   rm -f postinst
   rm -f prerm
   rm -f ../usr/bin/bluray-film-player
-  rm -f ../usr/bin/bluray-film-player.linux.32bit
-  rm -f ../usr/bin/bluray-film-player.linux.64bit
+  rm -f -r ../usr/share/bluray-film-player
   cd ..
 }
 
@@ -82,9 +81,9 @@ prepare_postinst() {
   echo '' >>debian/postinst
   echo '  AR=$(arch)' >>debian/postinst
   echo '  if [ "$AR" = "x86_64" ]; then' >>debian/postinst
-  echo '    ln -s /usr/bin/bluray-film-player.linux.64bit /usr/bin/bluray-film-player' >>debian/postinst
+  echo '    ln -s /usr/share/bluray-film-player/bluray-film-player.linux.64bit /usr/bin/bluray-film-player' >>debian/postinst
   echo '  else' >>debian/postinst
-  echo '    ln -s /usr/bin/bluray-film-player.linux.32bit /usr/bin/bluray-film-player' >>debian/postinst
+  echo '    ln -s /usr/share/bluray-film-player/bluray-film-player.linux.32bit /usr/bin/bluray-film-player' >>debian/postinst
   echo '  fi' >>debian/postinst
   echo '' >>debian/postinst
   echo 'fi' >>debian/postinst
@@ -112,7 +111,7 @@ prepare_isoimage() {
   gzip ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_${VER}_all.deb
   mv ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_${VER}_all.deb.gz ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz
 
-  echo "bluray-film-player-image (1.0-1) experimental; urgency=low" > debian/changelog
+  echo "bluray-film-player-image ($VER) experimental; urgency=low" > debian/changelog
   echo "" >> debian/changelog
   echo "  * Prepared by alien version 8.95" >> debian/changelog
   echo "  " >> debian/changelog
@@ -132,8 +131,9 @@ generuj_all_bit() {
   prepare_changelog
   prepare_postinst
   prepare_prerm
-  cp ../../bluray-film-player.linux.32bit ./usr/bin/
-  cp ../../bluray-film-player.linux.64bit ./usr/bin/
+  mkdir ./usr/share/bluray-film-player
+  cp ../../bluray-film-player.linux.32bit ./usr/share/bluray-film-player/
+  cp ../../bluray-film-player.linux.64bit ./usr/share/bluray-film-player/
   fakeroot ./debian/rules binary
 }
 

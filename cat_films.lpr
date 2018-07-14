@@ -142,14 +142,15 @@ begin
         wersja:=TStringList.Create;
         try
           wersja.LoadFromFile('/usr/share/doc/bluray-film-player-image/files/version.txt');
+          if not DirectoryExists('Linux') then MkDir('Linux');
           dm.copy_file('/usr/share/doc/bluray-film-player-image/files/autorun.inf','autorun.inf');
-          dm.copy_file('/usr/share/doc/bluray-film-player-image/files/readme.txt','readme.txt');
-          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.32bit.exe.gz','bluray-film-player.32bit.exe');
+          dm.copy_file('/usr/share/doc/bluray-film-player-image/files/readme.txt','Linux/readme.txt');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.32bit.exe.gz','bluray-film-player.exe');
           dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.64bit.exe.gz','bluray-film-player.64bit.exe');
           dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.ico.gz','bluray-film-player.ico');
-          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.32bit.gz','bluray-film-player.linux.32bit');
-          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.64bit.gz','bluray-film-player.linux.64bit');
-          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz','bluray-film-player_'+wersja[0]+'_all.deb');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.32bit.gz','Linux/bluray-film-player.linux.32bit');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.64bit.gz','Linux/bluray-film-player.linux.64bit');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz','Linux/bluray-film-player_'+wersja[0]+'_all.deb');
         finally
           wersja.Free;
         end;
