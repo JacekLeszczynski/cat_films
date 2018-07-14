@@ -141,6 +141,8 @@ type
     procedure zwolnij_naped_optyczny;
     function GetNonWindowsPlayCommand(napisy: string): string;
     procedure odtworz_film_teraz(handle: THandle; plik,napisy: string);
+    procedure rozpakuj_gzip(archiwum,plik: string);
+    procedure copy_file(zrodlo,plik: string);
   end;
 
 var
@@ -155,7 +157,7 @@ uses
   {$IFDEF MSWINDOWS}
   windows,
   {$ENDIF}
-  ecode, functions, FileUtil;
+  ecode, functions, FileUtil, zstream;
 
 {$R *.lfm}
 
@@ -864,6 +866,26 @@ begin
     L.Free;
   end;
   {$ENDIF}
+end;
+
+procedure Tdm.rozpakuj_gzip(archiwum, plik: string);
+var
+  gzip: TGZFileStream;
+  f: TFileStream;
+begin
+  f:=TFileStream.Create(plik,fmCreate);
+  gzip:=TGZFileStream.create(archiwum,gzopenread);
+  try
+    f.CopyFrom(gzip,0);
+  finally
+    f.Free;
+    gzip.Free;
+  end;
+end;
+
+procedure Tdm.copy_file(zrodlo, plik: string);
+begin
+  CopyFile(zrodlo,plik,[cffOverwriteFile]);
 end;
 
 end.

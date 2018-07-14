@@ -1,9 +1,8 @@
 #!/bin/bash
 
-VER=`../cat_films.linux.64bit --ver`
+VER=`../bluray-film-player.linux.64bit --ver`
 DATE=`date`
 echo "Generowana wersja pakietów to: $VER"
-cd bluray-film-player
 
 czysc_katalog() {
   echo "Czyszczę katalogi..."
@@ -25,7 +24,26 @@ czysc_katalog() {
   cd ..
 }
 
-generuj_control() {
+czysc_isoimage() {
+  echo "Czyszczę katalogi..."
+  cd debian
+  rm -f -r .debhelper
+  rm -f -r bluray-film-player-image
+  rm -f -r usr
+  rm -f bluray-film-player-image.debhelper.log
+  rm -f bluray-film-player-image.substvars
+  rm -f changelog
+  rm -f files
+  cd ..
+  rm -f ./usr/share/doc/bluray-film-player-image/files/version.txt
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.32bit
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.64bit
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.32bit.exe
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.64bit.exe
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz
+}
+
+prepare_control() {
   echo "Source: bluray-film-player" > debian/control
   echo "Section: multimedia" >> debian/control
   echo "Priority: extra" >> debian/control
@@ -46,7 +64,7 @@ generuj_control() {
   echo " Odtwarzacz zestawów filmowych" >> debian/control
 }
 
-generuj_changelog() {
+prepare_changelog() {
   echo "bluray-film-player ($VER) experimental; urgency=low" > debian/changelog
   echo "" >> debian/changelog
   echo "  * Prepared by alien version 8.95" >> debian/changelog
@@ -55,7 +73,7 @@ generuj_changelog() {
   echo " -- Jacek Leszczyński <sam@bialan.pl>  $DATE" >> debian/changelog
 }
 
-generuj_postinst() {
+prepare_postinst() {
   echo '#!/bin/sh' >debian/postinst
   echo '' >>debian/postinst
   echo 'set -e' >>debian/postinst
@@ -75,7 +93,7 @@ generuj_postinst() {
   echo '' >>debian/postinst
 }
 
-generuj_prerm() {
+prepare_prerm() {
   echo '#!/bin/sh' > debian/prerm
   echo 'set -e' >> debian/prerm
   echo '# Automatically added by dh_installinit/11.2.1' >> debian/prerm
@@ -83,13 +101,37 @@ generuj_prerm() {
   echo '# End automatically added section' >> debian/prerm
 }
 
+prepare_isoimage() {
+  echo "$VER" > ./usr/share/doc/bluray-film-player-image/files/version.txt
+  cp ../../bluray-film-player.linux.32bit ./usr/share/doc/bluray-film-player-image/files/
+  cp ../../bluray-film-player.linux.64bit ./usr/share/doc/bluray-film-player-image/files/
+  cp ../../bluray-film-player.32bit.exe ./usr/share/doc/bluray-film-player-image/files/
+  cp ../../bluray-film-player.64bit.exe ./usr/share/doc/bluray-film-player-image/files/
+
+  cp ../bluray-film-player_${VER}_all.deb ./usr/share/doc/bluray-film-player-image/files/
+  gzip ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_${VER}_all.deb
+  mv ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_${VER}_all.deb.gz ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz
+
+  echo "bluray-film-player-image (1.0-1) experimental; urgency=low" > debian/changelog
+  echo "" >> debian/changelog
+  echo "  * Prepared by alien version 8.95" >> debian/changelog
+  echo "  " >> debian/changelog
+  echo "" >> debian/changelog
+  echo " -- Jacek Leszczyński <sam@bialan.pl>  $DATE" >> debian/changelog
+}
+
+generuj_isoimage() {
+  echo "Generuję pakiet IMAGEISO dla wszystkich architektur..."
+  fakeroot ./debian/rules binary
+}
+
 generuj_all_bit() {
   echo "Generuję pakiet DEB dla wszystkich architektur..."
   czysc_katalog
-  generuj_control 0
-  generuj_changelog
-  generuj_postinst
-  generuj_prerm
+  prepare_control 0
+  prepare_changelog
+  prepare_postinst
+  prepare_prerm
   cp ../../bluray-film-player.linux.32bit ./usr/bin/
   cp ../../bluray-film-player.linux.64bit ./usr/bin/
   fakeroot ./debian/rules binary
@@ -98,8 +140,8 @@ generuj_all_bit() {
 generuj_32bit() {
   echo "Generuję pakiet DEB dla wersji 32 bitowej..."
   czysc_katalog
-  generuj_control 32
-  generuj_changelog
+  prepare_control 32
+  prepare_changelog
   cp ../../bluray-film-player.linux.32bit ./usr/bin/bluray-film-player
   fakeroot ./debian/rules binary
 }
@@ -107,15 +149,21 @@ generuj_32bit() {
 generuj_64bit() {
   echo "Generuję pakiet DEB dla wersji 64 bitowej..."
   czysc_katalog
-  generuj_control 64
-  generuj_changelog
+  prepare_control 64
+  prepare_changelog
   cp ../../bluray-film-player.linux.64bit ./usr/bin/bluray-film-player
   fakeroot ./debian/rules binary
 }
 
+
+cd bluray-film-player
 generuj_all_bit
-#generuj_32bit
-#generuj_64bit
 czysc_katalog
+cd ..
+cd bluray-film-player-image
+prepare_isoimage
+generuj_isoimage
+czysc_isoimage
+cd ..
 
 exit 0

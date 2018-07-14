@@ -1,0 +1,11 @@
+Source: bluray-film-player-image
+Section: multimedia
+Priority: extra
+Maintainer: Jacek Leszczyński <sam@bialan.pl>
+
+Package: bluray-film-player-image
+Architecture: all
+Depends: bluray-film-player
+Description: Zawartość obrazu ISO
+ Pakiet plików, które potrzebne są do przygotowania
+ płyty optycznej ISO.

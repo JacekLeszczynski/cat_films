@@ -37,6 +37,7 @@ var
   v1,v2,v3,v4: integer;
   s,pom: string;
   b: boolean;
+  wersja: TStringList;
 begin
   GetProgramVersion(s1,s2,s3);
   GetProgramVersion(v1,v2,v3,v4);
@@ -59,7 +60,10 @@ begin
       writeln('Podpowiedzi wywołania programu z parametrami:');
       writeln('  --ver                    Informacja o wersji');
       writeln('  --new                    Założenie czystej bazy danych');
+      {$IFDEF UNIX}
+      writeln('  --iso                    Skopiuj pliki obrazu iso');
       writeln('  --scan                   Skanuje katalog z plikami i dodaje je do bazy');
+      {$ENDIF}
       writeln('  --set-directory          Ustawienie alternatywnego katalogu z plikami');
       writeln('  --set-title              Ustawienie tytułu płyty');
       writeln('  --set-showmenu           Włączenie menu głównego');
@@ -129,6 +133,31 @@ begin
       if FORCE_SORT='' then FORCE_SORT:='tytul';
     end;
     if FORCE_DIR<>'' then if (OPTICAL_DISC<>'') and (FileExists(s+_FF+'base.dat')) then dm.zwolnij_naped_optyczny;
+
+    {$IFDEF UNIX}
+    if parameters.IsParam('iso') then
+    begin
+      if FileExists('/usr/share/doc/bluray-film-player-image/files/version.txt') then
+      begin
+        wersja:=TStringList.Create;
+        try
+          wersja.LoadFromFile('/usr/share/doc/bluray-film-player-image/files/version.txt');
+          dm.copy_file('/usr/share/doc/bluray-film-player-image/files/autorun.inf','autorun.inf');
+          dm.copy_file('/usr/share/doc/bluray-film-player-image/files/readme.txt','readme.txt');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.32bit.exe.gz','bluray-film-player.32bit.exe');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.64bit.exe.gz','bluray-film-player.64bit.exe');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.ico.gz','bluray-film-player.ico');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.32bit.gz','bluray-film-player.linux.32bit');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.64bit.gz','bluray-film-player.linux.64bit');
+          dm.rozpakuj_gzip('/usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz','bluray-film-player_'+wersja[0]+'_all.deb');
+        finally
+          wersja.Free;
+        end;
+        writeln('Struktura plików ISO została wygenerowana.');
+      end else writeln('Zainstaluj najpierw pakiet "bluray-film-player-image".');
+      PP_EXIT:=true;
+    end;
+    {$ENDIF}
 
     if dm.db.Connected then
     begin
