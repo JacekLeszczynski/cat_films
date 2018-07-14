@@ -746,8 +746,31 @@ begin
 end;
 
 procedure TFMain.usunClick(Sender: TObject);
+var
+  s1,s2: string;
 begin
-  if mess.ShowConfirmationYesNo('Czy na pewno usunąć wskazany film?') then filmy.Delete;
+  if filmynowy_zestaw.AsInteger=0 then
+  begin
+    s1:=MyDir(DEF_DIR+_FF+filmyplik.AsString);
+    s2:=MyDir(DEF_DIR+_FF+filmysubtitles.AsString);
+  end else begin
+    s1:=DEF_NEW_DIR+_FF+ExtractFilename(filmyplik.AsString);
+    s2:=DEF_NEW_DIR+_FF+ExtractFilename(filmysubtitles.AsString);
+  end;
+  if mess.ShowConfirmationYesNo('Czy na pewno usunąć wskazany film?') then
+  begin
+    if mess.ShowConfirmationYesNo('Czy usunąć film z dysku?') then
+    begin
+      {$IFDEF UNIX}
+      if FileExists(s1) then DeleteFile(s1);
+      if FileExists(s2) then DeleteFile(s2);
+      {$ELSE}
+      if FileExists(s1) then DeleteFile(pchar(s1));
+      if FileExists(s2) then DeleteFile(pchar(s2));
+      {$ENDIF}
+    end;
+    filmy.Delete;
+  end;
 end;
 
 procedure TFMain._OPEN_CLOSE(DataSet: TDataSet);
