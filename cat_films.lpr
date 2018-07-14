@@ -42,7 +42,7 @@ begin
   GetProgramVersion(s1,s2,s3);
   GetProgramVersion(v1,v2,v3,v4);
   PROG_VERSION:=s2;
-  SetConfDir('Cat-Films');
+  SetConfDir('bluray-film-player');
   parameters:=TExtParams.Create(self);
   try
     parameters.ParamsForValues.Add('custom-play');
