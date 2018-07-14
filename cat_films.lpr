@@ -94,6 +94,17 @@ begin
     end else s:=PARAM_1;
     FORCE_SCAN:=parameters.IsParam('scan');
 
+    {$IFDEF UNIX}
+    if s='' then s:=GetCurrentDir else if s[1]<>'/' then
+    begin
+      if s[1]='.' then delete(s,1,1);
+      if s[1]<>'/' then s:='/'+s;
+      s:=GetCurrentDir+s;
+    end;
+    {$ELSE}
+    if s='' then s:=GetCurrentDir;
+    {$ENDIF}
+
     SetDir(s);
     dm.db.Database:=MyDir('base.dat');
     b:=not FileExists(dm.db.Database);
