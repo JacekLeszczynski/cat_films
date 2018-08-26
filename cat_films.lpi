@@ -17,11 +17,11 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <RevisionNr Value="2"/>
+      <RevisionNr Value="3"/>
       <BuildNr Value="1"/>
       <Language Value="0415"/>
     </VersionInfo>
-    <BuildModes Count="5">
+    <BuildModes Count="4">
       <Item1 Name="Roboczy" Default="True"/>
       <Item2 Name="Linux32">
         <CompilerOptions>
@@ -93,7 +93,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="bluray-film-player.32bit"/>
+            <Filename Value="bluray-film-player"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -122,39 +122,6 @@
           </Linking>
         </CompilerOptions>
       </Item4>
-      <Item5 Name="Win64">
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="bluray-film-player.64bit"/>
-          </Target>
-          <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../lib"/>
-            <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-win64"/>
-          </SearchPaths>
-          <CodeGeneration>
-            <SmartLinkUnit Value="True"/>
-            <TargetCPU Value="x86_64"/>
-            <TargetOS Value="win64"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <UseExternalDbgSyms Value="True"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-        </CompilerOptions>
-      </Item5>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -164,37 +131,34 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="10">
+    <RequiredPackages Count="9">
       <Item1>
-        <PackageName Value="excompress"/>
+        <PackageName Value="lib_register"/>
       </Item1>
       <Item2>
-        <PackageName Value="lib_register"/>
+        <PackageName Value="eccontrols"/>
       </Item2>
       <Item3>
-        <PackageName Value="eccontrols"/>
+        <PackageName Value="scrolltext"/>
       </Item3>
       <Item4>
-        <PackageName Value="scrolltext"/>
+        <PackageName Value="uEControls"/>
       </Item4>
       <Item5>
-        <PackageName Value="uEControls"/>
+        <PackageName Value="jujiboutils"/>
       </Item5>
       <Item6>
-        <PackageName Value="jujiboutils"/>
+        <PackageName Value="FCL"/>
       </Item6>
       <Item7>
-        <PackageName Value="FCL"/>
+        <PackageName Value="ExtLazarus"/>
       </Item7>
       <Item8>
-        <PackageName Value="ExtLazarus"/>
+        <PackageName Value="zcomponent"/>
       </Item8>
       <Item9>
-        <PackageName Value="zcomponent"/>
-      </Item9>
-      <Item10>
         <PackageName Value="LCL"/>
-      </Item10>
+      </Item9>
     </RequiredPackages>
     <Units Count="13">
       <Unit0>

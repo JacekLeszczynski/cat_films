@@ -37,8 +37,7 @@ czysc_isoimage() {
   rm -f ./usr/share/doc/bluray-film-player-image/files/version.txt
   rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.32bit
   rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.linux.64bit
-  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.32bit.exe
-  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.64bit.exe
+  rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player.exe
   rm -f ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_all.deb.gz
 }
 
@@ -109,8 +108,7 @@ prepare_isoimage() {
   echo "$VER" > ./usr/share/doc/bluray-film-player-image/files/version.txt
   cp ../../bluray-film-player.linux.32bit ./usr/share/doc/bluray-film-player-image/files/
   cp ../../bluray-film-player.linux.64bit ./usr/share/doc/bluray-film-player-image/files/
-  cp ../../bluray-film-player.32bit.exe ./usr/share/doc/bluray-film-player-image/files/
-  cp ../../bluray-film-player.64bit.exe ./usr/share/doc/bluray-film-player-image/files/
+  cp ../../bluray-film-player.exe ./usr/share/doc/bluray-film-player-image/files/
 
   cp ../bluray-film-player_${VER}_all.deb ./usr/share/doc/bluray-film-player-image/files/
   gzip ./usr/share/doc/bluray-film-player-image/files/bluray-film-player_${VER}_all.deb
